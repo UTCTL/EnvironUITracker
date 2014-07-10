@@ -1,0 +1,75 @@
+<!DOCTYPE>
+<html><head>
+ <title>Environ Test Tracker</title> 
+ <link rel="stylesheet" type="text/css" href="_stys/global.css"> 
+ <script src="_scrs/jquery.min.js"></script> 
+ <script src="_scrs/d3.v3.min.js"></script> 
+ <script src="_scrs/main.js"></script>
+</head><body>
+
+<section>
+	<div class="usermenu">
+		<h1>Users</h1> 
+		<ul>
+			<li id="u1">User 1</li>
+			<li id="u2">User 2</li>
+			<li id="u3">User 3</li>
+			<li id="u4">User 4</li>
+		</ul>
+	</div> 
+	<div class="useractivity">
+		<section>
+			<content class="info">
+				<h1>USER ##########</h1>
+				<h2>age, gender, race</h2> 
+			</content> 
+			<content class="game">
+				<h1>Screen Usage</h1> 
+				<div class="uimenu"></div> 
+				<div class="bottomnav"></div> 
+				<div class="minimap"></div> 
+			</content> 
+			<content class="stats">
+				<div class="maptype">
+					<span class="option" id="points">View as points</span>
+					<span class="option" id="heatmap">View as heatmap</span>
+					<span class="option" id="cluster">View as clusters</span>
+					<span class="option" id="report">Report</span> 
+				</div>
+			</content> 
+			<content>
+				<div class="report">
+					<h2>Camera Movement</h2>
+					<div class="movement" id="drag">
+						<div class="icon"></div>
+						<div class="graph">
+							<div class="bar"><svg></svg></div><span class="label">Dragging: <span class="quantity">0%</span></span> 
+						</div>
+					</div>
+					<div class="movement" id="arrow">
+						<div class="icon"></div>
+						<div class="graph">
+							<div class="bar"><svg></svg></div><span class="label">Arrow keys: <span class="quantity">0%</span></span> 
+						</div>
+					</div>
+					<div class="movement" id="key">
+						<div class="icon"></div>
+						<div class="graph">
+							<div class="bar"><svg></svg></div><span class="label">WASD keys: <span class="quantity">0%</span></span> 
+						</div>
+					</div>
+				</div> 
+
+				<h2>Panel Time</h2> 
+
+				<h2>Score Rate</h2> 
+
+				<h2>Unlocking Rate</h2> 
+
+				<h2>Region Data</h2> 
+			</content> 
+		</section> 
+	</div> 
+</section>
+
+</body></html>

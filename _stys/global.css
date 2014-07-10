@@ -1,0 +1,104 @@
+* { -webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none; 
+	cursor:default; }
+
+section { display:block; } 
+
+content { display:block; 
+	width:1200px; 
+	margin-top:20px; 
+	padding:10px; }
+
+	content:first-child { height:700px; 
+		padding:0px; 
+		margin-top:0px; 
+		border:1px solid #09f; }
+
+circle { display:block; 
+	position:absolute; 
+	width:10px; height:10px; 
+	background-color:#f00; 
+	border-radius:10px; } 
+
+/* 
+	MAIN LAYOUT 
+*/ 
+
+.usermenu { display:block; 
+	position:fixed; 
+	top:0px; left:0px; 
+	width:250px; 
+	height:100%; 
+	background-color:#333; 
+	overflow-y:auto; } 
+
+.useractivity { display:block; 
+	position:absolute; 
+	top:0px; left:250px; 
+	padding:20px; 
+	background-color:#fff; }
+
+/*
+	GAME VISUALIZATION 
+*/
+/*.game { background-image:url('game.png'); }*/
+
+.game svg, .game svg circle, .game svg rect { z-index:999; }
+
+.game div { display:block; 
+	position:absolute;
+	top:50%; left:50%;  
+	background-image:url('content.png'); 
+	border:1px solid #6af; 
+	z-index:0; }
+
+.game .uimenu { margin-top:-348px; 
+	margin-left:-590px; 
+	width:315px; height:645px; }
+
+.game .bottomnav { margin-top:300px; 
+	margin-left:-590px; 
+	width:890px; height:50px; }
+
+.game .minimap { margin-top:50px; 
+	margin-left:295px; 
+	width:300px; height:300px; 
+	border-radius:300px; }
+
+/*
+	STATS 
+*/ 
+.maptype { display:block; }
+	
+	.maptype .option { text-align:center; 
+		padding:10px; 
+		border:1px solid red; 
+		cursor:pointer; }
+	.maptype .option:hover { background-color:#fcc; } 
+
+.report { display:block; }
+
+.movement { display:block; } 
+
+	.movement .icon { display:inline-block; 
+		width:58px; height:60px; 
+		background-repeat:no-repeat; }
+	.movement#drag .icon { background-image:url('drag.png'); }
+	.movement#arrow .icon { background-image:url('arrow.png'); }
+	.movement#key .icon { background-image:url('key.png'); }
+
+	.movement .graph { display:inline-block; 
+		position:relative; 
+		top:12px; 
+		width:500px; height:60px; }
+
+	.movement .bar { display:block; 
+		width:500px; height:60px; }
+
+		.movement .bar svg { display:block; 
+			height:60px; 
+			background-color:#0f0; }
