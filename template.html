@@ -20,7 +20,19 @@
 			<content class="info">
 				<h1>########## <span class="meta">age, gender, race, gamer</span></h3> 
 			</content> 
-			<content class="game">
+			<content class="resources"> 
+				<div class="third">
+					<h4 id="funds">spent: <span class="label">12345</label></h4>
+					<h4 id="pc">spent: <span class="label">54321</label></h4>
+					<h4 id="level">level: <span class="label">12</span></h4> 
+				</div>
+				<div class="third"> 
+					<h4 id="timer">playtime: <span class="label">0:20:34</span></h4> 
+					<h4 id="status">status: <span class="label"> <span class="chosen">won</span> | lost | quit </label></h4> 
+					<h4 id="completed">completed: <span class="label">83%</span></h4> 
+				</div> 
+			</content> 
+			<content class="game normalize">
 				<h2>Screen Usage</h2> 
 				<div class="uimenu"></div> 
 				<div class="bottomnav"></div> 
@@ -38,32 +50,169 @@
 					<h2>Camera Movement</h2>
 					<div class="movement" id="drag">
 						<div class="icon"></div>
-						<div class="graph">
-							<div class="bar"><svg></svg><span class="label">0%</span></div>
+						<div class="bargraph">
+							<div class="bar"><svg style="width:201px"></svg><span class="label">40%</span></div>
 						</div>
 					</div>
 					<div class="movement" id="arrow">
 						<div class="icon"></div>
-						<div class="graph">
-							<div class="bar"><svg></svg><span class="label">0%</span></div>
+						<div class="bargraph zero">
+							<div class="bar"><svg style="width:35px"></svg><span class="label">0%</span></div>
 						</div>
 					</div>
 					<div class="movement" id="key">
 						<div class="icon"></div>
-						<div class="graph">
-							<div class="bar"><svg></svg><span class="label">0%</span></div>
+						<div class="bargraph">
+							<div class="bar"><svg style="width:249px"></svg><span class="label">60%</span></div>
 						</div>
 					</div>
 				</div> 
 				<div class="half">
 					<h2>Panel Time</h2> 
+					<div class="panel" id="on"> 
+						<span class="label positive">0%</span>
+					</div> 
+					<div class="panel" id="off">
+						<span class="label negative">0%</span> 
+					</div> 
 				</div>
-
+			</content>
+			<content class="rate normalize">
 				<h2>Score Rate</h2> 
+				<div class="half">
+					<div class="data" id="environ">
+						<span class="text">Avg. Environ Score: <span class="label positive" id="avg_environ_score">65</span></span> 
+						<span class="text">Avg. Environ Change: <span class="label positive" id="avg_environ_delta">+6.43</span></span>
+					</div>
+				</div> 
+				<div class="half">
+					<div class="data" id="economy">
+						<span class="text">Avg. Economy Score: <span class="label negative" id="avg_environ_score">-12</span></span> 
+						<span class="text">Avg. Economy Change: <span class="label negative" id="avg_environ_delta">-1.30</span></span> 
+					</div>
+				</div> 
+			</content>
+			<content>
+				<!-- environ score rate --> 
+				<div class="half score">
+					<div class="graphplot"></div> 
+				</div> 
+				<!-- economy score rate --> 
+				<div class="half score">
+					<div class="graphplot"></div> 
+				</div> 
 
-				<h2>Unlocking Rate</h2> 
-
+			</content> 
+			<content>
+				<h2>Node Rate <span class="meta">action/second</span></h2> 
+				<div class="table">
+					<div class="row">
+						<div class="header fifth">ACTION</div> 
+						<div class="header fifth">Bases</div> 
+						<div class="header fifth">Upgrades</div> 
+						<div class="header fifth">Events</div> 
+						<div class="header fifth">Disasters</div> 
+					</div> 
+					<div class="row">
+						<div class="datum fifth">Spawn</div> 
+						<div class="header fifth">-</div> 
+						<div class="header fifth">1.24</div> 
+						<div class="header fifth">3.24</div> 
+						<div class="header fifth">1.22</div> 
+					</div> 
+					<div class="row">
+						<div class="datum fifth">Unlock</div> 
+						<div class="header fifth">4.25</div> 
+						<div class="header fifth">1.52</div> 
+						<div class="header fifth">-</div> 
+						<div class="header fifth">-</div> 
+					</div>
+					<div class="row">
+						<div class="datum fifth">Active</div> 
+						<div class="header fifth">1.21</div> 
+						<div class="header fifth">2.13</div> 
+						<div class="header fifth">3.12</div> 
+						<div class="header fifth">0.11</div> 
+					</div>
+					<div class="row">
+						<div class="datum fifth">Responsive</div> 
+						<div class="header fifth">0.22</div> 
+						<div class="header fifth">0.10</div> 
+						<div class="header fifth">0.81</div> 
+						<div class="header fifth">0.75</div> 
+					</div> 
+				</div> 
+			</content>
+			<content class="region"> 
 				<h2>Region Data</h2> 
+				<div class="half">
+					<h3>Particular</h3> 
+					<div class="table">
+						<div class="row">
+							<div class="header fifth">REGION</div> 
+							<div class="header fifth">Order</div> 
+							<div class="header fifth">Avg Environ</div> 
+							<div class="header fifth">Avg Economy</div> 
+							<div class="header fifth">Focus</div> 
+						</div> 
+						<div class="row">
+							<div class="header fifth">NA</div>  
+							<div class="header fifth">1</div> 
+							<div class="header fifth positive">21.8</div> 
+							<div class="header fifth positive">75.3</div> 
+							<div class="header fifth">34%</div> 
+						</div> 
+						<div class="row">
+							<div class="header fifth">SA</div>  
+							<div class="header fifth">2</div> 
+							<div class="header fifth positive">75.0</div> 
+							<div class="header fifth positive">21.5</div> 
+							<div class="header fifth">22%</div> 
+						</div>
+						<div class="row">
+							<div class="header fifth">EU</div>  
+							<div class="header fifth">3</div> 
+							<div class="header fifth positive">64.6</div> 
+							<div class="header fifth positive">72.9</div> 
+							<div class="header fifth">28%</div> 
+						</div>
+						<div class="row">
+							<div class="header fifth">AF</div>  
+							<div class="header fifth">4</div> 
+							<div class="header fifth positive">25.1</div> 
+							<div class="header fifth negative">-14.8</div> 
+							<div class="header fifth">5%</div> 
+						</div> 
+						<div class="row">
+							<div class="header fifth">CA</div>  
+							<div class="header fifth">5</div> 
+							<div class="header fifth positive">45.6</div> 
+							<div class="header fifth negative">-21.0</div> 
+							<div class="header fifth">5%</div> 
+						</div> 
+						<div class="row">
+							<div class="header fifth">EA</div>  
+							<div class="header fifth">6</div> 
+							<div class="header fifth negative">-55.4</div> 
+							<div class="header fifth positive">63.2</div> 
+							<div class="header fifth">6%</div> 
+						</div> 
+					</div> 
+				</div> 
+				<div class="half"> 
+					<h3>General</h3> 
+					<h4 id="funds">Unlock Rate: <span class="label">5.35</label></h4> 
+					<h4>Navigation</h4> 
+					<div class="navigation">
+						<div class="bargraph">
+							<div class="bar">
+								<svg style="width:314px;" id="minimap"></svg><span class="label">Minimap 72%</span>
+								<svg style="width:116px; left:334px;" id="regkeys"></svg><span class="label" style="left:365px">Keys 18%</span>
+							</div>
+						</div>
+					</div>
+
+				</div> 
 			</content> 
 		</section> 
 	</div> 

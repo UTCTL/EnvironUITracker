@@ -10,16 +10,22 @@
 body { font-family:Tahoma; 
 	font-size:10pt; 
 	color:#111; 
-letter-spacing:1px; }
+	letter-spacing:1px; 
+	background-color:#eee; }
 
 h1 { font-size:24pt; }
 h2 { font-size:20pt; }
-h3 { font-size:16pt; }
+h3 { font-size:16pt; } 
+h4 { font-size:16pt; 
+	font-weight:normal; }
 
 section { display:block; } 
 
 content { display:block; 
-	width:1200px; }
+	width:1200px; 
+	background-color:#fff; 
+	margin:auto; 
+	padding-bottom:50px; }
 
 
 /* 
@@ -30,7 +36,7 @@ content { display:block;
 
 .meta { display:inline; 
 	font-size:12pt; 
-	color:#777; }
+	color:#999; }
 
 .usermenu { display:block; 
 	position:fixed; 
@@ -56,21 +62,65 @@ content { display:block;
 .useractivity { display:block; 
 	position:absolute; 
 	top:0px; left:250px; 
-	background-color:#fff; }
+	background-color:#fff; } 
+
+.whole { display:block; 
+	width:1200px; 
+	padding:0px; 
+	vertical-align: top; } 
 
 .half { display:inline-block; 
 	width:585px; 
 	padding-left:0px; 
 	vertical-align: top; }
-	
+
+.third { display:inline-block; 
+	width:29%; 
+	padding-left:0px; 
+	vertical-align: top; } 
+
+.fourth { display:inline-block; 
+	width:21%; 
+	padding-left:0px; 
+	vertical-align:top; }
+
+.fifth { display:inline-block; 
+	width:18%; 
+	margin:0px; }
+
+.positive { color:#0c0; }
+.negative { color:#f00; } 
+
+.normalize { padding-bottom:10px; }
+
+	/*
+	  -------------
+		Resources 
+	  -------------
+	*/ 
+	.resources h4 { background-position:left 11px; 
+		background-repeat:no-repeat; 
+		padding-left:40px; }
+
+	.resources h4#funds { background-image:url('../_imgs/resources_funds.png'); } 
+	.resources h4#pc { background-image:url('../_imgs/resources_pc.png'); } 
+	.resources h4#timer { background-image:url('../_imgs/timer.png'); } 
+	.resources h4#completed { background-image:url('../_imgs/completed.png'); } 
+	.resources h4#level { background-image:url('../_imgs/level.png'); } 
+	.resources h4#status { background-image:url('../_imgs/endstatus.png'); } 
+		.resources h4#status .label { color:#ddd; font-weight:normal; }
+		.resources h4#status .label .chosen { color:#09f; font-weight:bold; }
+
 	/*
 	  ------------
 		Gameview 
 	  ------------
 	*/ 
-	.game svg { padding:0px; 
+	.game svg { display:block; 
+		padding:0px; 
 		width:1200px; 
 		height:700px; 
+		background-image:url('../_imgs/content_gray.png');
 		border:1px solid #6af; }
 
 	.game div { display:block; 
@@ -132,27 +182,171 @@ content { display:block;
 		.movement#arrow .icon { background-image:url('../_imgs/arrow.png'); }
 		.movement#key .icon { background-image:url('../_imgs/key.png'); }
 
-		.movement .graph { display:inline-block; 
+		.movement .bargraph { display:inline-block; 
 			position:relative; 
 			top:0px; 
 			width:450px; height:40px; 
 			padding:0px; }
 
 		.movement .bar { display:block; 
-			width:450px; height:40px; }
+			width:450px; height:40px; 
+			background-color:#dff3ff; /*#cff1ff; */
+			background-image:url('../_imgs/content_gray.png');
+			position:absolute; 
+			border-radius:40px; 
+			top:-22px; }
 
 			.movement .bar svg { display:block; 
+				width:350px; 
 				height:40px; 
-				background-color:#42fc9f; 
+				background-color:#73d0f4	; /*#61c2e8;*/ /*#46abd3;*/ /*#42fc9f;*/
+				/*background-image:url('../_imgs/content.png');*/
 				position:absolute; 
-				top:-20px; }
+				border-radius:40px; 	
+				top:0px; left:0px; }
 
 			.movement .bar .label { display:inline-block; 
-				color:#000; 
-				font-size:40pt; 
+				color:#fff; 
+				text-shadow:0px 0px 5px rgba(40,138,177,0.9);  
+				font-size:20pt; 
 				font-weight:bold; 
 				position:absolute; 
-				top:-34px; }
+				top:3px; left:6px; 
+				/*top:-34px;*/ }
+
+				.movement .zero svg { background-color:#bbb; }
+				.movement .zero .label { text-shadow:0px 0px 5px rgba(0,0,0,0.4);  }
+
+	/*
+	  -------------- 
+		Panel Time 
+	  -------------- 
+	*/
+	.panel { display:inline-block; 
+		width:286px; height:214px; 
+		line-height:214px; 
+		text-align: center; 
+		font-weight:bold; 
+		font-size:40pt; 
+		padding:0px; } 
+
+		.panel#on { background-image:url('../_imgs/panel_on.png'); } 
+		.panel#off { background-image:url('../_imgs/panel_off.png'); 
+			background-position:0px 4px; } 
+
+		.panel#off .label { text-shadow:0px 0px 4px rgba(50,50,50,0.2); }
+
+
+	/*
+	  -------------- 
+		Score Rate
+	  -------------- 
+	*/ 
+	.score { background-position:0px 10px; 
+		background-repeat:no-repeat; }
+
+	.score#environ { background-image:url('../_imgs/environ_score.png'); }
+	.score#economy { background-image:url('../_imgs/economy_score.png'); }
+	
+		.score .graphplot { display:inline-block; 
+			position:relative; 
+			top:0px; left:0px; 
+			width:544px; height:220px; 
+			padding:0px; 
+			background-image:url('../_imgs/graph.png'); }
+
+		.data { display:block; 
+			font-size:12pt; 
+			padding:5px; 
+			padding-left:40px; background-position:0px 10px; 
+			background-repeat:no-repeat; }
+
+			.data#environ { background-image:url('../_imgs/environ_score.png'); }
+			.data#economy { background-image:url('../_imgs/economy_score.png'); }
+
+			.data .text { display:block; }
+			.data .label { padding:0px; 
+				font-weight:bold; }
+
+
+	/*
+	  -------------- 
+		Node Rate
+	  -------------- 
+	*/ 
+	.table { display:block; 
+		padding:0px; } 
+
+	.table .row { display:block; 
+		padding:0px; 
+		margin:auto; } 
+		.table .row:nth-child(2n+1) { background-color:#eee; }
+
+
+		.table .row:hover { background-color:#ffc; } 
+		.table .row:nth-child(2n+1):hover { background-color:#eeb; } 
+
+		.table .row:nth-child(1),
+		.table .row:nth-child(1):hover { background-color:#61c2e8; 
+			color:#fff; } 
+
+		.table .row .header { font-weight:bold; 
+			text-align:center; 
+			padding:8px; 
+			margin:auto; } 
+
+		.table .row .datum { padding:10px; 
+			margin:auto; } 
+
+
+	/*
+	  --------------- 
+		Region Data
+	  --------------- 
+	*/ 
+	.region .row div:nth-child(1) { width:50px; }
+
+	/*.region .half { border:1px solid red; }*/
+	.region .half:nth-child(3) { width:515px; 
+		padding-left:70px; }
+
+	.navigation { display:block; 
+		padding:0px; 
+		padding-bottom:15px; } 
+
+		.navigation .bargraph { display:inline-block; 
+			position:relative; 
+			top:0px; 
+			width:450px; height:40px; 
+			padding:0px; }
+
+		.navigation .bar { display:block; 
+			width:450px; height:40px; 
+			background-color:#dff3ff; /*#cff1ff; */
+			background-image:url('../_imgs/content_gray.png');
+			position:absolute; 
+			border-radius:40px; }
+
+			.navigation .bar svg { display:block; 
+				width:350px; 
+				height:40px; 
+				background-color:#73d0f4;
+				position:absolute; 
+				top:0px; left:0px; }
+
+			.navigation .bar .label { display:inline-block; 
+				color:#fff; 
+				text-shadow:0px 0px 5px rgba(40,138,177,0.9);  
+				font-size:12pt; 
+				position:absolute; 
+				top:10px; left:6px; }
+
+				.movement .zero svg { background-color:#bbb; }
+				.movement .zero .label { text-shadow:0px 0px 5px rgba(0,0,0,0.4);  }
+
+				.navigation .bar #minimap { border-radius:40px 0px 0px 40px; 
+					background-color:#4cb4dd; }
+				.navigation .bar #regkeys { border-radius:0px 40px 40px 0px; }
 /* 
   ======================
 	GAME VISUALIZATION 
