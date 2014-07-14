@@ -8,9 +8,22 @@ $(document).ready(function() {
 			.attr('width',w)
 			.attr('height',h); 
 
-	$.getJSON("data.json", function(data) {
-		console.log(data); 
-	}); 
+	// $.getJSON("data.json", function(data) {
+	// 	console.log("printing json"); 
+	// 	console.log(data); 
+	// }); 
+	$.ajax({
+		type: 'GET', 
+		url: 'testloader.php', 
+		async: false, 
+		success: function(data) {
+			var j = $.parseJSON(data); 
+			console.log(j); 
+		}, error: function() {
+			console.log("error"); 
+		}
+
+	})
 }); 
 
 $(window).resize(function() {
