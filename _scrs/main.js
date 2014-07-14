@@ -7,6 +7,10 @@ $(document).ready(function() {
 	var svg = d3.select(".game").append("svg")
 			.attr('width',w)
 			.attr('height',h); 
+
+	$.getJSON("data.json", function(data) {
+		console.log(data); 
+	}); 
 }); 
 
 $(window).resize(function() {
