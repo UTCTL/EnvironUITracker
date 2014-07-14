@@ -1,17 +1,18 @@
 {
 	"123456789":
 		{
+			"id":"123456789", 
 			"meta":
 				{
 					"age":19, 
 					"gender":"f",
 					"race":"white", 
-					"gamer":"yes"
+					"gamer":true 
 				}, 
 			"details": 
 				{
 					"spent_funds":2543.2, 
-					"spend_polcap":42454.3,
+					"spent_polcap":42454.3,
 					"level":12, 
 					"playtime":"00:20:34", 
 					"status":0, 
@@ -155,14 +156,14 @@
 				},
 			"camera_movement":
 				{
-					"drag":342, 
-					"arrows":32, 
-					"wasd":984 
+					"drag":561, 
+					"arrows":520, 
+					"keys":102 
 				},
 			"panel_time":
 				{
 					"open":3209.32, 
-					"closed":4593.09
+					"closed":2948.09
 				},
 			"scores":
 				{
@@ -197,14 +198,14 @@
 							"events":0, 
 							"disasters":0 
 						}, 
-					"events":
+					"active":
 						{
 							"bases":1.21, 
 							"upgrades":2.13, 
 							"events":3.12, 
 							"disasters":0.11
 						}, 
-					"disasters":
+					"responsive":
 						{
 							"bases":0.22, 
 							"upgrades":0.10, 
@@ -261,7 +262,7 @@
 						}, 
 					"general":
 						{
-							"unlock_rate":5.35, 
+							"unlock_rate":3.33, 
 							"navigation":
 								{
 									"minimap":521, 
@@ -272,21 +273,22 @@
 		}, 
 	"234567891":
 		{
+			"id":"234567891", 
 			"meta":
 				{
 					"age":19, 
 					"gender":"f",
 					"race":"white", 
-					"gamer":"yes"
+					"gamer":false 
 				}, 
 			"details": 
 				{
-					"spent_funds":2543.2, 
-					"spend_polcap":42454.3,
-					"level":12, 
-					"playtime":"00:20:34", 
-					"status":0, 
-					"completed":83 
+					"spent_funds":1230.4, 
+					"spent_polcap":51302.5,
+					"level":5, 
+					"playtime":"00:19:21", 
+					"status":2, 
+					"completed":12 
 				},
 			"screen_usage":
 				{
@@ -418,8 +420,8 @@
 			"camera_movement":
 				{
 					"drag":342, 
-					"arrows":32, 
-					"wasd":984 
+					"arrows":3, 
+					"keys":984 
 				},
 			"panel_time":
 				{
@@ -448,30 +450,30 @@
 					"spawn":
 						{
 							"bases":0, 
-							"upgrades":1.24, 
-							"events":3.24, 
-							"disasters":1.22 
+							"upgrades":2.35, 
+							"events":5.52, 
+							"disasters":3.21
 						}, 
 					"unlock":
 						{
-							"bases":4.25, 
-							"upgrades":1.52, 
+							"bases":1.01, 
+							"upgrades":1.63, 
 							"events":0, 
 							"disasters":0 
 						}, 
-					"events":
+					"active":
 						{
-							"bases":1.21, 
-							"upgrades":2.13, 
-							"events":3.12, 
-							"disasters":0.11
+							"bases":2.61, 
+							"upgrades":3.20, 
+							"events":1.00, 
+							"disasters":0.56
 						}, 
-					"disasters":
+					"responsive":
 						{
-							"bases":0.22, 
-							"upgrades":0.10, 
-							"events":0.81, 
-							"disasters":0.75 
+							"bases":0.94, 
+							"upgrades":1.21, 
+							"events":3.11, 
+							"disasters":0.54 
 						} 
 				}, 
 			"region_data":
@@ -480,54 +482,54 @@
 						{
 							"NA":
 								{
-									"order":1, 
-									"environ":21.8, 
-									"economy":75.3, 
-									"focus":34 
+									"order":6, 
+									"environ":-21.8, 
+									"economy":35.3, 
+									"focus":6
 								}, 
 							"SA":
 								{
-									"order":2, 
-									"environ":75.0, 
-									"economy":21.5, 
-									"focus":22 
+									"order":5, 
+									"environ":7.0, 
+									"economy":-2.5, 
+									"focus":5
 								}, 
 							"EU":
 								{
-									"order":3, 
-									"environ":64.6, 
-									"economy":72.9, 
-									"focus":28 
+									"order":4, 
+									"environ":-4.6, 
+									"economy":12.9, 
+									"focus":21 
 								}, 
 							"AF":
 								{
-									"order":4, 
-									"environ":25.1, 
-									"economy":-14.8, 
-									"focus":5 
+									"order":3, 
+									"environ":58.3, 
+									"economy":54.8, 
+									"focus":28
 								}, 
 							"CA":
 								{
-									"order":5, 
-									"environ":45.6, 
-									"economy":-21.0, 
-									"focus":5 
+									"order":2, 
+									"environ":84.5, 
+									"economy":25.0, 
+									"focus":6 
 								}, 
 							"EA":
 								{
-									"order":6, 
-									"environ":-55.4, 
-									"economy":63.2, 
-									"focus":6 
+									"order":1, 
+									"environ":95.4, 
+									"economy":83.2, 
+									"focus":34  
 								} 
 						}, 
 					"general":
 						{
-							"unlock_rate":5.35, 
+							"unlock_rate":8.18, 
 							"navigation":
 								{
-									"minimap":521, 
-									"keys":203 
+									"minimap":352, 
+									"keys":409 
 								}
 						}
 				}

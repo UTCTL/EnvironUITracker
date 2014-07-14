@@ -9,16 +9,14 @@
 
 <section>
 	<div class="usermenu">
-		<h1>Users</h1> 
-		<li id="u1">User 1</li>
-		<li id="u2">User 2</li>
-		<li id="u3">User 3</li>
-		<li id="u4">User 4</li> 
+		<h1>Sessions</h1> 
+		<li id="u123456789">123456789</li>
+		<li id="u234567891">234567891</li>
 	</div> 
 	<div class="useractivity">
 		<section>
 			<content class="info">
-				<h1>########## <span class="meta">age, gender, race, gamer</span></h3> 
+				<h1><span id="sessionid">##########</span><span class="meta">age, gender, race, gamer</span></h3> 
 			</content> 
 			<content class="resources"> 
 				<div class="third">
@@ -51,19 +49,19 @@
 					<div class="movement" id="drag">
 						<div class="icon"></div>
 						<div class="bargraph">
-							<div class="bar"><svg style="width:201px"></svg><span class="label">40%</span></div>
+							<div class="bar"><div class="model"></div><span class="label"></span></div>
 						</div>
 					</div>
-					<div class="movement" id="arrow">
-						<div class="icon"></div>
-						<div class="bargraph zero">
-							<div class="bar"><svg style="width:35px"></svg><span class="label">0%</span></div>
-						</div>
-					</div>
-					<div class="movement" id="key">
+					<div class="movement" id="arrows">
 						<div class="icon"></div>
 						<div class="bargraph">
-							<div class="bar"><svg style="width:249px"></svg><span class="label">60%</span></div>
+							<div class="bar"><div class="model"></div><span class="label"></span></div>
+						</div>
+					</div>
+					<div class="movement" id="keys">
+						<div class="icon"></div>
+						<div class="bargraph">
+							<div class="bar"><div class="model"></div><span class="label"></span></div>
 						</div>
 					</div>
 				</div> 
@@ -94,11 +92,11 @@
 			</content>
 			<content>
 				<!-- environ score rate --> 
-				<div class="half score">
+				<div class="score half" id="environ">
 					<div class="graphplot"></div> 
 				</div> 
 				<!-- economy score rate --> 
-				<div class="half score">
+				<div class="score half" id="economy">
 					<div class="graphplot"></div> 
 				</div> 
 
@@ -115,31 +113,31 @@
 					</div> 
 					<div class="row">
 						<div class="datum fifth">Spawn</div> 
-						<div class="header fifth">-</div> 
-						<div class="header fifth">1.24</div> 
-						<div class="header fifth">3.24</div> 
-						<div class="header fifth">1.22</div> 
+						<div class="header fifth" id="node00">-</div> 
+						<div class="header fifth" id="node01">1.24</div> 
+						<div class="header fifth" id="node02">3.24</div> 
+						<div class="header fifth" id="node03">1.22</div> 
 					</div> 
 					<div class="row">
 						<div class="datum fifth">Unlock</div> 
-						<div class="header fifth">4.25</div> 
-						<div class="header fifth">1.52</div> 
-						<div class="header fifth">-</div> 
-						<div class="header fifth">-</div> 
+						<div class="header fifth" id="node10">4.25</div> 
+						<div class="header fifth" id="node11">1.52</div> 
+						<div class="header fifth" id="node12">-</div> 
+						<div class="header fifth" id="node13">-</div> 
 					</div>
 					<div class="row">
 						<div class="datum fifth">Active</div> 
-						<div class="header fifth">1.21</div> 
-						<div class="header fifth">2.13</div> 
-						<div class="header fifth">3.12</div> 
-						<div class="header fifth">0.11</div> 
+						<div class="header fifth" id="node20">1.21</div> 
+						<div class="header fifth" id="node21">2.13</div> 
+						<div class="header fifth" id="node22">3.12</div> 
+						<div class="header fifth" id="node23">0.11</div> 
 					</div>
 					<div class="row">
 						<div class="datum fifth">Responsive</div> 
-						<div class="header fifth">0.22</div> 
-						<div class="header fifth">0.10</div> 
-						<div class="header fifth">0.81</div> 
-						<div class="header fifth">0.75</div> 
+						<div class="header fifth" id="node30">0.22</div> 
+						<div class="header fifth" id="node31">0.10</div> 
+						<div class="header fifth" id="node32">0.81</div> 
+						<div class="header fifth" id="node33">0.75</div> 
 					</div> 
 				</div> 
 			</content>
@@ -157,45 +155,45 @@
 						</div> 
 						<div class="row">
 							<div class="header fifth">NA</div>  
-							<div class="header fifth">1</div> 
-							<div class="header fifth positive">21.8</div> 
-							<div class="header fifth positive">75.3</div> 
-							<div class="header fifth">34%</div> 
+							<div class="header fifth" id="region00">1</div> 
+							<div class="header fifth positive" id="region01">21.8</div> 
+							<div class="header fifth positive" id="region02">75.3</div> 
+							<div class="header fifth" id="region03">34%</div> 
 						</div> 
 						<div class="row">
 							<div class="header fifth">SA</div>  
-							<div class="header fifth">2</div> 
-							<div class="header fifth positive">75.0</div> 
-							<div class="header fifth positive">21.5</div> 
-							<div class="header fifth">22%</div> 
+							<div class="header fifth" id="region10">2</div> 
+							<div class="header fifth positive" id="region11">75.0</div> 
+							<div class="header fifth positive" id="region12">21.5</div> 
+							<div class="header fifth" id="region13">22%</div> 
 						</div>
 						<div class="row">
 							<div class="header fifth">EU</div>  
-							<div class="header fifth">3</div> 
-							<div class="header fifth positive">64.6</div> 
-							<div class="header fifth positive">72.9</div> 
-							<div class="header fifth">28%</div> 
+							<div class="header fifth" id="region20">3</div> 
+							<div class="header fifth positive" id="region21">64.6</div> 
+							<div class="header fifth positive" id="region22">72.9</div> 
+							<div class="header fifth" id="region23">28%</div> 
 						</div>
 						<div class="row">
 							<div class="header fifth">AF</div>  
-							<div class="header fifth">4</div> 
-							<div class="header fifth positive">25.1</div> 
-							<div class="header fifth negative">-14.8</div> 
-							<div class="header fifth">5%</div> 
+							<div class="header fifth" id="region30">4</div> 
+							<div class="header fifth positive" id="region31">25.1</div> 
+							<div class="header fifth negative" id="region32">-14.8</div> 
+							<div class="header fifth" id="region33">5%</div> 
 						</div> 
 						<div class="row">
 							<div class="header fifth">CA</div>  
-							<div class="header fifth">5</div> 
-							<div class="header fifth positive">45.6</div> 
-							<div class="header fifth negative">-21.0</div> 
-							<div class="header fifth">5%</div> 
+							<div class="header fifth" id="region40">5</div> 
+							<div class="header fifth positive" id="region41">45.6</div> 
+							<div class="header fifth negative" id="region42">-21.0</div> 
+							<div class="header fifth" id="region43">5%</div> 
 						</div> 
 						<div class="row">
 							<div class="header fifth">EA</div>  
-							<div class="header fifth">6</div> 
-							<div class="header fifth negative">-55.4</div> 
-							<div class="header fifth positive">63.2</div> 
-							<div class="header fifth">6%</div> 
+							<div class="header fifth" id="region50">6</div> 
+							<div class="header fifth negative" id="region51">-55.4</div> 
+							<div class="header fifth positive" id="region52">63.2</div> 
+							<div class="header fifth" id="region53">6%</div> 
 						</div> 
 					</div> 
 				</div> 
@@ -206,8 +204,8 @@
 					<div class="navigation">
 						<div class="bargraph">
 							<div class="bar">
-								<svg style="width:314px;" id="minimap"></svg><span class="label">Minimap 72%</span>
-								<svg style="width:116px; left:334px;" id="regkeys"></svg><span class="label" style="left:365px">Keys 18%</span>
+								<div style="width:314px;" id="minimap"></div><span class="label" id="mini">Minimap 72%</span>
+								<div style="width:116px; left:334px;" id="regkeys"></div><span class="label" id="regk"style="left:365px">Keys 18%</span>
 							</div>
 						</div>
 					</div>

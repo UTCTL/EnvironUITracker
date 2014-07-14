@@ -1,37 +1,467 @@
-var w = 1200, 
-	h = 700; 
+// ======================= 
+// 	Visuzlization globals 
+// ======================= 
+
+// structure 
+var SVG; 
+var GRID = [], 
+	CLICKS = [], 
+	centroids = [], 
+	TOLERANCE = 0.4;
+
+// dimentsion s
+var w = 1200,	// SVG width  
+	h = 700, 	// SVG height
+	dx = 120, 	// width of blocks on GRID
+	dy = 70, 	// height of blocks on GRID
+	rx = w/dx, 	// how many blocks horizontally on GRID
+	ry = h/dy; 	// how many blocks vertically on GRID
+
+// colors 
+var COLORS_WHITE 	= "#ffffff", 
+	COLORS_CYAN 	= "#00ffff",
+	COLORS_GREEN 	= "#00ff00",
+	COLORS_YELLOW 	= "#ffff00",
+	COLORS_RED 		= "#ff0000",
+	COLORS_PURPLE 	= "#902c8e", 
+	COLORS_MAIN_LIGHT 	= "#98e1fd", 
+	COLORS_MAIN_DARK 	= "#008ec5";
+var CENTROID_COLOR 	= ["#ebceff",
+                	   "#ffcece",
+	                   "#ffebce",
+	                   "#f9ffce",
+	                   "#d5ffce",
+	                   "#d3d3d3"]; 
+
+// visualization 
+var selected_visualization = 0; 
+
+
+// =======================
+// 	Visuzlization classes 
+// =======================
+
+// click 
+function Click() {
+	this.instantiate = function(svg,x,y) {
+		this.x = x; 
+		this.y = y; 
+		this.circle = svg.append('circle') 
+						 .attr('cx',x) 
+						 .attr('cy',y) 
+						 .attr('r',2) 
+						 .attr('fill',COLORS_RED); 
+	}; 
+}
+
+// block (grid) 
+function Block() {
+	this.instantiate = function(id,svg,x,y) {
+		var rand = Math.floor(Math.random()*3); 
+		this.id = id; 
+		this.x = x; 
+		this.y = y; 
+		this.hits = 0; 
+		this.added = 0; 
+		this.rect = svg.append('rect')
+					   .attr('x',x) 
+					   .attr('y',y) 
+					   .attr('width',rx) 
+					   .attr('height',ry) 
+					   .style('fill',COLORS_WHITE); 
+	}; 
+
+	this.hit = function() {
+		this.hits++; 
+	}
+
+	this.increment = function(k) {
+		this.added+=k; 
+	}
+}
+
+
+// =======================
+// 	Main Driver 
+// =======================
 
 $(document).ready(function() {
 	resize_user_activity_section(); 
 
-	var svg = d3.select(".game").append("svg")
-			.attr('width',w)
+	// make an svg container 
+	SVG = d3.select('.game').append('svg')
+			.attr('width',w) 
 			.attr('height',h); 
 
-	// $.getJSON("data.json", function(data) {
-	// 	console.log("printing json"); 
-	// 	console.log(data); 
-	// }); 
-	$.ajax({
-		type: 'GET', 
-		url: 'testloader.php', 
-		async: false, 
-		success: function(data) {
-			var j = $.parseJSON(data); 
-			console.log(j); 
-		}, error: function() {
-			console.log("error"); 
-		}
+	// draw invisible grid 
+	var j = -1; 
+	GRID = d3.range(dx*dy).map(function(i) {
+		var newx = (i*rx)%w; 
+		if(newx==0) j++; 
+		var newy = ry*j; 
 
-	})
+		var b = new Block(); 
+		b.instantiate(i,SVG,newx,newy,rx,ry); 
+		return b; 
+	}); 
+
+	$('.usermenu li').on('click',function() { 
+		var id = $(this).attr('id'); 
+		id = id.substring(1,id.length); 
+		console.log(id); 
+		$.ajax({
+			type: 'GET', 
+			url: 'testloader.php', 
+			data: {
+				id:id 
+			}, 
+			async: false, 
+			success: function(data) {
+				var j = $.parseJSON(data); 
+				display_data(j); 
+				if(selected_visualization==1) draw_heatmap(); 
+				else draw_points(); 
+			}, error: function() {
+				console.log("error"); 
+			}
+
+		}); 
+	}); 
+
+	// select map visualization                                                                                                                                                                              
+	$('.option').on('click',function(e) {
+        var id = $(this).attr('id');
+        switch(id) {
+            case 'points':
+                draw_points();
+                break;
+            case 'heatmap':
+                draw_heatmap();
+				break;
+            case 'cluster':
+                draw_cluster(svg);
+                break;
+            default: break;
+        }
+    });
 }); 
 
 $(window).resize(function() {
 	resize_user_activity_section(); 
 }); 
 
+
+// ===========
+// 	Functions 
+// ===========
+
+// resizing activity section 
 function resize_user_activity_section() {
 	$('.useractivity').css({
 		'width':(window.innerWidth-290)+'px' 
 	}); 
 } 
+
+// increment added value of adjacent block 
+function increment_adjacent(i,v) {
+	if(v<0.1) return; 
+	var j = 0; 
+
+	for(var k=0; k<3; k++) {
+		j = (k==0) ? i-dx-2 : (k==1) ? i-2 : i+dx-2; 
+
+		for(var l=0; l<3; l++) {
+			j++; 
+			if(j==l) continue; 
+			if(j<GRID.length && j>=0) {
+				GRID[j].increment(v); 
+				increment_adjacent(j,v/2); 
+			}
+		}
+	}
+}
+
+// hit grid block
+function hit_grid_block(x,y) {
+	var newx = Math.floor(x/rx); 
+	var newy = Math.floor(y/ry); 
+	var i = (newy*dx)+newx; 
+	GRID[i].hit(); 
+	increment_adjacent(i,TOLERANCE); 
+}
+
+// show data for camera movement 
+function move_camera_data(type,value,total) {
+	var p = value/total; 
+	var v = Math.round(p*100); 
+	$('.movement#'+type+' .label').html(v+"%"); 
+	if(v==0) {
+		$('.movement#'+type+' .bargraph').addClass('zero'); 
+		$('.movement#'+type+' .bargraph .bar .model').animate({
+			'width':'35px' 
+		},700,function() {}).css({
+			'background-color':'#bbb'
+		}); 
+	} else { 
+		console.log(type+" "+value+" "+get_color_in_between(p,COLORS_MAIN_LIGHT,COLORS_MAIN_DARK) );
+		$('.movement#'+type+' .bargraph').removeClass('zero'); 
+		$('.movement#'+type+' .bargraph .bar .model').animate({
+			'width':Math.round(35+(415*p))+'px' 
+		},700,function() {}).css({
+			'background-color':get_color_in_between(p,COLORS_MAIN_LIGHT,COLORS_MAIN_DARK) 
+		}); 
+	}
+}
+
+// display gather data for a particular session 
+function display_data(session) {
+	// console.log(session); 
+
+	// SESSION id
+	$('#sessionid').html(session["id"]); 
+
+	// SESSION user meta info 
+	var meta = ""; 
+	meta += session["meta"]["age"]+"-year-old "; 
+	meta += session["meta"]["race"]+" "; 
+	meta += (session["meta"]["gamer"]) ? "gamer " : "non-gamer "; 
+	meta += (session["meta"]["gender"]=="m") ? "male " : "female "; 
+
+	$('.info .meta').html(meta); 
+
+	// SESSION game details 
+	var win = (session["details"]["status"]==0) ? '<span class="chosen">won</span>' : 'won'; 
+	var los = (session["details"]["status"]==1) ? '<span class="chosen">lost</span>' : 'lost'; ; 
+	var qui = (session["details"]["status"]==2) ? '<span class="chosen">quit</span>' : 'quit'; ; 
+
+	$('.resources #funds .label').html(session["details"]["spent_funds"]); 
+	$('.resources #pc .label').html(session["details"]["spent_polcap"]); 
+	$('.resources #level .label').html(session["details"]["level"]); 
+	$('.resources #timer .label').html(session["details"]["playtime"]); 
+	$('.resources #status .label').html(win+" | "+los+" | "+qui); 
+	$('.resources #completed .label').html(session["details"]["completed"]+"%"); 
+
+	// SESSION screen usage 
+
+	// ========================
+	// 	Screen Visualization 
+	// ========================
+	SVG.selectAll('circle').remove(); 
+	var data = session["screen_usage"]["clicks"]; 
+	for(var i=0; i<data.length; i++) {
+		var c = new Click(); 
+		var x = data[i][0]; 
+		var y = 700-data[i][1]; 
+		c.instantiate(SVG,x,y); 
+		CLICKS.push(c); 
+		hit_grid_block(x,y); 
+	}
+
+	// SESSION camera movement 
+	data = session["camera_movement"]; 
+	var tags = ["drag","arrows","keys"]; 
+	var total = 0; 
+	for(var i=0; i<tags.length; i++) 
+		total += data[tags[i]]; 
+	for(var i=0; i<tags.length; i++) 
+	 	move_camera_data(tags[i],data[tags[i]],total); 
+
+	// SESSION panel time 
+	total = session["panel_time"]["open"]+session["panel_time"]["closed"]; 
+	total = Math.round(session["panel_time"]["open"]*100/total); 
+
+	if(total>=50) {
+		$('.panel#on .label').removeClass("negative").addClass("positive"); 
+		$('.panel#off .label').removeClass("positive").addClass("negative"); 
+	} else {
+		$('.panel#on .label').removeClass("positive").addClass("negative"); 
+		$('.panel#off .label').removeClass("negative").addClass("positive"); 
+	} 
+
+	$('.panel#on .label').html(total+"%"); 
+	$('.panel#off .label').html((100-total)+"%"); 
+
+	// SESSION graph score plots 
+	// total = session["scores"]["environ"].length; 
+	// var space = d3.select(".score#environ .graphplot").append("svg"); 
+	// d3.range(total).map(function(i) {
+	// 	space.append('circle'); 
+	// }); 
+
+	// SESSION node rate 
+	var k = 0, n = 0; 
+	var types = ["spawn","unlock","active","responsive"]; 
+	var nodes = ["bases","upgrades","events","disasters"]; 
+	var v; 
+
+	for(var i=0; i<types.length; i++) {
+		n=0; 
+		for(var j=0; j<nodes.length; j++) {
+			v = session["node_rate"][types[i]][nodes[j]]; 
+			$('#node'+k+""+n).html((v==0) ? '-' : v.toFixed(2)); 
+			n++; 
+		}
+		k++; 
+	} 
+
+	// SESSION Region data particular 
+	types = ["NA","SA","EU","AF","CA","EA"]; 
+	nodes = ["order","environ","economy","focus"]; 
+	k = 0; 
+
+	for(var i=0; i<types.length; i++) {
+		n=0; 
+		for(var j=0; j<nodes.length; j++) {
+			v = session["region_data"]["particular"][types[i]][nodes[j]]; 
+
+			switch(j) {
+				case 0: 
+					$('#region'+k+""+n).html(v); 
+					break; 
+				case 1: 
+				case 2: 
+					$('#region'+k+""+n).html(v.toFixed(1)); 
+					if(v>0) $('#region'+k+""+n).removeClass('negative').addClass('positive'); 
+					else $('#region'+k+""+n).removeClass('positive').addClass('negative'); 
+					break; 
+				default: 
+					$('#region'+k+""+n).html(v+"%"); 
+			}
+			n++; 
+		}
+		k++; 
+	} 
+
+
+	// SESSION region data general 
+	data = session["region_data"]["general"]["navigation"]; 
+	total = data["minimap"]+data["keys"]; 
+	v = (data["minimap"]/total); 
+	$('#funds .label').html(session["region_data"]["general"]["unlock_rate"]); 
+
+	$('.navigation .bargraph .bar .label#mini').html("Minimap "+(Math.floor(v*100))+"%"); 
+	$('.navigation .bargraph .bar #minimap').animate({
+		'width':v*430+'px'
+	},700,function() {}); 
+	$('.navigation .bargraph .bar .label#regk').html("Keys "+(Math.floor((1-v)*100))+"%"); 
+	$('.navigation .bargraph .bar #regkeys').animate({
+		'width':(430-(v*430))+'px', 
+		'left':(v*430)+20
+	},700,function() {}); 
+
+
+}
+
+
+// =================
+// 	COLOR Functions 
+// =================
+function get_color_in_between(ratio,color1,color2) {
+    color1 = hex_to_decimal(color1);
+    color2 = hex_to_decimal(color2);
+    var color3 = [];
+
+	for(var i=0; i<color1.length; i++) {
+		if(color1[i]==color2[i]) color3[i] = color1[i];
+        else {
+            var d = Math.abs(color1[i]-color2[i]);
+            color3[i] = Math.floor(Math.min(color1[i],color2[i])+(d*ratio));
+    	}
+    } 
+
+	color3 = decimal_to_hex(color3);
+	return color3;
+
+}
+
+function hex_to_decimal(color) {
+    var num = 0,
+        k = 0,
+        ch = '',
+        temp = [],
+        hex = [],
+        prov = '';
+
+    for(var i=1; i<color.length; i++) {
+        prov += color[i];
+		if(i%2==0) {
+			hex[k] = prov;
+			k++;
+			prov = "";
+        }
+    }
+
+    for(var j=0; j<hex.length; j++) {
+        num = 0;
+        for(var i=hex[j].length-1; i>=0; i--) {
+			ch = hex[j][hex[j].length-(i+1)];
+			k = Math.floor((isNaN(parseInt(ch))) ? ch.charCodeAt(0)-87 : parseInt(ch));
+			num += k*(Math.pow(16, i));
+		}
+		temp[j] = num;
+    }
+
+	return temp;
+}
+
+function decimal_to_hex(color) {
+    var temp = [],
+		hex = "",
+        result = 0,
+        remainder = 0;
+
+    for(var i=0; i<color.length; i++) {
+        hex = "";
+        result = color[i];
+        if(result<10) temp[i] = "0"+result;
+        else if(result>=255) temp[i] = "ff";
+		else {
+            while(result>0) {
+				remainder = Math.floor(result%16);
+				result = Math.floor(result/16);
+                hex = ((remainder<10) ? ""+remainder : String.fromCharCode(87+remainder))+hex;
+			}
+        	temp[i] = hex;
+        }
+
+        if(temp[i].length<2) temp[i] = "0"+temp[i]; 
+    }
+
+    console.log(temp); 
+    return "#"+temp.join("");
+}
+
+
+// =================
+// 	DRAWING SCREEN  
+// =================
+function draw_points() {
+	selected_visualization = 0; 
+    d3.range(GRID.length).map(function(i) {
+       	GRID[i].rect.style('fill',COLORS_WHITE);
+    });
+}
+
+function draw_heatmap() {
+	selected_visualization = 1; 
+    var max = 0;
+    var total = 0;
+    d3.range(GRID.length).map(function(i) {
+        if(GRID[i].hits>max) max = GRID[i].hits;
+        total += GRID[i].hits;
+    });
+
+    d3.range(GRID.length).map(function(i) {
+        GRID[i].rect.style('fill',get_map_color((GRID[i].hits+GRID[i].added)/max));
+    });
+}
+
+function get_map_color(ratio) {
+	if(ratio<0.1 || isNaN(ratio)) return COLORS_WHITE;
+    else if(ratio<0.2) return get_color_in_between(ratio,COLORS_WHITE,COLORS_CYAN);
+    else if(ratio<0.5) return get_color_in_between(ratio,COLORS_CYAN,COLORS_GREEN);
+    else if(ratio<0.8) return COLORS_YELLOW;
+	else if(ratio<0.9) return get_color_in_between(ratio,COLORS_GREEN,COLORS_YELLOW);
+	else if(ratio<1) return get_color_in_between(ratio,COLORS_YELLOW,COLORS_RED);
+    else return COLORS_RED;
+}

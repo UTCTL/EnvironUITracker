@@ -179,8 +179,8 @@ content { display:block;
 			background-repeat:no-repeat; 
 			padding:0px; }
 		.movement#drag .icon { background-image:url('../_imgs/drag.png'); }
-		.movement#arrow .icon { background-image:url('../_imgs/arrow.png'); }
-		.movement#key .icon { background-image:url('../_imgs/key.png'); }
+		.movement#arrows .icon { background-image:url('../_imgs/arrow.png'); }
+		.movement#keys .icon { background-image:url('../_imgs/key.png'); }
 
 		.movement .bargraph { display:inline-block; 
 			position:relative; 
@@ -196,10 +196,10 @@ content { display:block;
 			border-radius:40px; 
 			top:-22px; }
 
-			.movement .bar svg { display:block; 
-				width:350px; 
+			.movement .bar .model { display:block; 
+				/*width:350px; */
 				height:40px; 
-				background-color:#73d0f4	; /*#61c2e8;*/ /*#46abd3;*/ /*#42fc9f;*/
+				/*background-color:#73d0f4;*/ /*#61c2e8;*/ /*#46abd3;*/ /*#42fc9f;*/
 				/*background-image:url('../_imgs/content.png');*/
 				position:absolute; 
 				border-radius:40px; 	
@@ -214,7 +214,7 @@ content { display:block;
 				top:3px; left:6px; 
 				/*top:-34px;*/ }
 
-				.movement .zero svg { background-color:#bbb; }
+				.movement .zero .model { background-color:#bbb; }
 				.movement .zero .label { text-shadow:0px 0px 5px rgba(0,0,0,0.4);  }
 
 	/*
@@ -245,8 +245,8 @@ content { display:block;
 	.score { background-position:0px 10px; 
 		background-repeat:no-repeat; }
 
-	.score#environ { background-image:url('../_imgs/environ_score.png'); }
-	.score#economy { background-image:url('../_imgs/economy_score.png'); }
+	/*.score#environ { background-image:url('../_imgs/environ_score.png'); }
+	.score#economy { background-image:url('../_imgs/economy_score.png'); }*/
 	
 		.score .graphplot { display:inline-block; 
 			position:relative; 
@@ -266,7 +266,8 @@ content { display:block;
 
 			.data .text { display:block; }
 			.data .label { padding:0px; 
-				font-weight:bold; }
+				font-weight:bold; } 
+			.data svg { border:1px solid red; }
 
 
 	/*
@@ -327,7 +328,7 @@ content { display:block;
 			position:absolute; 
 			border-radius:40px; }
 
-			.navigation .bar svg { display:block; 
+			.navigation .bar div { display:block; 
 				width:350px; 
 				height:40px; 
 				background-color:#73d0f4;
@@ -341,7 +342,7 @@ content { display:block;
 				position:absolute; 
 				top:10px; left:6px; }
 
-				.movement .zero svg { background-color:#bbb; }
+				.movement .zero div { background-color:#bbb; }
 				.movement .zero .label { text-shadow:0px 0px 5px rgba(0,0,0,0.4);  }
 
 				.navigation .bar #minimap { border-radius:40px 0px 0px 40px; 
