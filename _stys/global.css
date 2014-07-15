@@ -255,6 +255,9 @@ content { display:block;
 			padding:0px; 
 			background-image:url('../_imgs/graph.png'); }
 
+			.score .graphplot svg { position:relative; 
+				left:8px; }
+
 		.data { display:block; 
 			font-size:12pt; 
 			padding:5px; 

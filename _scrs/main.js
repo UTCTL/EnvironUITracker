@@ -3,11 +3,11 @@
 // ======================= 
 
 // structure 
-var SVG; 
+var SVG, ENVIRON, ECONOMY; 
 var GRID = [], 
 	CLICKS = [], 
 	centroids = [], 
-	TOLERANCE = 0.4;
+	TOLERANCE = 0.36;
 
 // dimentsion s
 var w = 1200,	// SVG width  
@@ -15,13 +15,17 @@ var w = 1200,	// SVG width
 	dx = 120, 	// width of blocks on GRID
 	dy = 70, 	// height of blocks on GRID
 	rx = w/dx, 	// how many blocks horizontally on GRID
-	ry = h/dy; 	// how many blocks vertically on GRID
+	ry = h/dy, 	// how many blocks vertically on GRID
+	gw = 516, 	// score graph width 
+	gh = 199; 	// score graph height 
 
 // colors 
 var COLORS_WHITE 	= "#ffffff", 
 	COLORS_CYAN 	= "#00ffff",
 	COLORS_GREEN 	= "#00ff00",
+	COLORS_VERDE 	= "#00aa00", 
 	COLORS_YELLOW 	= "#ffff00",
+	COLORS_AMBER 	= "#aaaa00", 
 	COLORS_RED 		= "#ff0000",
 	COLORS_PURPLE 	= "#902c8e", 
 	COLORS_MAIN_LIGHT 	= "#98e1fd", 
@@ -105,10 +109,18 @@ $(document).ready(function() {
 		return b; 
 	}); 
 
+	// draw score graphs 
+	ENVIRON = d3.select(".score#environ .graphplot").append('svg') 
+				.attr('width',gw) 
+				.attr('height',gh); 
+	ECONOMY = d3.select(".score#economy .graphplot").append('svg') 
+				.attr('width',gw) 
+				.attr('height',gh); 
+
 	$('.usermenu li').on('click',function() { 
 		var id = $(this).attr('id'); 
 		id = id.substring(1,id.length); 
-		console.log(id); 
+		// console.log(id); 
 		$.ajax({
 			type: 'GET', 
 			url: 'testloader.php', 
@@ -203,7 +215,7 @@ function move_camera_data(type,value,total) {
 			'background-color':'#bbb'
 		}); 
 	} else { 
-		console.log(type+" "+value+" "+get_color_in_between(p,COLORS_MAIN_LIGHT,COLORS_MAIN_DARK) );
+		// console.log(type+" "+value+" "+get_color_in_between(p,COLORS_MAIN_LIGHT,COLORS_MAIN_DARK) );
 		$('.movement#'+type+' .bargraph').removeClass('zero'); 
 		$('.movement#'+type+' .bargraph .bar .model').animate({
 			'width':Math.round(35+(415*p))+'px' 
@@ -211,6 +223,14 @@ function move_camera_data(type,value,total) {
 			'background-color':get_color_in_between(p,COLORS_MAIN_LIGHT,COLORS_MAIN_DARK) 
 		}); 
 	}
+}
+
+function distance_formula(x1,y1,x2,y2) {
+	return Math.sqrt(Math.pow(x1-x2,2) + Math.pow(y1-y2,2));
+}
+
+function slope_formula(x1,y1,x2,y2) {
+	return (y2-y1)/(x2-x1); 
 }
 
 // display gather data for a particular session 
@@ -282,11 +302,8 @@ function display_data(session) {
 	$('.panel#off .label').html((100-total)+"%"); 
 
 	// SESSION graph score plots 
-	// total = session["scores"]["environ"].length; 
-	// var space = d3.select(".score#environ .graphplot").append("svg"); 
-	// d3.range(total).map(function(i) {
-	// 	space.append('circle'); 
-	// }); 
+	graph_scores(session,"environ"); 
+	graph_scores(session,"economy"); 
 
 	// SESSION node rate 
 	var k = 0, n = 0; 
@@ -427,10 +444,70 @@ function decimal_to_hex(color) {
         if(temp[i].length<2) temp[i] = "0"+temp[i]; 
     }
 
-    console.log(temp); 
+    // console.log(temp); 
     return "#"+temp.join("");
 }
 
+function graph_scores(session,type) {
+	var canvas = (type=="environ") ? ENVIRON : ECONOMY; 
+	var count = session["scores"][type].length; 
+	var delta = gw/(count-1); 
+	var total = 0; 
+	var zero = gh/2; 
+	var prev = 0; 
+	var slopes = []; 
+	d3.selectAll('.score#'+type+' .graphplot line').remove(); 
+	d3.range(count).map(function(i) { 
+		var val = session["scores"][type][i]; 
+		if(i==0) {
+			prev = val; 
+			return; 
+		}
+
+		var color; 
+		if(val>25) color = COLORS_VERDE; 
+		else if(val>0) color = get_color_in_between(1-(val/25), COLORS_AMBER, COLORS_VERDE); 
+		else if(val>-25) color = get_color_in_between(1+(val/25),COLORS_AMBER,COLORS_RED); 
+		else color = COLORS_RED; 
+
+		total+=val; 
+
+		var x1 = (i-1)*delta, 
+			y1 = gh-(zero+((prev/100)*zero)), 
+			x2 = i*delta, 
+			y2 = gh-(zero+((val/100)*zero)); 
+
+		slopes[i] = slope_formula(i-1,prev,i,val); 
+		canvas.append('line') 
+			  .attr('x1',x1)  
+			  .attr('y1',y1) 
+			  .attr('x2',x2)  
+			  .attr('y2',y2) 
+			  .attr('style','stroke:'+color+'; stroke-width:5px; '); 
+
+		prev = val; 
+
+	}); 
+
+	var avg = 0; 
+	d3.range(slopes.length).map(function(i) { if(i==0) return; avg+=slopes[i]; }); 
+	console.log(slopes); 
+	avg = avg/slopes.length; 
+	$('#avg_'+type+'_delta').html(avg.toFixed(2)); 
+	if(avg>0) $('.data#'+type+' .label#avg_'+type+'_delta').removeClass('negative').addClass('positive'); 
+	else $('.data#'+type+' .label#avg_'+type+'_delta').removeClass('positive').addClass('negative'); 
+
+	avg = total/count; 
+	$('#avg_'+type+'_score').html(avg.toFixed(2)); 
+	if(avg>0) $('.data#'+type+' .label#avg_'+type+'_score').removeClass('negative').addClass('positive'); 
+	else $('.data#'+type+' .label#avg_'+type+'_score').removeClass('positive').addClass('negative'); 	
+	canvas.append('line') 
+		  .attr('x1',0) 
+		  .attr('y1',zero-avg) 
+		  .attr('x2',gw) 
+		  .attr('y2',zero-avg) 
+		  .attr('style','stroke:#73d0f4; stroke-width:1px; '); 
+}
 
 // =================
 // 	DRAWING SCREEN  
