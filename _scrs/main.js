@@ -84,6 +84,48 @@ function Block() {
 	}
 }
 
+// centroid 
+function Centroid() {
+	this.instantiate = function(id,svg) {
+		this.id = id; 
+		this.x = Math.floor(Math.random()*w); 
+		this.y = Math.floor(Math.random()*h); 
+		this.distances = {}; 
+		this.attributions = []; 
+	}; 
+
+	this.dist = function(b) {
+		this.distances[b.id] = distance_formula(this.x,this.y,b.x,b.y); 
+	}; 
+
+	this.attribute = function(b) {
+		this.attributions.push(b); 
+	}; 
+
+	this.repos = function() {
+
+		if(this.attributions.length==0) {
+			this.x = 0; 
+			this.y = 0; 
+		} else {
+			var px = 0, 
+				py = 0; 
+			var attrs = this.attributions; 
+			var color_index = this.id; 
+			d3.range(this.attributions.length).map(function(i) {
+				var a = attrs[i]; 
+				px += a.x; 
+				py += a.y; 
+				a.rect.transition().duration(100) 
+					  .style('fill','#f00'); 
+			}); 
+			
+			this.x = Math.floor(px/this.attributions.length); 
+			this.y = Math.floor(py/this.attributions.length); 
+		}
+	}
+}
+
 
 // =======================
 // 	Main Driver 
@@ -93,32 +135,9 @@ $(document).ready(function() {
 	resize_user_activity_section(); 
 	load_menu(); 
 	hide_show_menu(); 
+	premake_svgs(); 
 
-	// make an svg container 
-	SVG = d3.select('.game').append('svg')
-			.attr('width',w) 
-			.attr('height',h); 
-
-	// draw invisible grid 
-	var j = -1; 
-	GRID = d3.range(dx*dy).map(function(i) {
-		var newx = (i*rx)%w; 
-		if(newx==0) j++; 
-		var newy = ry*j; 
-
-		var b = new Block(); 
-		b.instantiate(i,SVG,newx,newy,rx,ry); 
-		return b; 
-	}); 
-
-	// draw score graphs 
-	ENVIRON = d3.select(".score#environ .graphplot").append('svg') 
-				.attr('width',gw) 
-				.attr('height',gh); 
-	ECONOMY = d3.select(".score#economy .graphplot").append('svg') 
-				.attr('width',gw) 
-				.attr('height',gh); 
-
+	// choose item from menu 
 	$('.usermenu li').on('click',function() { 
 		$('.usermenu li#'+SELECTED).removeClass('selected'); 
 
@@ -165,7 +184,7 @@ $(document).ready(function() {
                 draw_heatmap();
 				break;
             case 'cluster':
-                draw_cluster(svg);
+                draw_cluster();
                 break;
             default: break;
         }
@@ -227,6 +246,33 @@ function hide_show_menu() {
 			$('.menuoption').animate({left:'0px'}, 500, function() {}).html('&raquo;'); 
 			$('.usermenu').animate({left:'-250px'}, 500, function() {}); 
 		}
+	}); 
+}
+
+function premake_svgs() {
+	// draw score graphs 
+	ENVIRON = d3.select(".score#environ .graphplot").append('svg') 
+				.attr('width',gw) 
+				.attr('height',gh); 
+	ECONOMY = d3.select(".score#economy .graphplot").append('svg') 
+				.attr('width',gw) 
+				.attr('height',gh); 
+
+	// make an svg container 
+	SVG = d3.select('.game').append('svg')
+			.attr('width',w) 
+			.attr('height',h); 
+
+	// draw invisible grid 
+	var j = -1; 
+	GRID = d3.range(dx*dy).map(function(i) {
+		var newx = (i*rx)%w; 
+		if(newx==0) j++; 
+		var newy = ry*j; 
+
+		var b = new Block(); 
+		b.instantiate(i,SVG,newx,newy,rx,ry); 
+		return b; 
 	}); 
 }
 
@@ -599,6 +645,11 @@ function draw_heatmap() {
     d3.range(GRID.length).map(function(i) {
         GRID[i].rect.style('fill',get_map_color((GRID[i].hits+GRID[i].added)/max));
     });
+}
+
+function draw_cluster() {
+	return; 
+
 }
 
 function get_map_color(ratio) {

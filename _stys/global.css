@@ -121,6 +121,9 @@ content { display:block;
 		Resources 
 	  -------------
 	*/ 
+	.info { padding-bottom:20px; }
+	.resources { padding-top:0px; }
+
 	.resources h4 { background-position:left 11px; 
 		background-repeat:no-repeat; 
 		padding-left:40px; }
