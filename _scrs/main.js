@@ -3,7 +3,7 @@
 // ======================= 
 
 // structure 
-var SVG, ENVIRON, ECONOMY; 
+var SVG, ENVIRON, ECONOMY, SELECTED; 
 var GRID = [], 
 	CLICKS = [], 
 	centroids = [], 
@@ -91,6 +91,7 @@ function Block() {
 
 $(document).ready(function() {
 	resize_user_activity_section(); 
+	hide_show_menu(); 
 
 	// make an svg container 
 	SVG = d3.select('.game').append('svg')
@@ -118,7 +119,12 @@ $(document).ready(function() {
 				.attr('height',gh); 
 
 	$('.usermenu li').on('click',function() { 
+		$('.usermenu li#'+SELECTED).removeClass('selected'); 
+
 		var id = $(this).attr('id'); 
+		SELECTED = id; 
+		$('.usermenu li#'+SELECTED).addClass('selected'); 
+
 		id = id.substring(1,id.length); 
 		// console.log(id); 
 		$.ajax({
@@ -169,10 +175,33 @@ $(window).resize(function() {
 
 // resizing activity section 
 function resize_user_activity_section() {
+	if(window.innerWidth>=1500) {
+		$('.usermenu').css({'left':'0px'}); 
+		$('.menuoption').css({'visibility':'hidden'}); 
+	} else { 
+		$('.usermenu').css({'left':'-250px'}); 
+		$('.menuoption').css({'visibility':'visible','left':'0px'}).html('&raquo;'); 
+	}
+
 	$('.useractivity').css({
 		'width':(window.innerWidth-290)+'px' 
 	}); 
 } 
+
+// hide/show menu depending on screen size 
+function hide_show_menu() {
+	$('.menuoption').on('click',function() {
+		var x = $(this).offset().left; 
+		console.log(x); 
+		if(x<10) {
+			$('.menuoption').animate({left:'250px'}, 500, function() {}).html('&laquo;'); 
+			$('.usermenu').animate({left:'0px'}, 500, function() {}); 
+		} else {
+			$('.menuoption').animate({left:'0px'}, 500, function() {}).html('&raquo;'); 
+			$('.usermenu').animate({left:'-250px'}, 500, function() {}); 
+		}
+	}); 
+}
 
 // increment added value of adjacent block 
 function increment_adjacent(i,v) {
@@ -499,7 +528,6 @@ function graph_scores(session,type) {
 
 	var avg = 0; 
 	d3.range(slopes.length).map(function(i) { if(i==0) return; avg+=slopes[i]; }); 
-	console.log(slopes); 
 	avg = avg/slopes.length; 
 	$('#avg_'+type+'_delta').html(avg.toFixed(2)); 
 	if(avg>0) $('.data#'+type+' .label#avg_'+type+'_delta').removeClass('negative').addClass('positive'); 
