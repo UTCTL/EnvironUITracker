@@ -91,6 +91,7 @@ function Block() {
 
 $(document).ready(function() {
 	resize_user_activity_section(); 
+	load_menu(); 
 	hide_show_menu(); 
 
 	// make an svg container 
@@ -194,6 +195,26 @@ function resize_user_activity_section() {
 		'width':(window.innerWidth-290)+'px' 
 	}); 
 } 
+
+function load_menu() {
+	$.ajax({
+		type: 'GET', 
+		url: '_api/requests.php', 
+		data: {
+			action:'options'
+		}, 
+		async:false, 
+		success: function(data) {
+			var j = $.parseJSON(data); 
+			if(j.hasOwnProperty("success")) {
+				for(var i=0; i<j["data"].length; i++) {
+					var val = j["data"][i]; 
+					$('.usermenu').append('<li id="u'+val+'">'+val+'</li>'); 
+				}
+			}
+		}
+	})
+}
 
 // hide/show menu depending on screen size 
 function hide_show_menu() {

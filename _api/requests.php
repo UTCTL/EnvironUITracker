@@ -45,6 +45,16 @@ switch($action) {
 
 		if(!$found) echo '{"error":506,"message":"Data not found."}'; 
 		break; 
+	case 'options': 
+		$result = mysqli_query($dblink,"SELECT session FROM sessions"); 
+		$out = '{"success":"success","message":"Entry found","data":['; 
+		while($row = mysqli_fetch_array($result)) {
+			$out .= '"'.$row['session'].'",'; 
+		}
+		$out = substr($out, 0, strlen($out)-1); 
+		$out .= ']}'; 
+		echo $out; 
+		break; 
 	default: 
 		echo '{"error":504,"message":"Information missing"}'; 
 		break; 
