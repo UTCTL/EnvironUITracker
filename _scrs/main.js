@@ -129,17 +129,24 @@ $(document).ready(function() {
 		// console.log(id); 
 		$.ajax({
 			type: 'GET', 
-			url: 'testloader.php', 
+			// url: 'testloader.php', 
+			url: '_api/requests.php', 
 			data: {
+				action:'pull', 
 				id:id 
 			}, 
 			async: false, 
 			success: function(data) {
 				var j = $.parseJSON(data); 
-				display_data(j); 
-				if(selected_visualization==1) draw_heatmap(); 
-				else draw_points(); 
-			}, error: function() {
+				if(j.hasOwnProperty("success")) {
+					display_data(j["data"][id]); 
+					if(selected_visualization==1) draw_heatmap(); 
+					else draw_points(); 
+				} else { 
+					console.log("error"); 
+					console.log(j); 
+				}
+			}, error: function() { 
 				console.log("error"); 
 			}
 
@@ -192,7 +199,6 @@ function resize_user_activity_section() {
 function hide_show_menu() {
 	$('.menuoption').on('click',function() {
 		var x = $(this).offset().left; 
-		console.log(x); 
 		if(x<10) {
 			$('.menuoption').animate({left:'250px'}, 500, function() {}).html('&laquo;'); 
 			$('.usermenu').animate({left:'0px'}, 500, function() {}); 
