@@ -480,10 +480,18 @@ function graph_scores(session,type) {
 		slopes[i] = slope_formula(i-1,prev,i,val); 
 		canvas.append('line') 
 			  .attr('x1',x1)  
+			  .attr('y1',zero) 
+			  .attr('x2',x2)  
+			  .attr('y2',zero) 
+			  .attr('stroke','#fff') 
+			  .attr('stroke-width','2px')
+			  .transition().duration(1000)
+			  .attr('x1',x1)  
 			  .attr('y1',y1) 
 			  .attr('x2',x2)  
-			  .attr('y2',y2) 
-			  .attr('style','stroke:'+color+'; stroke-width:5px; '); 
+			  .attr('y2',y2)
+			  .attr('stroke',color) 
+			  .attr('stroke-width','5px'); 
 
 		prev = val; 
 
@@ -503,10 +511,15 @@ function graph_scores(session,type) {
 	else $('.data#'+type+' .label#avg_'+type+'_score').removeClass('positive').addClass('negative'); 	
 	canvas.append('line') 
 		  .attr('x1',0) 
+		  .attr('y1',zero) 
+		  .attr('x2',gw) 
+		  .attr('y2',zero) 
+		  .attr('style','stroke:#73d0f4; stroke-width:1px; ')
+		  .transition().duration(1000) 
+		  .attr('x1',0) 
 		  .attr('y1',zero-avg) 
 		  .attr('x2',gw) 
-		  .attr('y2',zero-avg) 
-		  .attr('style','stroke:#73d0f4; stroke-width:1px; '); 
+		  .attr('y2',zero-avg); 
 }
 
 // =================
