@@ -136,6 +136,7 @@ $(document).ready(function() {
 	load_menu(); 
 	hide_show_menu(); 
 	premake_svgs(); 
+	handle_user(); 
 
 	// choose item from menu 
 	$('.usermenu li').on('click',function() { 
@@ -273,6 +274,66 @@ function premake_svgs() {
 		var b = new Block(); 
 		b.instantiate(i,SVG,newx,newy,rx,ry); 
 		return b; 
+	}); 
+}
+
+function handle_user() {
+	$('#login').on('click',function() {
+		var u = $('#uname').val(), 
+			p = $('#pword').val(); 
+		$.ajax({
+			type:'POST', 
+			url:'_incs/private_requests.php', 
+			data: {
+				action:'login', 
+				uname:u, 
+				pword:p 
+			}, 
+			async: false, 
+			success: function(data) {
+				var j = $.parseJSON(data); 
+				if(j.hasOwnProperty("success")) 
+					window.location.replace("http://localhost:8888/EnvironUITracker/stats"); 
+				else console.log(j["message"]); 
+			}
+		}); 
+	});
+
+	$('#uname,#pword').on('keyup',function(e) {
+		if(e.which=='13') {
+			var u = $('#uname').val(), 
+				p = $('#pword').val(); 
+			$.ajax({
+				type:'POST', 
+				url:'_incs/private_requests.php', 
+				data: {
+					action:'login', 
+					uname:u, 
+					pword:p 
+				}, 
+				async: false, 
+				success: function(data) {
+					var j = $.parseJSON(data); 
+					if(j.hasOwnProperty("success")) 
+						window.location.replace("http://localhost:8888/EnvironUITracker/stats"); 
+					else console.log(j["message"]); 
+				}
+			}); 
+		}
+	})
+
+	$('#logout').on('click',function() {
+		console.log("signing out 1"); 
+		$.ajax({
+			type:'POST', 
+			url:'_incs/private_requests.php', 
+			data: { action:'logout' }, 
+			async: false, 
+			success: function(data) {
+				window.location.replace("http://localhost:8888/EnvironUITracker"); 
+				console.log("signing out 2"); 
+			}
+		})
 	}); 
 }
 

@@ -36,6 +36,15 @@ content { display:block;
   =============== 
 */ 
 
+#logout { display:block; 
+	position:fixed; 
+	top:10px; right:10px; 
+	color:#a00;
+	cursor:pointer; 
+	z-index:1000; }
+	#logout:hover { color:#f00; }
+
+
 .meta { display:inline; 
 	font-size:12pt; 
 	color:#999; }

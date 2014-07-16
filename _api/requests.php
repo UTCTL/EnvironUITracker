@@ -1,19 +1,21 @@
 <?php
 
-function clean($str) { return htmlentities(stripslashes($str)); } 
+require_once('../_incs/library.php'); 
 
 $action = clean($_GET['action']); 
-$dbhost = "localhost"; 
-$dbname = "EnvironTestTracker"; 
-$dbuser = "root"; 
-$dbpass = "root"; 
-try { 
-	$dblink = mysqli_connect($dbhost,$dbuser,$dbpass,$dbname) or die(); 
-} catch (mysqli_sql_exception $e) {
-	echo '{"error":343,"message":"We cannot connect you to the database. Please try agian later. "}'; 
-}
+
+$db = new DATABASE($dbhost,$dbname,$dbuser,$dbpass); 
+$dblink = $db->connect(); 
+if($dblink==false) 
+	$action = "dberror"; 
 
 switch($action) {
+	case 'session': 
+		session_start(); 
+		session_regenerate_id(); 
+		echo '{"success":"success","message":"","data":{"session":"'.session_id().'"}}'; 
+		//session_destroy(); 
+		break; 
 	case 'push': 
 		if(!$_GET['id']||!$_GET['data']) {
 			echo '{"error":504,"message":"Information missing"}'; 
@@ -54,6 +56,9 @@ switch($action) {
 		$out = substr($out, 0, strlen($out)-1); 
 		$out .= ']}'; 
 		echo $out; 
+		break; 
+	case 'dberror': 
+		echo '{"error":343,"message":"We cannot connect you to the database. Please try agian later. "}'; 
 		break; 
 	default: 
 		echo '{"error":504,"message":"Information missing"}'; 
