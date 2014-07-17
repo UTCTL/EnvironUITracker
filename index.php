@@ -26,10 +26,16 @@ switch($views[0]) {
 			break; 
 		} 
 	default: 
-		require_once('_apps/User/views.php'); 
-		$v = new View(); 
-		if($_SESSION['ENVlogged']) $v->viewstats(); 
-		else $v->login(); 
+		if($_SESSION['ENVlogged']) {
+			require_once('_apps/Tracker/views.php'); 
+			$v = new View(); 
+			$v->showstats(); 
+			// $v->viewstats(); 
+		} else {
+			require_once('_apps/User/views.php'); 
+			$v = new View(); 
+			$v->login(); 
+		}
 		break; 
 }
 
