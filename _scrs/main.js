@@ -278,6 +278,7 @@ function premake_svgs() {
 }
 
 function handle_user() {
+	var url = "http://localhost:8888/EnvironUITracker/"; 
 	$('#login').on('click',function() {
 		var u = $('#uname').val(), 
 			p = $('#pword').val(); 
@@ -293,7 +294,7 @@ function handle_user() {
 			success: function(data) {
 				var j = $.parseJSON(data); 
 				if(j.hasOwnProperty("success")) 
-					window.location.replace("http://localhost:8888/EnvironUITracker/stats"); 
+					window.location.replace(url); 
 				else console.log(j["message"]); 
 			}
 		}); 
@@ -315,12 +316,12 @@ function handle_user() {
 				success: function(data) {
 					var j = $.parseJSON(data); 
 					if(j.hasOwnProperty("success")) 
-						window.location.replace("http://localhost:8888/EnvironUITracker/stats"); 
+						window.location.replace(url); 
 					else console.log(j["message"]); 
 				}
 			}); 
 		}
-	})
+	}); 
 
 	$('#logout').on('click',function() {
 		console.log("signing out 1"); 
@@ -330,10 +331,10 @@ function handle_user() {
 			data: { action:'logout' }, 
 			async: false, 
 			success: function(data) {
-				window.location.replace("http://localhost:8888/EnvironUITracker"); 
+				window.location.replace(url); 
 				console.log("signing out 2"); 
 			}
-		})
+		}); 
 	}); 
 }
 

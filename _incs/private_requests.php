@@ -1,6 +1,6 @@
 <?
 
-//header('Access-Control-Allow-Origin: localhost:8888'); 
+header('Access-Control-Allow-Origin: localhost:8888'); 
 
 require_once('library.php'); 
 require_once('../_apps/User/models.php'); 
@@ -11,6 +11,7 @@ $db = new DATABASE($dbhost,$dbname,$dbuser,$dbpass);
 $dblink = $db->connect(); 
 if($dblink==false) 
 	$action = "dberror"; 
+
 
 switch($action) {
 	case 'login': 
