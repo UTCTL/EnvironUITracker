@@ -260,7 +260,7 @@ function premake_svgs() {
 				.attr('height',gh); 
 
 	// make an svg container 
-	SVG = d3.select('.game').append('svg')
+	SVG = d3.select('.game .grid').append('svg')
 			.attr('width',w) 
 			.attr('height',h); 
 

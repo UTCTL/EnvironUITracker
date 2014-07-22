@@ -1,5 +1,6 @@
-/*@import url(http://fonts.googleapis.com/css?family=Open+Sans|Roboto);*/
+@import url(http://fonts.googleapis.com/css?family=Open+Sans|Roboto);*/
 @font-face { font-family:ptsans; src:url('_fonts/PTC55F.ttf'); }
+@font-face { font-family:ptsansb; src:url('_fonts/PTC55F.ttf'); }
 @font-face { font-family:ptsans_bold; src:url('_fonts/PTC75F.ttf'); }
 @font-face { font-family:webly; src:url('_fonts/weblysleekuil.ttf'); } 
 @font-face { font-family:webly_semi; src:url('_fonts/weblysleekuisl.ttf'); }
@@ -14,15 +15,17 @@
 	cursor:default; 
 	margin:0px; padding:10px; }
 
-body { font-family:ptsans; 
+body { font-family:ptsansb; 
 	font-size:14px; 
 	color:#777; 
 	letter-spacing:1px; 
 	background-color:#f5f5f5; }
 
 h1 { font-size:20px; 
-	font-family:webly;}
-h2 { font-size:20pt; }
+	font-family:webly; }
+h2 { font-size:24px; 
+	letter-spacing:0px; 
+	color:#000; }
 h3 { font-size:16pt; } 
 h4 { font-size:16pt; 
 	font-weight:normal; }
@@ -39,7 +42,7 @@ content { display:block;
 	width:1200px; 
 	background-color:#fff; 
 	margin:20px;  
-	padding-bottom:50px; 
+	/*padding-bottom:50px; */
 	box-shadow:0px 0px 10px rgba(0,0,0,0.2); 
 	/*border:1px solid blue;*/ }
 
@@ -140,6 +143,71 @@ nav { display:block;
 		.meta #status .chosen { color:#46c2c2; 
 			padding:0px; 
 			font-family:ptsans_bold; }
+
+
+
+/* 
+  ============
+	GAME DATA
+  ============
+*/ 
+
+/* -= gamemap =- */ 
+.game { height:830px; }
+
+	.game svg { background-color:#ded; 
+		padding:0px; margin:0px; 
+		z-index:100; } 
+	.game .grid { display:block; 
+		position:relative; 
+		top:-10px; left:-10px; 
+		width:1200px; height:700px; 
+		z-index:100; }
+	.game .frame { display:block; 
+		position:relative; 
+		top:-720px; 
+		width:1200px; height:700px; 
+		background-image:url('../_imgs/gameframe.png'); 
+		background-repeat:no-repeat; 
+		background-color:transparent !important; 
+		z-index:900; }
+
+	.game .maptype { /*display:block; */
+		position:relative; 
+		top:710px; 
+		margin:auto; 
+		width:1100px; height:25px; 
+		text-align:center;
+		/*border:1px solid red;*/ } 
+	
+		.maptype .option { text-align:center; 
+			font-size:8pt; 
+			color:#777; 
+			background-color:#f3f3f3;
+			border:1px solid #bbb; 
+			border-radius:4px; 
+			cursor:pointer; }
+		.maptype .option:hover { color:#888; 
+			background-color:#fff; 
+			border:1px solid #aaa; 
+			box-shadow:0px 1px 1px rgba(50,50,50,0.2); }
+		.maptype .option:active { color:#000; 
+			background-color:#fff; 
+			border:1px solid #777; 
+			box-shadow:0px 0px 1px rgba(50,50,50,0.2); } 
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* 
   ===============
@@ -533,4 +601,3 @@ nav { display:block;
 		background-color:rgba(51,51,51,.8); }
 		.menuoption:hover { background-color:rgba(81,81,81,.7); }
 }
-*/
