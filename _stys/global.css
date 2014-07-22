@@ -1,4 +1,9 @@
-@import url(http://fonts.googleapis.com/css?family=Open+Sans|Roboto);
+/*@import url(http://fonts.googleapis.com/css?family=Open+Sans|Roboto);*/
+@font-face { font-family:ptsans; src:url('_fonts/PTC55F.ttf'); }
+@font-face { font-family:ptsans_bold; src:url('_fonts/PTC75F.ttf'); }
+@font-face { font-family:webly; src:url('_fonts/weblysleekuil.ttf'); } 
+@font-face { font-family:webly_semi; src:url('_fonts/weblysleekuisl.ttf'); }
+@font-face { font-family:webly_bold; src:url('_fonts/weblysleekuisb.ttf'); }
 
 * { -webkit-touch-callout: none;
 	-webkit-user-select: none;
@@ -9,7 +14,7 @@
 	cursor:default; 
 	margin:0px; padding:10px; }
 
-body { font-family:Open Sans; 
+body { font-family:ptsans; 
 	font-size:10pt; 
 	color:#111; 
 	letter-spacing:1px; 
