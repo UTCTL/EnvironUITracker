@@ -15,24 +15,34 @@
 	margin:0px; padding:10px; }
 
 body { font-family:ptsans; 
-	font-size:10pt; 
-	color:#111; 
+	font-size:14px; 
+	color:#777; 
 	letter-spacing:1px; 
-	background-color:#eee; }
+	background-color:#f5f5f5; }
 
-h1 { font-size:24pt; }
+h1 { font-size:20px; 
+	font-family:webly;}
 h2 { font-size:20pt; }
 h3 { font-size:16pt; } 
 h4 { font-size:16pt; 
 	font-weight:normal; }
+h6 { font-size:14px; 
+	font-weight:normal; 
+	color:#777;
+	font-family:webly;}
+
+b { padding:0px; }
 
 section { display:block; } 
 
 content { display:block; 
 	width:1200px; 
 	background-color:#fff; 
-	margin:auto; 
-	padding-bottom:50px; }
+	margin:20px;  
+	padding-bottom:50px; 
+	box-shadow:0px 0px 10px rgba(0,0,0,0.2); 
+	/*border:1px solid blue;*/ }
+
 
 
 /* 
@@ -40,6 +50,110 @@ content { display:block;
 	MAIN LAYOUT 
   =============== 
 */ 
+
+/* -= Navigation =- */
+nav { display:block; 
+	position:fixed; 
+	top:0px; left:0px; 
+	width:270px; height:100%; 
+	padding:0px; 
+	background-color:#363636; }
+
+/* -= Activity =- */
+.activity { display:block; 
+	position:absolute; 
+	width:1300px; 
+	top:0px; left:270px; 
+	/*border:1px solid green;*/ }
+
+
+
+/* 
+  ===============
+	GRID CLASSES 
+  ===============
+*/ 
+
+/* -= half =- */ 
+.half { display:inline-block; 
+	width:568px; 
+	vertical-align:top; 
+	/*background-color:#f00;*/ } 
+
+/* -= third =- */ 
+.third { display:inline-block; 
+	width:356px; 
+	vertical-align:top; 
+	/*background-color:#ff0;*/ }
+
+/* -= fourth =- */ 
+.fourth { display:inline-block; 
+	width:250px; 
+	vertical-align:top; 
+	/*background-color:#0ff;*/ }
+
+
+
+/* 
+  ===========
+	TOP INFO 
+  ===========
+*/ 
+
+/* -= session =- */ 
+.info { background-color:transparent !important; 
+	box-shadow:none; 
+	padding:0px; }
+
+	.info #sessionid { font-size:58px; 
+		font-family:webly_bold; 
+		line-height:50px; 
+		color:#000; }
+
+/* -= meta =- */ 
+.meta { background-color:transparent !important; 
+	box-shadow:none; 
+	color:#aaa; }
+
+	.meta div { display:block; 
+		height:60px; 
+		line-height:52px; 
+		padding:0px; 
+		padding-left:60px; 
+		background-repeat:no-repeat; } 
+
+		.meta #age 		{ background-image:url('../_imgs/_webicons/age.png'); } 
+		.meta #gender 	{ background-image:url('../_imgs/_webicons/gender.png'); } 
+		.meta #gamer_yes { background-image:url('../_imgs/_webicons/gamer_yes.png'); } 
+		.meta #gamer_no { background-image:url('../_imgs/_webicons/gamer_no.png'); } 
+		.meta #funds 	{ background-image:url('../_imgs/_webicons/funds.png'); } 
+		.meta #pc 		{ background-image:url('../_imgs/_webicons/polcap.png'); } 
+		.meta #level 	{ background-image:url('../_imgs/_webicons/level.png'); } 
+		.meta #time 	{ background-image:url('../_imgs/_webicons/time.png'); } 
+		.meta #status 	{ background-image:url('../_imgs/_webicons/status.png'); } 
+		.meta #completed { background-image:url('../_imgs/_webicons/completed.png'); } 
+
+	.meta b { font-weight:normal; 
+		color:#666; } 
+
+		.meta #status b { color:#ddd; } 
+		.meta #status .chosen { color:#46c2c2; 
+			padding:0px; 
+			font-family:ptsans_bold; }
+
+/* 
+  ===============
+	MAIN LAYOUT 
+  =============== 
+*/ 
+
+/*
+.logo { display:block; 
+	width:250px; height:41px; 
+	padding:20px 0px; 
+	background-image:url('../_imgs/logo.png'); 
+	background-repeat:no-repeat; 
+	background-position:15px 10px; }
 
 #logout { display:block; 
 	position:fixed; 
@@ -57,9 +171,9 @@ content { display:block;
 .usermenu { display:block; 
 	position:fixed; 
 	top:0px; left:0px; 
-	width:250px; 
+	width:270px; 
 	height:100%; 
-	background-color:#333; 
+	background-color:#363636; 
 	overflow-y:auto; 
 	color:#fff; 
 	padding:0px; 
@@ -98,7 +212,7 @@ content { display:block;
 .useractivity { display:block; 
 	position:absolute; 
 	top:0px; left:250px; 
-	background-color:#fff; 
+	background-color:#f5f5f5; 
 	z-index:80; } 
 
 .whole { display:block; 
@@ -129,12 +243,14 @@ content { display:block;
 .negative { color:#f00; } 
 
 .normalize { padding-bottom:10px; }
+*/
 
 	/*
 	  -------------
 		Resources 
 	  -------------
 	*/ 
+	/*
 	.info { padding-bottom:20px; }
 	.resources { padding-top:0px; }
 
@@ -150,12 +266,14 @@ content { display:block;
 	.resources h4#status { background-image:url('../_imgs/endstatus.png'); } 
 		.resources h4#status .label { color:#ddd; font-weight:normal; }
 		.resources h4#status .label .chosen { color:#09f; font-weight:bold; }
+		*/
 
 	/*
 	  ------------
 		Gameview 
 	  ------------
 	*/ 
+	/*
 	.game svg { display:block; 
 		padding:0px; 
 		width:1200px; 
@@ -203,6 +321,7 @@ content { display:block;
 			background-color:#fff; 
 			border:1px solid #777; 
 			box-shadow:0px 0px 1px rgba(50,50,50,0.2); }
+	*/
 
 
 	/*
@@ -210,6 +329,7 @@ content { display:block;
 		Camera Movement 
 	  -------------------
 	*/ 
+	/*
 	.movement { display:block; 
 		padding:0px; 
 		padding-bottom:15px; } 
@@ -230,17 +350,17 @@ content { display:block;
 
 		.movement .bar { display:block; 
 			width:450px; height:40px; 
-			background-color:#dff3ff; /*#cff1ff; */
+			background-color:#dff3ff; /*#cff1ff; *//*
 			background-image:url('../_imgs/content_gray.png');
 			position:absolute; 
 			border-radius:40px; 
 			top:-22px; }
 
 			.movement .bar .model { display:block; 
-				/*width:350px; */
+				/*width:350px; *//*
 				height:40px; 
 				/*background-color:#73d0f4;*/ /*#61c2e8;*/ /*#46abd3;*/ /*#42fc9f;*/
-				/*background-image:url('../_imgs/content.png');*/
+				/*background-image:url('../_imgs/content.png');*//*
 				position:absolute; 
 				border-radius:40px; 	
 				top:0px; left:0px; }
@@ -252,16 +372,18 @@ content { display:block;
 				font-weight:bold; 
 				position:absolute; 
 				top:3px; left:6px; 
-				/*top:-34px;*/ }
+				/*top:-34px;*//* }
 
 				.movement .zero .model { background-color:#bbb; }
 				.movement .zero .label { text-shadow:0px 0px 5px rgba(0,0,0,0.4);  }
+	*/
 
 	/*
 	  -------------- 
 		Panel Time 
 	  -------------- 
 	*/
+	/*
 	.panel { display:inline-block; 
 		width:286px; height:214px; 
 		line-height:214px; 
@@ -275,18 +397,19 @@ content { display:block;
 			background-position:0px 4px; } 
 
 		.panel#off .label { text-shadow:0px 0px 4px rgba(50,50,50,0.1); }
-
+	*/
 
 	/*
 	  -------------- 
 		Score Rate
 	  -------------- 
 	*/ 
+	/*
 	.score { background-position:0px 10px; 
 		background-repeat:no-repeat; }
 
 	/*.score#environ { background-image:url('../_imgs/environ_score.png'); }
-	.score#economy { background-image:url('../_imgs/economy_score.png'); }*/
+	.score#economy { background-image:url('../_imgs/economy_score.png'); }*//*
 	
 		.score .graphplot { display:inline-block; 
 			position:relative; 
@@ -311,13 +434,14 @@ content { display:block;
 			.data .label { padding:0px; 
 				font-weight:bold; } 
 			.data svg { border:1px solid red; }
-
+	*/
 
 	/*
 	  -------------- 
 		Node Rate
 	  -------------- 
-	*/ 
+	*/
+	/* 
 	.table { display:block; 
 		padding:0px; } 
 
@@ -328,7 +452,7 @@ content { display:block;
 
 
 		.table .row:hover { background-color:#fffa93; } 
-		/*.table .row:nth-child(2n+1):hover { background-color:#fff499; } */
+		/*.table .row:nth-child(2n+1):hover { background-color:#fff499; } *//*
 
 		.table .row:nth-child(1),
 		.table .row:nth-child(1):hover { background-color:#61c2e8; 
@@ -341,16 +465,18 @@ content { display:block;
 
 		.table .row .datum { padding:10px; 
 			margin:auto; } 
-
+	*/
 
 	/*
 	  --------------- 
 		Region Data
 	  --------------- 
 	*/ 
+	/*
 	.region .row div:nth-child(1) { width:50px; }
 
-	/*.region .half { border:1px solid red; }*/
+	/*
+	.region .half { border:1px solid red; }*//*
 	.region .half:nth-child(3) { width:515px; 
 		padding-left:70px; }
 
@@ -366,7 +492,7 @@ content { display:block;
 
 		.navigation .bar { display:block; 
 			width:450px; height:40px; 
-			background-color:#dff3ff; /*#cff1ff; */
+			background-color:#dff3ff; /*#cff1ff; *//*
 			background-image:url('../_imgs/content_gray.png');
 			position:absolute; 
 			border-radius:40px; }
@@ -391,8 +517,9 @@ content { display:block;
 				.navigation .bar #minimap { border-radius:40px 0px 0px 40px; 
 					background-color:#4cb4dd; }
 				.navigation .bar #regkeys { border-radius:0px 40px 40px 0px; }
+	*/
 
-
+/*
 @media only screen and (max-width:1500px) {
 	body { background-color:#fff; }
 
@@ -406,3 +533,4 @@ content { display:block;
 		background-color:rgba(51,51,51,.8); }
 		.menuoption:hover { background-color:rgba(81,81,81,.7); }
 }
+*/

@@ -8,27 +8,63 @@
 </head><body>
 
 <section>
-	<div class="usermenu">
+	<nav>
+		<div class="logo"></div> 
 		<div class="menuoption">&raquo;</div> 
-		<h1>Sessions</h1> 
-	</div> 
-	<div class="useractivity">
+		<h1>Sessions Tracker</h1> 
+	</nav> 
+	<div class="activity"> 
 		<section>
 			<content class="info">
-				<h1><span id="sessionid">##########</span><span class="meta">age, gender, race, gamer</span></h3> 
+				<h6>Session id: <br><span id="sessionid">##########</span></h6> 
 			</content> 
-			<content class="resources"> 
-				<div class="third">
-					<h4 id="funds">spent: <span class="label">12345</label></h4>
-					<h4 id="pc">spent: <span class="label">54321</label></h4>
-					<h4 id="level">level: <span class="label">12</span></h4> 
-				</div>
-				<div class="third"> 
-					<h4 id="timer">playtime: <span class="label">0:20:34</span></h4> 
-					<h4 id="status">status: <span class="label"> <span class="chosen">won</span> | lost | quit </label></h4> 
-					<h4 id="completed">completed: <span class="label">83%</span></h4> 
-				</div> 
+
+
+
+
+			<content class="meta third"> 
+				<div id="age"><b>19</b> years old</div>
+				<div id="gender"><b>female</b></div>
+				<div id="gamer_yes"><b>gamer</b></div> 
 			</content> 
+			<content class="meta third"> 
+				<div id="funds"><b>$12345</b> spent</div>
+				<div id="pc"><b>54321pc</b> spent</div>
+				<div id="level">level <b>12</b></div> 
+			</content> 
+			<content class="meta third"> 
+				<div id="time"><b>0:20:34</b> played</div> 
+				<div id="status"><b><span class="chosen">won</span> | lost | quit </b></div> 
+				<div id="completed"><b>83%</b> completed</div> 
+			</content> 
+
+
+
+			<content class="resources fourth"> 
+				<span id="funds">spent: <span class="label">12345</label></span>
+				<span id="pc">spent: <span class="label">54321</label></span>
+				<span id="level">level: <span class="label">12</span></span> 
+			</content> 
+			<content class="resources fourth"> 
+				<span id="funds">spent: <span class="label">12345</label></span>
+				<span id="pc">spent: <span class="label">54321</label></span>
+				<span id="level">level: <span class="label">12</span></span> 
+			</content> 
+			<content class="resources fourth"> 
+				<span id="funds">spent: <span class="label">12345</label></span>
+				<span id="pc">spent: <span class="label">54321</label></span>
+				<span id="level">level: <span class="label">12</span></span> 
+			</content> 
+			<content class="resources fourth"> 
+				<span id="funds">spent: <span class="label">12345</label></span>
+				<span id="pc">spent: <span class="label">54321</label></span>
+				<span id="level">level: <span class="label">12</span></span> 
+			</content> 
+
+
+
+
+
 			<content class="game normalize">
 				<h2>Screen Usage</h2> 
 				<div class="uimenu"></div> 
@@ -42,65 +78,77 @@
 					<!-- <span class="option" id="cluster">View as clusters</span>  -->
 				</div>
 			</content> 
-			<content>
-				<div class="half">
-					<h2>Camera Movement</h2>
-					<div class="movement" id="drag">
-						<div class="icon"></div>
-						<div class="bargraph">
-							<div class="bar"><div class="model"></div><span class="label"></span></div>
-						</div>
+			<content class="half">
+				<h2>Camera Movement</h2>
+				<div class="movement" id="drag">
+					<div class="icon"></div>
+					<div class="bargraph">
+						<div class="bar"><div class="model"></div><span class="label"></span></div>
 					</div>
-					<div class="movement" id="arrows">
-						<div class="icon"></div>
-						<div class="bargraph">
-							<div class="bar"><div class="model"></div><span class="label"></span></div>
-						</div>
+				</div>
+				<div class="movement" id="arrows">
+					<div class="icon"></div>
+					<div class="bargraph">
+						<div class="bar"><div class="model"></div><span class="label"></span></div>
 					</div>
-					<div class="movement" id="keys">
-						<div class="icon"></div>
-						<div class="bargraph">
-							<div class="bar"><div class="model"></div><span class="label"></span></div>
-						</div>
+				</div>
+				<div class="movement" id="keys">
+					<div class="icon"></div>
+					<div class="bargraph">
+						<div class="bar"><div class="model"></div><span class="label"></span></div>
 					</div>
-				</div> 
-				<div class="half">
-					<h2>Panel Time</h2> 
-					<div class="panel" id="on"> 
-						<span class="label positive">0%</span>
-					</div> 
-					<div class="panel" id="off">
-						<span class="label negative">0%</span> 
-					</div> 
 				</div>
 			</content>
-			<content class="rate normalize">
-				<h2>Score Rate</h2> 
-				<div class="half">
-					<div class="data" id="environ">
-						<span class="text">Avg. Environ Score: <span class="label positive" id="avg_environ_score">65</span></span> 
-						<span class="text">Avg. Environ Change: <span class="label positive" id="avg_environ_delta">+6.43</span></span>
-					</div>
+			<content class="half">
+				<h2>Panel Time</h2> 
+				<div class="panel" id="on"> 
+					<span class="label positive">0%</span>
 				</div> 
-				<div class="half">
-					<div class="data" id="economy">
-						<span class="text">Avg. Economy Score: <span class="label negative" id="avg_economy_score">-12</span></span> 
-						<span class="text">Avg. Economy Change: <span class="label negative" id="avg_economy_delta">-1.30</span></span> 
-					</div>
+				<div class="panel" id="off">
+					<span class="label negative">0%</span> 
 				</div> 
 			</content>
-			<content>
+			<content class="half">
+				<h4>Navigation</h4> 
+				<div class="navigation">
+					<div class="bargraph">
+						<div class="bar">
+							<div style="width:314px;" id="minimap"></div><span class="label" id="mini">Minimap 72%</span>
+							<div style="width:116px; left:334px;" id="regkeys"></div><span class="label" id="regk"style="left:365px">Keys 18%</span>
+						</div>
+					</div>
+				</div>
+			</content> 
+			<content></content> 
+			<content class="rate normalize half">
+				<h2>Environ Score Rate</h2> 
+				<div class="data" id="environ">
+					<span class="text">Avg. Environ Score: <span class="label positive" id="avg_environ_score">65</span></span> 
+					<span class="text">Avg. Environ Change: <span class="label positive" id="avg_environ_delta">+6.43</span></span>
+				</div>
 				<!-- environ score rate --> 
-				<div class="score half" id="environ">
+				<div class="score" id="environ">
 					<div class="graphplot"></div> 
+				</div> 
+			</content>
+			<content class="rate normalize half"> 
+				<h2>Economy Score Rate</h2> 
+				<div class="data" id="economy">
+					<span class="text">Avg. Economy Score: <span class="label negative" id="avg_economy_score">-12</span></span> 
+					<span class="text">Avg. Economy Change: <span class="label negative" id="avg_economy_delta">-1.30</span></span> 
 				</div> 
 				<!-- economy score rate --> 
-				<div class="score half" id="economy">
+				<div class="score" id="economy">
 					<div class="graphplot"></div> 
 				</div> 
-
 			</content> 
-			<content>
+			<content class="half">
+				<h2>Region focus</h2> 
+			</content> 
+			<content class="half">
+				<h2>Bases focus</h2> 
+			</content> 
+			<!-- <content>
 				<h2>Node Rate <span class="meta">action/second</span></h2> 
 				<div class="table">
 					<div class="row">
@@ -139,8 +187,8 @@
 						<div class="header fifth" id="node33">0.75</div> 
 					</div> 
 				</div> 
-			</content>
-			<content class="region"> 
+			</content> -->
+			<!-- <content class="region"> 
 				<h2>Region Data</h2> 
 				<div class="half">
 					<h3>Particular</h3> 
@@ -198,8 +246,8 @@
 				</div> 
 				<div class="half"> 
 					<h3>General</h3> 
-					<h4 id="funds">Unlock Rate: <span class="label">5.35</label></h4> 
-					<h4>Navigation</h4> 
+					<span id="funds">Unlock Rate: <span class="label">5.35</label></span> 
+					<span>Navigation</span> 
 					<div class="navigation">
 						<div class="bargraph">
 							<div class="bar">
@@ -210,7 +258,7 @@
 					</div>
 
 				</div> 
-			</content> 
+			</content>  -->
 		</section> 
 	</div> 
 </section>
