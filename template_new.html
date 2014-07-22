@@ -1,0 +1,218 @@
+<!DOCTYPE>
+<html><head>
+ <title>Environ Test Tracker</title> 
+ <link rel="stylesheet" type="text/css" href="_stys/global.css"> 
+ <script src="_scrs/jquery.min.js"></script> 
+ <script src="_scrs/d3.v3.min.js"></script> 
+ <script src="_scrs/main.js"></script>
+</head><body>
+
+<section>
+	<div class="usermenu">
+		<div class="menuoption">&raquo;</div> 
+		<h1>Sessions</h1> 
+	</div> 
+	<div class="useractivity">
+		<section>
+			<content class="info">
+				<h1><span id="sessionid">##########</span><span class="meta">age, gender, race, gamer</span></h3> 
+			</content> 
+			<content class="resources"> 
+				<div class="third">
+					<h4 id="funds">spent: <span class="label">12345</label></h4>
+					<h4 id="pc">spent: <span class="label">54321</label></h4>
+					<h4 id="level">level: <span class="label">12</span></h4> 
+				</div>
+				<div class="third"> 
+					<h4 id="timer">playtime: <span class="label">0:20:34</span></h4> 
+					<h4 id="status">status: <span class="label"> <span class="chosen">won</span> | lost | quit </label></h4> 
+					<h4 id="completed">completed: <span class="label">83%</span></h4> 
+				</div> 
+			</content> 
+			<content class="game normalize">
+				<h2>Screen Usage</h2> 
+				<div class="uimenu"></div> 
+				<div class="bottomnav"></div> 
+				<div class="minimap"></div> 
+			</content> 
+			<content class="stats">
+				<div class="maptype">
+					<span class="option" id="points">View as points</span>
+					<span class="option" id="heatmap">View as heatmap</span>
+					<!-- <span class="option" id="cluster">View as clusters</span>  -->
+				</div>
+			</content> 
+			<content>
+				<div class="half">
+					<h2>Camera Movement</h2>
+					<div class="movement" id="drag">
+						<div class="icon"></div>
+						<div class="bargraph">
+							<div class="bar"><div class="model"></div><span class="label"></span></div>
+						</div>
+					</div>
+					<div class="movement" id="arrows">
+						<div class="icon"></div>
+						<div class="bargraph">
+							<div class="bar"><div class="model"></div><span class="label"></span></div>
+						</div>
+					</div>
+					<div class="movement" id="keys">
+						<div class="icon"></div>
+						<div class="bargraph">
+							<div class="bar"><div class="model"></div><span class="label"></span></div>
+						</div>
+					</div>
+				</div> 
+				<div class="half">
+					<h2>Panel Time</h2> 
+					<div class="panel" id="on"> 
+						<span class="label positive">0%</span>
+					</div> 
+					<div class="panel" id="off">
+						<span class="label negative">0%</span> 
+					</div> 
+				</div>
+			</content>
+			<content class="rate normalize">
+				<h2>Score Rate</h2> 
+				<div class="half">
+					<div class="data" id="environ">
+						<span class="text">Avg. Environ Score: <span class="label positive" id="avg_environ_score">65</span></span> 
+						<span class="text">Avg. Environ Change: <span class="label positive" id="avg_environ_delta">+6.43</span></span>
+					</div>
+				</div> 
+				<div class="half">
+					<div class="data" id="economy">
+						<span class="text">Avg. Economy Score: <span class="label negative" id="avg_economy_score">-12</span></span> 
+						<span class="text">Avg. Economy Change: <span class="label negative" id="avg_economy_delta">-1.30</span></span> 
+					</div>
+				</div> 
+			</content>
+			<content>
+				<!-- environ score rate --> 
+				<div class="score half" id="environ">
+					<div class="graphplot"></div> 
+				</div> 
+				<!-- economy score rate --> 
+				<div class="score half" id="economy">
+					<div class="graphplot"></div> 
+				</div> 
+
+			</content> 
+			<content>
+				<h2>Node Rate <span class="meta">action/second</span></h2> 
+				<div class="table">
+					<div class="row">
+						<div class="header fifth">ACTION</div> 
+						<div class="header fifth">Bases</div> 
+						<div class="header fifth">Upgrades</div> 
+						<div class="header fifth">Events</div> 
+						<div class="header fifth">Disasters</div> 
+					</div> 
+					<div class="row">
+						<div class="datum fifth">Spawn</div> 
+						<div class="header fifth" id="node00">-</div> 
+						<div class="header fifth" id="node01">1.24</div> 
+						<div class="header fifth" id="node02">3.24</div> 
+						<div class="header fifth" id="node03">1.22</div> 
+					</div> 
+					<div class="row">
+						<div class="datum fifth">Unlock</div> 
+						<div class="header fifth" id="node10">4.25</div> 
+						<div class="header fifth" id="node11">1.52</div> 
+						<div class="header fifth" id="node12">-</div> 
+						<div class="header fifth" id="node13">-</div> 
+					</div>
+					<div class="row">
+						<div class="datum fifth">Active</div> 
+						<div class="header fifth" id="node20">1.21</div> 
+						<div class="header fifth" id="node21">2.13</div> 
+						<div class="header fifth" id="node22">3.12</div> 
+						<div class="header fifth" id="node23">0.11</div> 
+					</div>
+					<div class="row">
+						<div class="datum fifth">Responsive</div> 
+						<div class="header fifth" id="node30">0.22</div> 
+						<div class="header fifth" id="node31">0.10</div> 
+						<div class="header fifth" id="node32">0.81</div> 
+						<div class="header fifth" id="node33">0.75</div> 
+					</div> 
+				</div> 
+			</content>
+			<content class="region"> 
+				<h2>Region Data</h2> 
+				<div class="half">
+					<h3>Particular</h3> 
+					<div class="table">
+						<div class="row">
+							<div class="header fifth">REGION</div> 
+							<div class="header fifth">Order</div> 
+							<div class="header fifth">Avg Environ</div> 
+							<div class="header fifth">Avg Economy</div> 
+							<div class="header fifth">Focus</div> 
+						</div> 
+						<div class="row">
+							<div class="header fifth">NA</div>  
+							<div class="header fifth" id="region00">1</div> 
+							<div class="header fifth positive" id="region01">21.8</div> 
+							<div class="header fifth positive" id="region02">75.3</div> 
+							<div class="header fifth" id="region03">34%</div> 
+						</div> 
+						<div class="row">
+							<div class="header fifth">SA</div>  
+							<div class="header fifth" id="region10">2</div> 
+							<div class="header fifth positive" id="region11">75.0</div> 
+							<div class="header fifth positive" id="region12">21.5</div> 
+							<div class="header fifth" id="region13">22%</div> 
+						</div>
+						<div class="row">
+							<div class="header fifth">EU</div>  
+							<div class="header fifth" id="region20">3</div> 
+							<div class="header fifth positive" id="region21">64.6</div> 
+							<div class="header fifth positive" id="region22">72.9</div> 
+							<div class="header fifth" id="region23">28%</div> 
+						</div>
+						<div class="row">
+							<div class="header fifth">AF</div>  
+							<div class="header fifth" id="region30">4</div> 
+							<div class="header fifth positive" id="region31">25.1</div> 
+							<div class="header fifth negative" id="region32">-14.8</div> 
+							<div class="header fifth" id="region33">5%</div> 
+						</div> 
+						<div class="row">
+							<div class="header fifth">CA</div>  
+							<div class="header fifth" id="region40">5</div> 
+							<div class="header fifth positive" id="region41">45.6</div> 
+							<div class="header fifth negative" id="region42">-21.0</div> 
+							<div class="header fifth" id="region43">5%</div> 
+						</div> 
+						<div class="row">
+							<div class="header fifth">EA</div>  
+							<div class="header fifth" id="region50">6</div> 
+							<div class="header fifth negative" id="region51">-55.4</div> 
+							<div class="header fifth positive" id="region52">63.2</div> 
+							<div class="header fifth" id="region53">6%</div> 
+						</div> 
+					</div> 
+				</div> 
+				<div class="half"> 
+					<h3>General</h3> 
+					<h4 id="funds">Unlock Rate: <span class="label">5.35</label></h4> 
+					<h4>Navigation</h4> 
+					<div class="navigation">
+						<div class="bargraph">
+							<div class="bar">
+								<div style="width:314px;" id="minimap"></div><span class="label" id="mini">Minimap 72%</span>
+								<div style="width:116px; left:334px;" id="regkeys"></div><span class="label" id="regk"style="left:365px">Keys 18%</span>
+							</div>
+						</div>
+					</div>
+
+				</div> 
+			</content> 
+		</section> 
+	</div> 
+</section>
+
+</body></html>
