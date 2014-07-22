@@ -151,7 +151,7 @@ $(document).ready(function() {
 		$.ajax({
 			type: 'GET', 
 			// url: 'testloader.php', 
-			url: '_api/requests.php', 
+			url: 'http://environtracker.benova.net/_api/requests.php', 
 			data: {
 				action:'pull', 
 				id:id 
@@ -219,7 +219,7 @@ function resize_user_activity_section() {
 function load_menu() {
 	$.ajax({
 		type: 'GET', 
-		url: '_api/requests.php', 
+		url: 'http://environtracker.benova.net/_api/requests.php', 
 		data: {
 			action:'options'
 		}, 
@@ -284,7 +284,7 @@ function handle_user() {
 			p = $('#pword').val(); 
 		$.ajax({
 			type:'POST', 
-			url:'_incs/private_requests.php', 
+			url:'_incs/prihttp://environtracker.benova.net/vate_requests.php', 
 			data: {
 				action:'login', 
 				uname:u, 
@@ -306,7 +306,7 @@ function handle_user() {
 				p = $('#pword').val(); 
 			$.ajax({
 				type:'POST', 
-				url:'_incs/private_requests.php', 
+				url:'_incs/prihttp://environtracker.benova.net/vate_requests.php', 
 				data: {
 					action:'login', 
 					uname:u, 
@@ -327,7 +327,7 @@ function handle_user() {
 		console.log("signing out 1"); 
 		$.ajax({
 			type:'POST', 
-			url:'_incs/private_requests.php', 
+			url:'_incs/prihttp://environtracker.benova.net/vate_requests.php', 
 			data: { action:'logout' }, 
 			async: false, 
 			success: function(data) {
