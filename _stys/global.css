@@ -96,6 +96,10 @@ nav { display:block;
 	/*background-color:#0ff;*/ }
 
 
+.clear { background-color:transparent !important; 
+	box-shadow:none; 
+	padding:0px; }
+
 
 /* 
   ===========
@@ -104,19 +108,13 @@ nav { display:block;
 */ 
 
 /* -= session =- */ 
-.info { background-color:transparent !important; 
-	box-shadow:none; 
-	padding:0px; }
-
 	.info #sessionid { font-size:58px; 
 		font-family:webly_bold; 
 		line-height:50px; 
 		color:#000; }
 
 /* -= meta =- */ 
-.meta { background-color:transparent !important; 
-	box-shadow:none; 
-	color:#aaa; }
+.meta { color:#aaa; }
 
 	.meta div { display:block; 
 		height:60px; 
@@ -198,12 +196,170 @@ nav { display:block;
 
 
 
+/* 
+  ==================
+	CAMERA MOVEMENT
+  ==================
+*/ 
+
+/* -= Movements =- */
+.movement { display:block; 
+	padding:0px; 
+	padding-left:10px; 
+	padding-top:10px; } 
+	.movement:nth-child(3n+1) { padding-bottom:20px; }
+
+	.movement .icon { display:inline-block; 
+		width:58px; height:60px; 
+		background-repeat:no-repeat; 
+		padding:0px; } 
+	.movement#drag .icon { background-image:url('../_imgs/_webicons/drag.png'); }
+	.movement#arrows .icon { background-image:url('../_imgs/_webicons/arrows.png'); }
+	.movement#keys .icon { background-image:url('../_imgs/_webicons/keys.png'); }
+
+	.movement .bargraph { display:inline-block; 
+		position:relative; 
+		top:0px; 
+		width:450px; height:40px; 
+		padding:0px; }
+
+	.movement .bar { display:block; 
+		width:450px; height:40px; 
+		background-color:#fff; 
+		background-image:url('../_imgs/content.png');
+		position:absolute; 
+		border-radius:40px; 
+		top:-22px; }
+
+		.movement .bar .model { display:block; 
+			/*width:350px; */
+			height:40px; 
+			/*background-color:#73d0f4;*/ /*#61c2e8;*/ /*#46abd3;*/ /*#42fc9f;*/
+			/*background-image:url('../_imgs/content.png');*/
+			position:absolute; 
+			border-radius:40px; 	
+			top:0px; left:0px; }
+
+		.movement .bar .label { display:inline-block; 
+			color:#fff; 
+			text-shadow:0px 0px 5px rgba(40,138,177,0.9);  
+			font-size:20pt; 
+			font-weight:bold; 
+			position:absolute; 
+			top:3px; left:6px; 
+			/*top:-34px;*/ }
+
+			.movement .zero .model { background-color:#bbb; }
+			.movement .zero .label { text-shadow:0px 0px 5px rgba(0,0,0,0.4);  }
+
+
+
+/* 
+  =============
+	PANEL TIME
+  =============
+*/ 
+
+/* -= Panels =- */
+.panel { display:inline-block; 
+	width:280px; height:214px; 
+	line-height:214px; 
+	text-align: center; 
+	font-weight:bold; 
+	font-size:40pt; 
+	padding:0px; 
+	background-size:280px 214px;  } 
+
+	.panel#on { background-image:url('../_imgs/panel_on.png'); } 
+	.panel#off { background-image:url('../_imgs/panel_off.png'); 
+		background-position:0px 4px; } 
+
+	.panel#off .label { text-shadow:0px 0px 4px rgba(50,50,50,0.1); }
+
+
+
+/* 
+  =============
+	NAVIGATION 
+  =============
+*/ 
+
+/* -= Navigation =- */
+.navigation { display:block; 
+		padding:0px; 
+		padding-bottom:15px; } 
+
+		.navigation .bargraph { display:inline-block; 
+			position:relative; 
+			top:0px; 
+			width:450px; height:40px; 
+			padding:40px; 
+			padding-top:20px; }
+
+		.navigation .bar { display:block; 
+			width:450px; height:40px; 
+			background-color:#dff3ff; /*#cff1ff; */
+			background-image:url('../_imgs/content.png');
+			position:absolute; 
+			border-radius:40px; }
+
+			.navigation .bar div { display:block; 
+				width:350px; 
+				height:40px; 
+				position:absolute; 
+				top:0px; left:0px; }
+
+			.navigation .bar .label { display:inline-block; 
+				color:#fff; 
+				text-shadow:0px 0px 5px rgba(40,138,177,0.9);  
+				font-size:12pt; 
+				position:absolute; 
+				top:10px; left:6px; }
+
+				.movement .zero div { background-color:#bbb; }
+				.movement .zero .label { text-shadow:0px 0px 5px rgba(0,0,0,0.4);  }
+
+				.navigation .bar #minimap { border-radius:40px 0px 0px 40px; 
+					background-color:#54c3c1; }
+				.navigation .bar #regkeys { border-radius:0px 40px 40px 0px; 
+					background-color:#79dad8;}
 
 
 
 
+/* 
+  =================
+	REGION BUTTONS 
+  ================= 
+*/ 
 
+/* -= Region Buttons =- */
+.regionbuttons { display:block; 
+	width:342px; height:40px; 
+	background-color:#434343; 
+	padding:5px; margin:auto; 
+	border-radius:8px; }
 
+	.button { display:inline-block; 
+		width:40px; height:40px; 
+		background-color:#333; 
+		padding:0px; margin-right:5px; 
+		cursor:pointer; 
+		background-position:0px 0px; 
+		background-repeat:no-repeat; }
+		.button:nth-child(7n) { margin-right:0px; }
+
+		.button:hover { background-position:0px -40px; }
+		.button.selected { background-position:0px -80px; }
+		.button.selected:hover { cursor:default; }
+
+		.button#w { background-image:url('../_imgs/_regionbuttons/w.png'); }
+		.button#na { background-image:url('../_imgs/_regionbuttons/na.png'); }
+		.button#sa { background-image:url('../_imgs/_regionbuttons/sa.png'); }
+		.button#eu { background-image:url('../_imgs/_regionbuttons/eu.png'); }
+		.button#af { background-image:url('../_imgs/_regionbuttons/af.png'); }
+		.button#ca { background-image:url('../_imgs/_regionbuttons/ca.png'); }
+		.button#ea { background-image:url('../_imgs/_regionbuttons/ea.png'); }
 
 
 
