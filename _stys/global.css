@@ -109,6 +109,23 @@ nav { display:block;
   ===========
 */ 
 
+/* show/hide menu */ 
+.hidemenuoption { display:block; 
+		visibility:hidden; 
+		position:fixed; 
+		top:43px; left:0px; 
+		width:16px; 
+		height:20px; 
+		color:#666; 
+		line-height:10px; 
+		font-size:34pt; 
+		background-color:#333; 
+		border-radius:0px 10px 10px 0px;
+		padding:10px 12px 10px 5px; 
+		cursor:pointer; }
+		.hidemenuoption:hover { background-color:#444; 
+			color:#fff; }
+
 /* -= logo =- */ 
 .logo { display:block; 
 	height:50px; 
@@ -116,6 +133,7 @@ nav { display:block;
 	background-position:center center; 
 	background-repeat:no-repeat; } 
 
+/* main menu */ 
 .mainnav { padding:0px; }
 .menuoptions { display:block; 
 	padding:0px; } 
@@ -133,6 +151,7 @@ nav { display:block;
 	.menuoptions li#logout:hover { background-color:#dc5151; 
 		color:#fff; } 
 
+/* sub navigation */ 
 .subnav { padding:0px; 
 	padding-top:20px; 
 	margin-top:20px; 
@@ -969,17 +988,17 @@ nav { display:block;
 				.navigation .bar #regkeys { border-radius:0px 40px 40px 0px; }
 	*/
 
-/*
-@media only screen and (max-width:1500px) {
-	body { background-color:#fff; }
 
-	.useractivity { left:0px; }
-	.usermenu { left:-250px; 
+@media only screen and (max-width:1500px) {
+	/*body { background-color:#fff; }*/
+
+	.ractivity { left:0px; }
+	nav { left:-250px; 
 		background-color:rgba(51,51,51,.8); }
 		.usermenu li:hover:not(.selected) { background-color:rgba(0,0,0,.5); }
 
-	.menuoption { visibility:visible; 
+	.hidemenuoption { visibility:visible; 
 		color:#ccc; 
 		background-color:rgba(51,51,51,.8); }
-		.menuoption:hover { background-color:rgba(81,81,81,.7); }
+		.hidemenuoption:hover { background-color:rgba(81,81,81,.7); }
 }

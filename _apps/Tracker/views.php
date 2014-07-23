@@ -8,7 +8,7 @@ class View {
 <section>
 	<nav>
 		<div class="logo"></div> 
-		<!-- <div class="menuoption">&raquo;</div>  -->
+		<div class="hidemenuoption">&raquo;</div> 
 		<div class="mainnav">
 			<ul class="menuoptions"> 
 				<li>Content Maker</li>
