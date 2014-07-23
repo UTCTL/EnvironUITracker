@@ -211,7 +211,7 @@ function resize_user_activity_section() {
 		$('nav').css({'left':'0px'}); 
 		$('.hidemenuoption').css({'visibility':'hidden'}); 
 	} else { 
-		$('.nav').css({'left':'-250px'}); 
+		$('nav').css({'left':'-270px'}); 
 		$('.hidemenuoption').css({'visibility':'visible','left':'0px'}).html('&raquo;'); 
 	}
 
