@@ -492,8 +492,10 @@ nav { display:block;
 /* -= Region Focus =- */
 .regionfocus { height:385px; }
 
-	.regionfocus svg { padding:0px; 
-		background-color:transparent !important; }
+	.regionfocus svg { width:530px; 
+		height:280px; 
+		padding:0px; 
+		background-color:transparent !important; } 
 
 	.mapsmall { display:block; 
 		width:530px; height:280px; 

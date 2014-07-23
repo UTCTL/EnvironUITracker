@@ -794,8 +794,8 @@ function bake_pie() {
 function focus_regions() {
 	var vis = d3.select(".regionfocus .mapsmall") 
 				.append("svg") 
-				.attr("w",400) 
-				.attr("h",300); 
+				.attr("w",530) 
+				.attr("h",280); 
 
 	var data = [ {"region":"NA","value":400, "coords":[100,110]}, 
 				 {"region":"SA","value":500, "coords":[160,190]}, 
