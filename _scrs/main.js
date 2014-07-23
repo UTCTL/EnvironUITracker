@@ -288,7 +288,7 @@ function handle_user() {
 			p = $('#pword').val(); 
 		$.ajax({
 			type:'POST', 
-			url:'_incs/prihttp://environtracker.benova.net/vate_requests.php', 
+			url:'http://environtracker.benova.net/_incs/private_requests.php', 
 			data: {
 				action:'login', 
 				uname:u, 
@@ -310,7 +310,7 @@ function handle_user() {
 				p = $('#pword').val(); 
 			$.ajax({
 				type:'POST', 
-				url:'_incs/prihttp://environtracker.benova.net/vate_requests.php', 
+				url:'http://environtracker.benova.net/_incs/private_requests.php', 
 				data: {
 					action:'login', 
 					uname:u, 
@@ -331,7 +331,7 @@ function handle_user() {
 		console.log("signing out 1"); 
 		$.ajax({
 			type:'POST', 
-			url:'_incs/prihttp://environtracker.benova.net/vate_requests.php', 
+			url:'http://environtracker.benova.net/_incs/private_requests.php', 
 			data: { action:'logout' }, 
 			async: false, 
 			success: function(data) {
