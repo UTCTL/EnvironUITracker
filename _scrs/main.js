@@ -139,6 +139,8 @@ $(document).ready(function() {
 	handle_user(); 
 	bake_pie(); 
 	focus_regions(); 
+	activate_region_buttons(); 
+	activate_navbar_menu(); 
 
 	// choose item from menu 
 	$('.usermenu li').on('click',function() { 
@@ -822,5 +824,24 @@ function focus_regions() {
            .attr("text-anchor", "middle")
 	       .attr("fill","#fff")
 	       .text(Math.round(f*100)+"%");
+	}); 
+}
+
+function activate_region_buttons() {
+	$('.regionbuttons .button').on('click',function() {
+		$('.regionbuttons .button').removeClass('selected'); 
+		$(this).addClass('selected'); 
+	}); 
+}
+
+function activate_navbar_menu() {
+	$('.mainnav .menuoptions li').on('click',function() {
+		$('.mainnav .menuoptions li').removeClass('selected'); 
+		$(this).addClass('selected'); 
+	}); 
+
+	$('.subnav .menuoptions li').on('click',function() {
+		$('.subnav .menuoptions li').removeClass('selected'); 
+		$(this).addClass('selected'); 
 	}); 
 }

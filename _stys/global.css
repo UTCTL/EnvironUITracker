@@ -17,13 +17,12 @@
 body { font-family:ptsans; 
 	font-size:14px; 
 	color:#777; 
-	letter-spacing:1px; 
+	letter-spacing:0px; 
 	background-color:#f5f5f5; }
 
 h1 { font-size:20px; 
 	font-family:webly; }
 h2 { font-size:24px; 
-	letter-spacing:0px; 
 	color:#000; }
 h3 { font-size:16pt; } 
 h4 { font-size:16pt; 
@@ -101,6 +100,51 @@ nav { display:block;
 
 .positive { color:#0b0; }
 .negative { color:#dc5151; } /*f00; } */
+
+
+
+/* 
+  ===========
+	NAV BAR 
+  ===========
+*/ 
+
+/* -= logo =- */ 
+.logo { display:block; 
+	height:50px; 
+	background-image:url('../_imgs/logo.png');
+	background-position:center center; 
+	background-repeat:no-repeat; } 
+
+.mainnav { padding:0px; }
+.menuoptions { display:block; 
+	padding:0px; } 
+
+	.menuoptions ul { padding:0px; }
+
+	.menuoptions li { list-style:none; 
+		padding:8px 20px; 
+		cursor:pointer; }
+	.menuoptions li:hover { background-color:#444; 
+		color:#fff; }
+	.menuoptions li.selected { background-color:#4bc0c2; 
+		color:#fff; }
+	.menuoptions li#logout { color:#dc5151; } 
+	.menuoptions li#logout:hover { background-color:#dc5151; 
+		color:#fff; } 
+
+.subnav { padding:0px; 
+	padding-top:20px; 
+	margin-top:20px; 
+	background-color:#2c2c2c; 
+	height:100%; }
+
+	.subnav h1 { color:#fff; }
+
+	.subnav li { color:#555; }
+	.subnav li:hover { background-color:#3a3a3a; } 
+	.subnav li.selected { background-color:#047173; }
+
 
 /* 
   ===========
@@ -409,8 +453,7 @@ nav { display:block;
 		.data .text { display:block; 
 			padding:0px; 
 			font-size:13px; 
-			color:#000; 
-			letter-spacing:0px; }
+			color:#000; }
 		.data .label { padding:0px; 
 			font-family:ptsans_bold; } 
 		.data svg { border:1px solid red; }
@@ -506,8 +549,7 @@ nav { display:block;
 		background-color:rgba(255,255,255,0.8); }
 
 		.distribution h2, .distribution h3 { 
-			padding:0px; 
-			letter-spacing:0px; }
+			padding:0px; }
 
 		.distribution .dgui h2 { color:#777; 
 			font-size:24px; }
