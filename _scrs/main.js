@@ -208,14 +208,14 @@ $(window).resize(function() {
 // resizing activity section 
 function resize_user_activity_section() {
 	if(window.innerWidth>=1500) {
-		$('.usermenu').css({'left':'0px'}); 
-		$('.menuoption').css({'visibility':'hidden'}); 
+		$('nav').css({'left':'0px'}); 
+		$('.hidemenuoption').css({'visibility':'hidden'}); 
 	} else { 
-		$('.usermenu').css({'left':'-250px'}); 
-		$('.menuoption').css({'visibility':'visible','left':'0px'}).html('&raquo;'); 
+		$('.nav').css({'left':'-250px'}); 
+		$('.hidemenuoption').css({'visibility':'visible','left':'0px'}).html('&raquo;'); 
 	}
 
-	$('.useractivity').css({
+	$('.activity').css({
 		'width':(window.innerWidth-290)+'px' 
 	}); 
 } 
@@ -248,11 +248,11 @@ function hide_show_menu() {
 	$('.menuoption').on('click',function() {
 		var x = $(this).offset().left; 
 		if(x<10) {
-			$('.menuoption').animate({left:'250px'}, 500, function() {}).html('&laquo;'); 
-			$('.usermenu').animate({left:'0px'}, 500, function() {}); 
+			$('.hidemenuoption').animate({left:'270px'}, 500, function() {}).html('&laquo;'); 
+			$('nav').animate({left:'0px'}, 500, function() {}); 
 		} else {
-			$('.menuoption').animate({left:'0px'}, 500, function() {}).html('&raquo;'); 
-			$('.usermenu').animate({left:'-250px'}, 500, function() {}); 
+			$('.hidemenuoption').animate({left:'0px'}, 500, function() {}).html('&raquo;'); 
+			$('nav').animate({left:'-270px'}, 500, function() {}); 
 		}
 	}); 
 }

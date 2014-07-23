@@ -992,10 +992,10 @@ nav { display:block;
 @media only screen and (max-width:1500px) {
 	/*body { background-color:#fff; }*/
 
-	.ractivity { left:0px; }
+	.activity { left:0px; }
 	nav { left:-250px; 
 		background-color:rgba(51,51,51,.8); }
-		.usermenu li:hover:not(.selected) { background-color:rgba(0,0,0,.5); }
+		nav li:hover:not(.selected) { background-color:rgba(0,0,0,.5); } 
 
 	.hidemenuoption { visibility:visible; 
 		color:#ccc; 
