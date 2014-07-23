@@ -114,33 +114,43 @@
 
 
 
-			<content class="rate half">
+			<content class="rate half" id="environ">
 				<h2>Environ Score Rate</h2> 
-				<div class="data" id="environ">
-					<span class="text">Avg. Environ Score: <span class="label positive" id="avg_environ_score">65</span></span> 
-					<span class="text">Avg. Environ Change: <span class="label positive" id="avg_environ_delta">+6.43</span></span>
-				</div>
 				<!-- environ score rate --> 
 				<div class="score" id="environ">
 					<div class="graphplot"></div> 
 				</div> 
+				<div class="data" id="environ">
+					<span class="text">Avg. Environ Score: <span class="label positive" id="avg_environ_score">65</span></span> 
+					<span class="text">Avg. Environ Change: <span class="label positive" id="avg_environ_delta">+6.43</span></span>
+				</div>
 			</content>
-			<content class="rate half"> 
+			<content class="rate half" id="economy"> 
 				<h2>Economy Score Rate</h2> 
-				<div class="data" id="economy">
-					<span class="text">Avg. Economy Score: <span class="label negative" id="avg_economy_score">-12</span></span> 
-					<span class="text">Avg. Economy Change: <span class="label negative" id="avg_economy_delta">-1.30</span></span> 
-				</div> 
 				<!-- economy score rate --> 
 				<div class="score" id="economy">
 					<div class="graphplot"></div> 
 				</div> 
+				<div class="data" id="economy">
+					<span class="text">Avg. Economy Score: <span class="label negative" id="avg_economy_score">-12</span></span> 
+					<span class="text">Avg. Economy Change: <span class="label negative" id="avg_economy_delta">-1.30</span></span> 
+				</div> 
 			</content> 
-			<content class="half">
+
+
+
+			<content class="regionfocus half">
 				<h2>Region focus</h2> 
+				<div class="mapsmall"></div> 
+				<div class="correlation">For this player...</div> 
 			</content> 
-			<content class="half">
+
+
+
+			<content class="basefocus half">
 				<h2>Bases focus</h2> 
+				<div class="piechart"></div> 
+				<div class="basenode"></div> 
 			</content> 
 			<!-- <content>
 				<h2>Node Rate <span class="meta">action/second</span></h2> 
