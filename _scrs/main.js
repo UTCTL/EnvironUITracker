@@ -215,9 +215,9 @@ function resize_user_activity_section() {
 		$('.hidemenuoption').css({'visibility':'visible','left':'0px'}).html('&raquo;'); 
 	}
 
-	$('.activity').css({
-		'width':(window.innerWidth-290)+'px' 
-	}); 
+	// $('.activity').css({
+	// 	'width':(window.innerWidth-290)+'px' 
+	// }); 
 } 
 
 function load_menu() {
