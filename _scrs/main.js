@@ -138,6 +138,7 @@ $(document).ready(function() {
 	premake_svgs(); 
 	handle_user(); 
 	bake_pie(); 
+	focus_regions(); 
 
 	// choose item from menu 
 	$('.usermenu li').on('click',function() { 
@@ -738,12 +739,11 @@ function bake_pie() {
     //         {"label":"four", "value":50}, 
     //         {"label":"five", "value":50}, 
     //         {"label":"six", "value":30}];
-    data = [{"label":"two", "value":50}, 
-            {"label":"four", "value":50}, 
-            {"label":"five", "value":50}, 
-            {"label":"three", "value":30}, 
-            {"label":"six", "value":20}, 
-            {"label":"one", "value":30}];
+    data = [{"label":"nuclear", "value":50}, 
+            {"label":"wind", "value":50}, 
+            {"label":"solar", "value":30}, 
+            {"label":"coal", "value":20}, 
+            {"label":"agriculture", "value":30}];
     
     var vis = d3.select(".piechart")
         .append("svg:svg")              //create the SVG element inside the <body>
@@ -766,7 +766,7 @@ function bake_pie() {
         .attr("class", "slice");    //allow us to style things in the slices (like text)
 
     arcs.append("svg:path")
-        .attr("fill", function(d, i) { return get_color_in_between(i/data.length,'#d5d5d5','#f5f5f5'); /*return color[i];*/ } ) //set the color for each slice to be chosen from the color function defined above
+        .attr("fill", function(d, i) { return get_color_in_between(i/data.length,'#e0e0e0','#fafafa'); /*return color[i];*/ } ) //set the color for each slice to be chosen from the color function defined above
         .attr("d", arc);                                    //this creates the actual SVG path using the associated data (pie) with the arc drawing function
 
     arcs.append("svg:text")                                     //add a label to each slice
@@ -777,6 +777,50 @@ function bake_pie() {
             return "translate(" + arc.centroid(d) + ")";        //this gives us a pair of coordinates like [50, 50]
         })
         .attr("text-anchor", "middle")                          //center the text on it's origin
-        .text(function(d, i) { return data[i].label; });        //get the label from our original data array
+        .attr("class","pie_text")
+        .text(function(d, i) { return data[i].label/*+" "+Math.round((data[i].value/180)*100)+"%"*/; });        //get the label from our original data array
+}
 
+function focus_regions() {
+	var vis = d3.select(".regionfocus .mapsmall") 
+				.append("svg") 
+				.attr("w",400) 
+				.attr("h",300); 
+
+	var data = [ {"region":"NA","value":400, "coords":[100,110]}, 
+				 {"region":"SA","value":500, "coords":[160,190]}, 
+				 {"region":"EU","value":321, "coords":[250,100]}, 
+				 {"region":"AF","value":123, "coords":[280,160]}, 
+				 {"region":"CA","value":258, "coords":[380,80]}, 
+				 {"region":"EA","value":357, "coords":[410,130]} ]; 
+
+	var total = 0; 
+	var max = {"index":0,"value":0}; 
+	d3.range(data.length).map(function(i) {
+		total += data[i]["value"]; 
+		if(data[i]["value"]>max["value"]) {
+			max["index"] = i; 
+			max["value"] = data[i]["value"]; 
+		}
+	})
+
+	d3.range(data.length).map(function(i) {
+		var x = data[i]["coords"][0], 
+			y = data[i]["coords"][1], 
+			f = data[i]["value"]/total, 
+			m = f/(max["value"]/total), 
+			r = 11 + (f*70); 
+
+		vis.append('circle')
+		   .attr('cx',x) 
+		   .attr('cy',y) 
+		   .attr('r',r) 
+		   .attr('fill',get_color_in_between(m,'#128483','#68dadc')); 
+		vis.append('text')
+	       .attr("dx", x) 
+	       .attr("dy", y+6) 
+           .attr("text-anchor", "middle")
+	       .attr("fill","#fff")
+	       .text(Math.round(f*100)+"%");
+	}); 
 }
