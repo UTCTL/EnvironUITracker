@@ -28,8 +28,8 @@ var COLORS_WHITE 	= "#ffffff",
 	COLORS_AMBER 	= "#aaaa00", 
 	COLORS_RED 		= "#ff0000",
 	COLORS_PURPLE 	= "#902c8e", 
-	COLORS_MAIN_LIGHT 	= "#98e1fd", 
-	COLORS_MAIN_DARK 	= "#008ec5";
+	COLORS_MAIN_LIGHT 	= "#68dadc", 
+	COLORS_MAIN_DARK 	= "#128483";
 var CENTROID_COLOR 	= ["#ebceff",
                 	   "#ffcece",
 	                   "#ffebce",
@@ -825,7 +825,7 @@ function focus_regions() {
 		   .attr('cx',x) 
 		   .attr('cy',y) 
 		   .attr('r',r) 
-		   .attr('fill',get_color_in_between(m,'#128483','#68dadc')); 
+		   .attr('fill',get_color_in_between(m,COLORS_MAIN_DARK,COLORS_MAIN_LIGHT)); 
 		vis.append('text')
 	       .attr("dx", x) 
 	       .attr("dy", y+6) 
