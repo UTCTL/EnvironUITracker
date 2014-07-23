@@ -143,12 +143,12 @@ $(document).ready(function() {
 	activate_navbar_menu(); 
 
 	// choose item from menu 
-	$('.usermenu li').on('click',function() { 
-		$('.usermenu li#'+SELECTED).removeClass('selected'); 
+	$('.subnav .menuoptions li').on('click',function() { 
+		// $('.subnav .me li#'+SELECTED).removeClass('selected'); 
 
 		var id = $(this).attr('id'); 
-		SELECTED = id; 
-		$('.usermenu li#'+SELECTED).addClass('selected'); 
+		// SELECTED = id; 
+		// $('.usermenu li#'+SELECTED).addClass('selected'); 
 
 		id = id.substring(1,id.length); 
 		// console.log(id); 
@@ -233,7 +233,7 @@ function load_menu() {
 			if(j.hasOwnProperty("success")) {
 				for(var i=0; i<j["data"].length; i++) {
 					var val = j["data"][i]; 
-					$('.usermenu').append('<li id="u'+val+'">'+val+'</li>'); 
+					$('.subnav .menuoptions').append('<li id="u'+val+'">'+val+'</li>'); 
 				}
 			}
 		}
