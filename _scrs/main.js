@@ -236,6 +236,9 @@ function load_menu() {
 					$('.subnav .menuoptions').append('<li id="u'+val+'">'+val+'</li>'); 
 				}
 			}
+		}, 
+		error: function(data) {
+			console.log('something went wrong, check back later.'); 
 		}
 	})
 }
@@ -299,7 +302,12 @@ function handle_user() {
 				var j = $.parseJSON(data); 
 				if(j.hasOwnProperty("success")) 
 					window.location.replace(url); 
-				else console.log(j["message"]); 
+				else {
+					$('input#uname,input#pword').css({
+						'border':'1px solid #dc5151'
+					}); 
+					console.log(j["message"]); 
+				}
 			}
 		}); 
 	});
