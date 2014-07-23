@@ -58,14 +58,16 @@ nav { display:block;
 	top:0px; left:0px; 
 	width:270px; height:100%; 
 	padding:0px; 
-	background-color:#363636; }
+	background-color:#363636; 
+	z-index:990; }
 
 /* -= Activity =- */
 .activity { display:block; 
 	position:absolute; 
 	width:1300px; 
 	top:0px; left:270px; 
-	/*border:1px solid green;*/ }
+	/*border:1px solid green;*/ 
+	z-index:99; }
 
 
 
@@ -994,7 +996,7 @@ nav { display:block;
 	/*body { background-color:#fff; }*/
 
 	.activity { left:0px; }
-	nav { left:-250px; 
+	nav { left:-270px; 
 		background-color:rgba(51,51,51,.8); }
 		nav li:hover:not(.selected) { background-color:rgba(0,0,0,.5); } 
 
