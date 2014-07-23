@@ -245,7 +245,7 @@ function load_menu() {
 
 // hide/show menu depending on screen size 
 function hide_show_menu() {
-	$('.menuoption').on('click',function() {
+	$('.hidemenuoption').on('click',function() {
 		var x = $(this).offset().left; 
 		if(x<10) {
 			$('.hidemenuoption').animate({left:'270px'}, 500, function() {}).html('&laquo;'); 
