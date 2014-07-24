@@ -35,9 +35,25 @@ h6 { font-size:14px;
 b { padding:0px; }
 
 input { outline:none; 
+	border:1px solid #ddd;
+	font-family:webly;
+	letter-spacing: 1px; 
+	font-size:18px; 
 	margin:10px; }
 	input:focus { border:1px solid #46c2c2;
 		box-shadow:0px 0px 5px rgba(83,206,208,0.5); }
+
+	input[type="button"] { background-color:#54c3c1; 
+		border:0px solid #54c3c1; 
+		padding:10px 25px;
+		color:#fff; 
+		font-size:16px; 
+		cursor:pointer; }
+	input[type="button"]:hover { background-color:#5ececc; 
+		text-shadow:0px 0px 5px #128483; }
+	input[type="button"]:active { background-color:#46bcba; 
+		box-shadow:0px 0px 5px rgba(83,206,208,0.5); }
+	input[type="button"]:focus { border:0px solid #54c3c1; }
 
 section { display:block; } 
 
@@ -59,11 +75,13 @@ content { display:block;
 .loginbox { display:block; 
 	position:absolute; 
 	top:50%; left:50%; 
-	margin-left:-200px; 
-	margin-top:-200px; 
-	width:400px; height:400px; 
+	margin-left:-205px; 
+	margin-top:-220px; 
+	width:400px; height:200px; 
 	background-color:#fff; 
-	box-shadow:0px 0px 10px rgba(0,0,0,0.2); }
+	box-shadow:0px 0px 10px rgba(0,0,0,0.2); 
+	text-align:center; 
+	padding:50px 10px; }
 
 
 
