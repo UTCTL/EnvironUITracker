@@ -18,13 +18,16 @@ error_log("ENVuser: ".isset($_SESSION['ENVuser']).' '.$_SESSION['ENVuser']);
 error_log("ENVlogged: ".isset($_SESSION['ENVlogged']).' '.$_SESSION['ENVlogged']); 
 
 switch($views[0]) {
-	case 'stats': 
-		if($_SESSION['ENVlogged']) {
-			require_once('_apps/Tracker/views.php'); 
-			$v = new View(); 
-			$v->showstats(); 
-			break; 
-		} 
+	// case 'stats': 
+	// 	if($_SESSION['ENVlogged']) {
+	// 		require_once('_apps/Tracker/views.php'); 
+	// 		$v = new View(); 
+	// 		$v->showstats(); 
+	// 		break; 
+	// 	} 
+	case 'testip':
+		echo "Your ip address is: ".getip(); 
+		break; 
 	default: 
 		if($_SESSION['ENVlogged']) {
 			require_once('_apps/Tracker/views.php'); 
