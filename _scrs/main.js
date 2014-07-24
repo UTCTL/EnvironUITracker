@@ -839,6 +839,16 @@ function activate_region_buttons() {
 	$('.regionbuttons .button').on('click',function() {
 		$('.regionbuttons .button').removeClass('selected'); 
 		$(this).addClass('selected'); 
+
+		var id = $(this).attr('id'); 
+		if(id=="w") {
+			$('.regionfocus, .basefocus').show(); 
+			$('.distribution').hide(); 
+		} else { 
+			$('.regionfocus, .basefocus').hide(); 
+			$('.distribution').show(); 
+		}
+
 	}); 
 }
 
