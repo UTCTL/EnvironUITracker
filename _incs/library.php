@@ -4,6 +4,15 @@ session_start();
 
 function clean($str) { return htmlentities(stripslashes($str)); } 
 
+function getip() {
+	return getenv('HTTP_CLIENT_IP')?:
+		   getenv('HTTP_X_FORWARDED_FOR')?:
+		   getenv('HTTP_X_FORWARDED')?:
+		   getenv('HTTP_FORWARDED_FOR')?:
+		   getenv('HTTP_FORWARDED')?:
+		   getenv('REMOTE_ADDR');
+}
+
 class HTML {
 	public function show_header() {
 		?>
