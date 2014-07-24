@@ -5,12 +5,22 @@ session_start();
 function clean($str) { return htmlentities(stripslashes($str)); } 
 
 function getip() {
-	return getenv('HTTP_CLIENT_IP')?:
-		   getenv('HTTP_X_FORWARDED_FOR')?:
-		   getenv('HTTP_X_FORWARDED')?:
-		   getenv('HTTP_FORWARDED_FOR')?:
-		   getenv('HTTP_FORWARDED')?:
-		   getenv('REMOTE_ADDR');
+    $ipaddress = '';
+    if ($_SERVER['HTTP_CLIENT_IP'])
+        $ipaddress = $_SERVER['HTTP_CLIENT_IP'];
+    else if($_SERVER['HTTP_X_FORWARDED_FOR'])
+        $ipaddress = $_SERVER['HTTP_X_FORWARDED_FOR'];
+    else if($_SERVER['HTTP_X_FORWARDED'])
+        $ipaddress = $_SERVER['HTTP_X_FORWARDED'];
+    else if($_SERVER['HTTP_FORWARDED_FOR'])
+        $ipaddress = $_SERVER['HTTP_FORWARDED_FOR'];
+    else if($_SERVER['HTTP_FORWARDED'])
+        $ipaddress = $_SERVER['HTTP_FORWARDED'];
+    else if($_SERVER['REMOTE_ADDR'])
+        $ipaddress = $_SERVER['REMOTE_ADDR'];
+    else
+        $ipaddress = 'UNKNOWN';
+    return $ipaddress;
 }
 
 class HTML {
