@@ -414,7 +414,7 @@ function display_data(session) {
 	console.log(session); 
 
 	// SESSION id
-	$('#sessionid').html(session["id"]); 
+	$('#sessionid').html(session["meta"]["session"]); 
 
 	// SESSION user meta info 
 	$('.meta #age b').html(session["meta"]["age"]); 
