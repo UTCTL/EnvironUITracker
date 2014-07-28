@@ -162,7 +162,7 @@ $(document).ready(function() {
 			}, 
 			async: false, 
 			success: function(data) {
-				var j = $.parseJSON(data); 
+				var j = $.parseJSON(data);  
 				if(j.hasOwnProperty("success")) {
 					display_data(j["data"][id]); 
 					if(selected_visualization==1) draw_heatmap(); 
@@ -411,31 +411,40 @@ function slope_formula(x1,y1,x2,y2) {
 
 // display gather data for a particular session 
 function display_data(session) {
-	// console.log(session); 
+	console.log(session); 
 
 	// SESSION id
 	$('#sessionid').html(session["id"]); 
 
 	// SESSION user meta info 
-	var meta = ""; 
-	meta += session["meta"]["age"]+"-year-old "; 
-	meta += session["meta"]["race"]+" "; 
-	meta += (session["meta"]["gamer"]) ? "gamer " : "non-gamer "; 
-	meta += (session["meta"]["gender"]=="m") ? "male " : "female "; 
-
-	$('.info .meta').html(meta); 
+	$('.meta #age b').html(session["meta"]["age"]); 
+	$('.meta #gender b').html(session["meta"]["gender"]); 
+	$('.meta #ethnic b').html(session["meta"]["ethnic"]); 
+	$('.meta #gamer_no b').html(session["meta"]["gamer"]); 
+	$('.meta #ipaddr b').html(session["meta"]["ipaddr"]); 
+	$.ajax({
+		type:'GET', 
+		url:'http://freegeoip.net/json/'+session["meta"]["ipaddr"], 
+		success:function(data) { 
+			var iploc = data["city"]+", "+((data["country_code"]=="US") ? data["region_code"] : data["country_code"]); 
+			$('.meta #iploc b').html(iploc); 
+		}, 
+		error: function(data) {
+			console.log(data);
+		}
+	}); 
 
 	// SESSION game details 
 	var win = (session["details"]["status"]==0) ? '<span class="chosen">won</span>' : 'won'; 
 	var los = (session["details"]["status"]==1) ? '<span class="chosen">lost</span>' : 'lost'; ; 
 	var qui = (session["details"]["status"]==2) ? '<span class="chosen">quit</span>' : 'quit'; ; 
 
-	$('.resources #funds .label').html(session["details"]["spent_funds"]); 
-	$('.resources #pc .label').html(session["details"]["spent_polcap"]); 
-	$('.resources #level .label').html(session["details"]["level"]); 
-	$('.resources #timer .label').html(session["details"]["playtime"]); 
-	$('.resources #status .label').html(win+" | "+los+" | "+qui); 
-	$('.resources #completed .label').html(session["details"]["completed"]+"%"); 
+	$('.meta #funds b').html(session["details"]["spent_funds"]); 
+	$('.meta #pc b').html(session["details"]["spent_polcap"]); 
+	$('.meta #level b').html(session["details"]["level"]); 
+	$('.meta #time b').html(session["details"]["playtime"]); 
+	$('.meta #status b').html(win+" | "+los+" | "+qui); 
+	$('.meta #completed b').html(session["details"]["completed"]+"%"); 
 
 	// SESSION screen usage 
 

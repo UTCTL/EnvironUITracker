@@ -202,7 +202,8 @@ nav { display:block;
 
 	.subnav h1 { color:#fff; }
 
-	.subnav li { color:#555; }
+	.subnav li { color:#555; 
+		font-size:9pt; }
 	.subnav li:hover { background-color:#3a3a3a; } 
 	.subnav li.selected { background-color:#047173; }
 
@@ -231,8 +232,11 @@ nav { display:block;
 
 		.meta #age 		{ background-image:url('../_imgs/_webicons/age.png'); } 
 		.meta #gender 	{ background-image:url('../_imgs/_webicons/gender.png'); } 
+		.meta #ethnic 	{ background-image:url('../_imgs/_webicons/ethnic.png'); } 
 		.meta #gamer_yes { background-image:url('../_imgs/_webicons/gamer_yes.png'); } 
 		.meta #gamer_no { background-image:url('../_imgs/_webicons/gamer_no.png'); } 
+		.meta #ipaddr 	{ background-image:url('../_imgs/_webicons/ipaddr.png'); } 
+		.meta #iploc 	{ background-image:url('../_imgs/_webicons/iploc.png'); } 
 		.meta #funds 	{ background-image:url('../_imgs/_webicons/funds.png'); } 
 		.meta #pc 		{ background-image:url('../_imgs/_webicons/polcap.png'); } 
 		.meta #level 	{ background-image:url('../_imgs/_webicons/level.png'); } 
