@@ -3,7 +3,7 @@
 require_once('_incs/library.php'); 
 
 $views = explode('/',clean($_GET['view'])); 
-array_shift($views); 
+// array_shift($views); 
 
 $html = new HTML(); 
 $html->show_header(); 
@@ -17,6 +17,8 @@ $html->show_header();
 error_log("ENVuser: ".isset($_SESSION['ENVuser']).' '.$_SESSION['ENVuser']); 
 error_log("ENVlogged: ".isset($_SESSION['ENVlogged']).' '.$_SESSION['ENVlogged']); 
 
+echo "view: ".$views[0]; 
+
 switch($views[0]) {
 	// case 'stats': 
 	// 	if($_SESSION['ENVlogged']) {
@@ -25,9 +27,14 @@ switch($views[0]) {
 	// 		$v->showstats(); 
 	// 		break; 
 	// 	} 
-	case 'testip':
-		echo "Your ip address is: ".getip(); 
+	case 'play':
+		require_once('_apps/Play/views.php'); 
+		$v = new View(); 
+		$v->play(); 
 		break; 
+	// case 'testip':
+	// 	echo "Your ip address is: ".getip(); 
+	// 	break; 
 	default: 
 		if($_SESSION['ENVlogged']) {
 			require_once('_apps/Tracker/views.php'); 
