@@ -32,7 +32,10 @@ class HTML {
  <link rel="stylesheet" type="text/css" href="_stys/global.css"> 
  <script type="text/javascript" src="_scrs/jquery.min.js"></script> 
  <script type="text/javascript" src="_scrs/d3.v3.min.js"></script> 
- <script type="text/javascript" src="_scrs/main.js"></script>
+ <script src="_scrs/_visualization/constants.js"></script> 
+ <script src="_scrs/_visualization/classes.js"></script> 
+ <script src="_scrs/_visualization/display_data.js"></script> 
+ <script src="_scrs/main.js"></script>
 </head><body>
 		<?
 	}
