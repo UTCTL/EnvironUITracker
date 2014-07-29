@@ -39,6 +39,11 @@ function Block() {
 	this.increment = function(k) {
 		this.added+=k; 
 	}
+
+	this.clear = function() {
+		this.hits = 0; 
+		this.added = 0; 
+	}
 }
 
 
@@ -93,4 +98,10 @@ function hit_grid_block(x,y) {
 	var i = (newy*dx)+newx; 
 	GRID[i].hit(); 
 	increment_adjacent(i,TOLERANCE); 
+}
+
+function clear_grid_blocks() {
+	d3.range(GRID.length).map(function(i) {
+		GRID[i].clear(); 
+	}); 
 }

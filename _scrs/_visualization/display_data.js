@@ -1,6 +1,6 @@
 // display gather data for a particular session 
 function display_data() {
-	console.log(session); 
+	clear_grid_blocks(); 
 
 	// SESSION id
 	$('#sessionid').html(session["meta"]["session"]); 
