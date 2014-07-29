@@ -4,6 +4,9 @@
  <link rel="stylesheet" type="text/css" href="_stys/global.css"> 
  <script src="_scrs/jquery.min.js"></script> 
  <script src="_scrs/d3.v3.min.js"></script> 
+ <script src="_scrs/_visualization/constants.js"></script> 
+ <script src="_scrs/_visualization/classes.js"></script> 
+ <script src="_scrs/_visualization/display_data.js"></script> 
  <script src="_scrs/main.js"></script>
 </head><body>
 
@@ -21,15 +24,7 @@
 		</div> 
 		<div class="subnav">
 			<h1>Session Tracker</h1> 
-			<ul class="menuoptions"> 
-				<!-- <li>123456789</li>
-				<li>234567891</li>
-				<li class="selected">987654321</li> 
-				<li>456789123</li>
-				<li>564231897</li>
-				<li>951627384</li>
-				<li>357681249</li> -->
-			</ul> 
+			<ul class="menuoptions"> </ul> 
 		</div>
 	</nav> 
 	<div class="activity"> 
@@ -199,117 +194,6 @@
 					</ul>
 				</div> 
 			</content> 
-			<!-- <content>
-				<h2>Node Rate <span class="meta">action/second</span></h2> 
-				<div class="table">
-					<div class="row">
-						<div class="header fifth">ACTION</div> 
-						<div class="header fifth">Bases</div> 
-						<div class="header fifth">Upgrades</div> 
-						<div class="header fifth">Events</div> 
-						<div class="header fifth">Disasters</div> 
-					</div> 
-					<div class="row">
-						<div class="datum fifth">Spawn</div> 
-						<div class="header fifth" id="node00">-</div> 
-						<div class="header fifth" id="node01">1.24</div> 
-						<div class="header fifth" id="node02">3.24</div> 
-						<div class="header fifth" id="node03">1.22</div> 
-					</div> 
-					<div class="row">
-						<div class="datum fifth">Unlock</div> 
-						<div class="header fifth" id="node10">4.25</div> 
-						<div class="header fifth" id="node11">1.52</div> 
-						<div class="header fifth" id="node12">-</div> 
-						<div class="header fifth" id="node13">-</div> 
-					</div>
-					<div class="row">
-						<div class="datum fifth">Active</div> 
-						<div class="header fifth" id="node20">1.21</div> 
-						<div class="header fifth" id="node21">2.13</div> 
-						<div class="header fifth" id="node22">3.12</div> 
-						<div class="header fifth" id="node23">0.11</div> 
-					</div>
-					<div class="row">
-						<div class="datum fifth">Responsive</div> 
-						<div class="header fifth" id="node30">0.22</div> 
-						<div class="header fifth" id="node31">0.10</div> 
-						<div class="header fifth" id="node32">0.81</div> 
-						<div class="header fifth" id="node33">0.75</div> 
-					</div> 
-				</div> 
-			</content> -->
-			<!-- <content class="region"> 
-				<h2>Region Data</h2> 
-				<div class="half">
-					<h3>Particular</h3> 
-					<div class="table">
-						<div class="row">
-							<div class="header fifth">REGION</div> 
-							<div class="header fifth">Order</div> 
-							<div class="header fifth">Avg Environ</div> 
-							<div class="header fifth">Avg Economy</div> 
-							<div class="header fifth">Focus</div> 
-						</div> 
-						<div class="row">
-							<div class="header fifth">NA</div>  
-							<div class="header fifth" id="region00">1</div> 
-							<div class="header fifth positive" id="region01">21.8</div> 
-							<div class="header fifth positive" id="region02">75.3</div> 
-							<div class="header fifth" id="region03">34%</div> 
-						</div> 
-						<div class="row">
-							<div class="header fifth">SA</div>  
-							<div class="header fifth" id="region10">2</div> 
-							<div class="header fifth positive" id="region11">75.0</div> 
-							<div class="header fifth positive" id="region12">21.5</div> 
-							<div class="header fifth" id="region13">22%</div> 
-						</div>
-						<div class="row">
-							<div class="header fifth">EU</div>  
-							<div class="header fifth" id="region20">3</div> 
-							<div class="header fifth positive" id="region21">64.6</div> 
-							<div class="header fifth positive" id="region22">72.9</div> 
-							<div class="header fifth" id="region23">28%</div> 
-						</div>
-						<div class="row">
-							<div class="header fifth">AF</div>  
-							<div class="header fifth" id="region30">4</div> 
-							<div class="header fifth positive" id="region31">25.1</div> 
-							<div class="header fifth negative" id="region32">-14.8</div> 
-							<div class="header fifth" id="region33">5%</div> 
-						</div> 
-						<div class="row">
-							<div class="header fifth">CA</div>  
-							<div class="header fifth" id="region40">5</div> 
-							<div class="header fifth positive" id="region41">45.6</div> 
-							<div class="header fifth negative" id="region42">-21.0</div> 
-							<div class="header fifth" id="region43">5%</div> 
-						</div> 
-						<div class="row">
-							<div class="header fifth">EA</div>  
-							<div class="header fifth" id="region50">6</div> 
-							<div class="header fifth negative" id="region51">-55.4</div> 
-							<div class="header fifth positive" id="region52">63.2</div> 
-							<div class="header fifth" id="region53">6%</div> 
-						</div> 
-					</div> 
-				</div> 
-				<div class="half"> 
-					<h3>General</h3> 
-					<span id="funds">Unlock Rate: <span class="label">5.35</label></span> 
-					<span>Navigation</span> 
-					<div class="navigation">
-						<div class="bargraph">
-							<div class="bar">
-								<div style="width:314px;" id="minimap"></div><span class="label" id="mini">Minimap 72%</span>
-								<div style="width:116px; left:334px;" id="regkeys"></div><span class="label" id="regk"style="left:365px">Keys 18%</span>
-							</div>
-						</div>
-					</div>
-
-				</div> 
-			</content>  -->
 		</section> 
 	</div> 
 </section>
