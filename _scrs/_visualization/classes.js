@@ -1,5 +1,5 @@
 // =======================
-// 	Visuzlization classes 
+// 	Visualization classes 
 // =======================
 
 // click 
