@@ -64,6 +64,27 @@ function slope_formula(x1,y1,x2,y2) {
 	return (y2-y1)/(x2-x1); 
 }
 
+function variance_formula(x) {
+    return covariance_formula(x,x); 
+}
+
+function covariance_formula(x,y) {
+    var n = x.length, 
+        a = 0, b = 0, c = 0; 
+
+    for(var i=0; i<n; i++) {
+        a += x[i]*y[i]; 
+        b += x[i]; 
+        c += y[i]; 
+    }
+    
+    return (a-(b*c/n))/n; 
+} 
+
+function linear_regression_formula(x,y) {
+    return covariance_formula(x,y)/variance_formula(x); 
+}
+
 function sort_object(obj) {
     var arr = [];
     for (var prop in obj) {

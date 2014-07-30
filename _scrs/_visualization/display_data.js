@@ -76,7 +76,29 @@ function display_data() {
 	$('.panel#on .label').html(total+"%"); 
 	$('.panel#off .label').html((100-total)+"%"); 
 
+	// SESSION navigation 
+	console.log(session); 
+	var minimap = session["input"]["navigation"]["minimap"], 
+		keys = session["input"]["navigation"]["keys"], 
+		ratio = 0; 
+	total = minimap+keys; 
+	ratio = minimap/total; 
+
+	console.log("minimap: "+minimap+", keys: "+keys+", total: "+total+", ratio: "+ratio+"&"+(1-ratio)); 
+
+	// minimap 
+	$('.navigation #minimap').animate({ 'width':(430*ratio)+'px' }); 
+	$('.navigation .label#mini').html('Minimap '+(Math.round(ratio*100))+'%'); 
+	
+	// region keys 1-6 
+	$('.navigation #regkeys').animate({ 
+		'width':(430*(1-ratio))+'px', 
+		'left':((430*ratio)+20)+'px' 
+	}); 
+	$('.navigation .label#regk').html('Keys '+(Math.round((1-ratio)*100))+'%'); 
+
 	// SESSION graph score plots 
+
 	graph_scores("environ"); 
 	graph_scores("economy"); 
 
@@ -96,6 +118,8 @@ function display_data() {
 	bases = {}; 
 	get_bases_data(); 
 	focus_bases(); 
+
+
 
 	// SESSION node rate 
 	// var k = 0, n = 0; 
@@ -201,6 +225,9 @@ function graph_scores(type) {
 	var slopes = []; 
 	d3.selectAll('.score#'+type+' .graphplot line').remove(); 
 	// if(initials=="W") return; 
+
+	$('.rate h2 .label').html(session["regions"][initials]["name"]); 
+
 	d3.range(count).map(function(i) { 
 		var val = session["regions"][initials]["scores"][type][i]; 
 		if(i==0) {
@@ -360,6 +387,11 @@ function focus_regions(data) {
 	       .attr("fill","#fff")
 	       .text(Math.round(f*100)+"%");
 	}); 
+
+	var R = {}; 
+
+	console.log("session on focus_regions: ")
+	console.log(session); 
 }
 
 function activate_region_buttons() {
@@ -414,23 +446,23 @@ function get_region_focus(init) {
 }
 
 function get_bases_data() {
-	console.log("getting bases data"); 
+	// console.log("getting bases data"); 
 	for(var region in session["regions"]) {
-		console.log("\tregion: "+region); 
+		// console.log("\tregion: "+region); 
 		for(var b in session["regions"][region]["bases"]) {
 			base = session["regions"][region]["bases"][b];
-			console.log("\t\tbase: "+base["name"]); 
+			// console.log("\t\tbase: "+base["name"]); 
 			if(base["active"]) {
 				for(var u in base["upgrades"]) {
 					var upgrade = base["upgrades"][u]; 
-					console.log("\t\t\tupgrade: "+upgrade["name"]); 
+					// console.log("\t\t\tupgrade: "+upgrade["name"]); 
 					if(upgrade["active"]) {
 						if(base["name"] in bases) {
 							bases[base["name"]]++; 
-							console.log(base["name"]+"+1 = "+bases[base["name"]]); 
+							// console.log(base["name"]+"+1 = "+bases[base["name"]]); 
 						} else {
 							bases[base["name"]] = 1; 
-							console.log(base["name"]+" = "+bases[base["name"]]); 
+							// console.log(base["name"]+" = "+bases[base["name"]]); 
 						}
 					}
 				}
