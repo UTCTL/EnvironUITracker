@@ -77,14 +77,14 @@ function display_data() {
 	$('.panel#off .label').html((100-total)+"%"); 
 
 	// SESSION navigation 
-	console.log(session); 
+	// console.log(session); 
 	var minimap = session["input"]["navigation"]["minimap"], 
 		keys = session["input"]["navigation"]["keys"], 
 		ratio = 0; 
 	total = minimap+keys; 
 	ratio = minimap/total; 
 
-	console.log("minimap: "+minimap+", keys: "+keys+", total: "+total+", ratio: "+ratio+"&"+(1-ratio)); 
+	// console.log("minimap: "+minimap+", keys: "+keys+", total: "+total+", ratio: "+ratio+"&"+(1-ratio)); 
 
 	// minimap 
 	$('.navigation #minimap').animate({ 'width':(430*ratio)+'px' }); 
@@ -120,6 +120,8 @@ function display_data() {
 	focus_bases(); 
 
 
+	// SESSION distribution 
+	d3.select('.distribution svg'); 
 
 	// SESSION node rate 
 	// var k = 0, n = 0; 
@@ -355,10 +357,12 @@ function focus_regions(data) {
 				.attr("w",530) 
 				.attr("h",280); 
 
+	var relationships = {}; 
 	var total = 0; 
 	var max = {"index":0,"value":0}; 
 	d3.range(data.length).map(function(i) {
 		total += data[i]["value"]; 
+		relationships[data[i]["region"]] = {"focus":data[i]["value"], "order":session["regions"][data[i]["region"]]["order"]}; 
 		if(data[i]["value"]>max["value"]) {
 			max["index"] = i; 
 			max["value"] = data[i]["value"]; 
@@ -388,10 +392,7 @@ function focus_regions(data) {
 	       .text(Math.round(f*100)+"%");
 	}); 
 
-	var R = {}; 
-
-	console.log("session on focus_regions: ")
-	console.log(session); 
+	console.log(relationships); 
 }
 
 function activate_region_buttons() {
@@ -407,6 +408,7 @@ function activate_region_buttons() {
 		} else { 
 			$('.regionfocus, .basefocus').hide(); 
 			$('.distribution').show(); 
+			$('.distribution svg').attr('id',selected_region); 
 		}
 
 		graph_scores("environ"); 
@@ -470,7 +472,7 @@ function get_bases_data() {
 		}
 	}
 
-	bases = sort_object(bases); 
+	bases = sort_object_by_key(bases); 
 }
 
 function focus_bases() {

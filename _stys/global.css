@@ -652,7 +652,18 @@ nav { display:block;
 		.distribution .dgui li.inactive:hover { border-left:10px solid #ddd; } 
 
 
+	.distribution svg { background-color:#00f; 
+		position:relative; 
+		top:-800px; left:340px; 
+		width:400px; 
+		height:200px; } 
 
+		.distribution svg#na { background-image:url('../_imgs/_regions/na.png'); }
+		.distribution svg#sa { background-image:url('../_imgs/_regions/sa.png'); }
+		.distribution svg#eu { background-image:url('../_imgs/_regions/eu.png'); }
+		.distribution svg#af { background-image:url('../_imgs/_regions/af.png'); }
+		.distribution svg#ca { background-image:url('../_imgs/_regions/ca.png'); }
+		.distribution svg#ea { background-image:url('../_imgs/_regions/ea.png'); }
 
 
 

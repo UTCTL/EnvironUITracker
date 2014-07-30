@@ -99,7 +99,19 @@ function sort_object(obj) {
     return arr; 
 }
 
-
+function sort_object_by_key(obj) {
+    var arr = [];
+    for (var prop in obj) {
+        if (obj.hasOwnProperty(prop)) {
+            arr.push({
+                'key': prop,
+                'value': obj[prop]
+            });
+        }
+    }
+    arr.sort(function(a, b) { return a.key - b.key; });
+    return arr; 
+} 
 
 
 // =================
