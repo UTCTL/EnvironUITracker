@@ -665,6 +665,12 @@ nav { display:block;
 		.distribution svg#af { background-image:url('../_imgs/_regions/af.png'); }
 		.distribution svg#ca { background-image:url('../_imgs/_regions/ca.png'); }
 		.distribution svg#ea { background-image:url('../_imgs/_regions/ea.png'); }
+		
+		.distribution svg circle { cursor:pointer; }
+
+			.distribution svg circle:hover { fill:#51dcdc; }
+			.distribution svg circle.selected { stoke:#fff; 
+				stroke-width:5px; }
 
 
 

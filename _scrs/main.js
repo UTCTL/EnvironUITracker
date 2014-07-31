@@ -12,6 +12,7 @@ $(document).ready(function() {
 	focus_regions(); 
 	activate_region_buttons(); 
 	activate_navbar_menu(); 
+	hide_sections(); 
 
 	// choose item from menu 
 	$('.subnav .menuoptions li').on('click',function() { 

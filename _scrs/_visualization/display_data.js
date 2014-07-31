@@ -1,3 +1,10 @@
+function hide_sections() {
+	$('.activity section').hide(); 
+	$('nav li').on('click',function() {
+		$('.activity section').fadeIn(1000); 
+	}); 
+}
+
 // display gather data for a particular session 
 function display_data() {
 	clear_grid_blocks(); 
@@ -121,7 +128,8 @@ function display_data() {
 
 
 	// SESSION distribution 
-	d3.select('.distribution svg'); 
+	// console.log(session["regions"]); 
+	show_region_data(selected_region); 
 
 	// SESSION node rate 
 	// var k = 0, n = 0; 
@@ -392,7 +400,35 @@ function focus_regions(data) {
 	       .text(Math.round(f*100)+"%");
 	}); 
 
-	console.log(relationships); 
+
+	// get linear regression to establish correlation between 
+	// region activation order and focus 
+	var x = [1,2,3,4,5,6], 
+		y = []; 
+
+	for(var r in relationships) {
+		for(var i=0; i<x.length; i++) {
+			if(relationships[r]["order"]==x[i]) {
+				y[i] = relationships[r]["focus"]; 
+			}
+		}
+	}
+
+	// console.log(x); 
+	// console.log(y); 
+	var linreg = -1*linear_regression_formula(x,y); 
+	// console.log(linreg); 
+
+	if(linreg>0.25) {
+		$('.correlation').removeClass('neutral').removeClass('negative').addClass('positive')
+						 .html('Forst this user... positive'); 
+	} else if(linreg <-0.25) {
+		$('.correlation').removeClass('positive').removeClass('neutral').addClass('negative')
+						 .html('Forst this user... negative'); ; 
+	} else {
+		$('.correlation').removeClass('positive').removeClass('negative').addClass('neutral')
+						 .html('Forst this user... neutral'); ; 
+	}
 }
 
 function activate_region_buttons() {
@@ -403,12 +439,14 @@ function activate_region_buttons() {
 		var id = $(this).attr('id'); 
 		selected_region = id; 
 		if(id=="w") {
-			$('.regionfocus, .basefocus').show(); 
+			$('.regionfocus, .basefocus').fadeIn(); 
 			$('.distribution').hide(); 
 		} else { 
 			$('.regionfocus, .basefocus').hide(); 
-			$('.distribution').show(); 
+			$('.distribution').fadeIn(); 
 			$('.distribution svg').attr('id',selected_region); 
+
+			show_region_data(selected_region); 
 		}
 
 		graph_scores("environ"); 
@@ -418,9 +456,9 @@ function activate_region_buttons() {
 }
 
 function get_time(time) {
-	hours = Math.round(time/3600); 
-	minutes = Math.round(time/60); 
-	seconds = Math.round(time-(minutes*60)); 
+	hours = Math.floor(time/3600); 
+	minutes = Math.floor(time/60); 
+	seconds = Math.floor(time-(minutes*60)); 
 
 	return hours+"h "+minutes+"m "+seconds+"s "; 
 }
@@ -491,4 +529,78 @@ function focus_bases() {
     //         {"label":"agriculture", "value":30}];
 
     bake_pie(data); 
+}
+
+function show_region_data(id) {
+	// console.log(id); 
+	var region = session["regions"][id.toUpperCase()], 
+		spent_funds = region["spent_funds"], 
+		spent_polcap = region["spent_polcap"], 
+		theta = 360/region["bases"].length; 
+		dist = 250
+		svg = ""; 
+
+	$('#funds_small b').html(spent_funds); 
+	$('#pc_small b').html(spent_polcap); 
+
+	svg = d3.select('.distribution svg'); 
+	svg.selectAll('circle').remove(); 
+	d3.range(region["bases"].length).map(function(i) {
+		var x = $('.distribution svg').width()/2 + dist*Math.cos(i*theta/180*Math.PI + Math.PI), 
+			y = $('.distribution svg').height()/2 + dist*Math.sin(i*theta/180*Math.PI + Math.PI); 
+
+
+		var upgrades = region["bases"][i]["upgrades"]; 
+		var uweight = 0; 
+		d3.range(upgrades.length).map(function(j) {
+			uweight += (upgrades[j]["active"]) ? 1 : 0; 
+		}); 
+
+		var ratio = uweight / upgrades.length; 
+
+	    // var defs = svg.append('svg:defs');
+	    // defs.append('svg:pattern')
+	    //     .attr('id', 'basetile'+i)
+	    //     .attr('patternUnits', 'userSpaceOnUse')
+	    //     .attr('width', 116)
+	    //     .attr('height', 116)
+	    //     .append('svg:image')
+	    //     .attr('xlink:href', '_imgs/_webicons/base_big.png')
+	    //     .attr('x', 0)
+	    //     .attr('y', 0)
+	    //     .attr('width', 116)
+	    //     .attr('height', 116);
+
+		svg.append('circle')
+		   .attr('cx',x) 
+		   .attr('cy',y) 
+		   .attr('r',40+(ratio*20))
+		   .attr('fill',get_color_in_between(ratio,COLORS_MAIN_DARK,COLORS_MAIN_LIGHT)) 
+		   .attr('id','base'+i); 
+		   // .attr('fill','url(#basetile'+i+')');  
+	}); 
+
+    $('.distribution svg circle').on('click',function() {
+    	// $('.distribution svg circle').removeClass('selected'); 
+    	// $(this).addClass('selected'); 
+    	var baseid = parseInt($(this).attr('id').substring(4)); 
+    	load_base_info(region,region["bases"][baseid]); 
+    	$('.distribution svg circle').css({'stroke-width':'0px'}); 
+    	$(this).css({'stroke':'#ffde16','stroke-width':'5px'}); 
+    }); 
+
+    $('.distribution svg circle').first().click(); 
+	// console.log(spent_funds+" "+spent_polcap); 
+	// console.log(region); 
+}
+
+function load_base_info(region,base) {
+	$('.distribution .dgui h2').html(region["name"]); 
+	$('.distribution .dgui h3').html(base["name"]); 
+
+	$('.distribution .dgui .upgrades').html(''); 
+	for(var i in base["upgrades"]) {
+		var u = base["upgrades"][i]; 
+		$('.distribution .dgui .upgrades').append('<li class="'+(((u["active"]) ? 'active' : 'inactive'))+'">'+u["name"]+'</li>'); 
+	}
 }
