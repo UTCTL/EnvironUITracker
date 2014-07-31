@@ -14,10 +14,9 @@ $html->show_header();
 // if($_SESSION['ENVlogged']==null) error_log("no ENVlogged index"); 
 // elseif($_SESSION['ENVlogged']==false) error_log("ENVlogged is false"); 
 // else error_log("ENVlogged is true"); 
-error_log("ENVuser: ".isset($_SESSION['ENVuser']).' '.$_SESSION['ENVuser']); 
-error_log("ENVlogged: ".isset($_SESSION['ENVlogged']).' '.$_SESSION['ENVlogged']); 
 
-echo "view: ".$views[0]; 
+// error_log("ENVuser: ".isset($_SESSION['ENVuser']).' '.$_SESSION['ENVuser']); 
+// error_log("ENVlogged: ".isset($_SESSION['ENVlogged']).' '.$_SESSION['ENVlogged']); 
 
 switch($views[0]) {
 	// case 'stats': 
