@@ -105,7 +105,7 @@ class View {
 					<div class="bargraph">
 						<div class="bar">
 							<div style="width:314px;" id="minimap"></div><span class="label" id="mini">Minimap 72%</span>
-							<div style="width:116px; left:334px;" id="regkeys"></div><span class="label" id="regk"style="left:365px">Keys 18%</span>
+							<div style="width:116px; left:334px;" id="regkeys"></div><span class="label" id="regk"style="left:345px">Keys 18%</span>
 						</div>
 					</div>
 				</div>
@@ -129,7 +129,7 @@ class View {
 
 
 			<content class="rate half" id="environ" ctype="environrate">
-				<h2>Environ Score Rate</h2> 
+				<h2><span class="label">W </span>Environ Score Rate</h2> 
 				<!-- environ score rate --> 
 				<div class="score" id="environ">
 					<div class="graphplot"></div> 
@@ -140,7 +140,7 @@ class View {
 				</div>
 			</content>
 			<content class="rate half" id="economy" ctype="evonomyrate"> 
-				<h2>Economy Score Rate</h2> 
+				<h2><span class="label">W </span>Economy Score Rate</h2> 
 				<!-- economy score rate --> 
 				<div class="score" id="economy">
 					<div class="graphplot"></div> 
@@ -156,7 +156,7 @@ class View {
 			<content class="regionfocus half" ctype="regionfocus">
 				<h2>Region focus</h2> 
 				<div class="mapsmall"></div> 
-				<div class="negative correlation">For this player...</div> 
+				<div class="neutral correlation"></div> 
 			</content> 
 
 
@@ -171,23 +171,16 @@ class View {
 
 			<content class="distribution" ctype="distribution">
 				<div class="dgui">
-					<h2>Base Name</h2>
-					<h3>Region</h3> 
-					<div class="meta" id="funds_small"><b>$863</b> spent</div> 
-					<div class="meta" id="pc_small"><b>455</b> spent</div> 
-					<div class="meta" id="focus_small"><b>23%</b> focus</div> 
+					<h2>Region</h2>
+					<div class="meta" id="funds_small"><b></b> spent</div> 
+					<div class="meta" id="pc_small"><b></b> spent</div> 
+					<div class="meta" id="focus_small"><b></b> focus</div> 
+					<br><br>
+					<h3>Base Name</h3> 
 					<ul class="upgrades">
-						<li class="active">Upgrade 1</li> 
-						<li class="active">Upgrade 2</li> 
-						<li class="active">Upgrade 3</li> 
-						<li class="active">Upgrade 4</li> 
-						<li class="active">Upgrade 5</li> 
-						<li class="inactive">Upgrade 6</li> 
-						<li class="inactive">Upgrade 7</li> 
-						<li class="inactive">Upgrade 8</li> 
-						<li class="inactive">Upgrade 9</li> 
 					</ul>
 				</div> 
+				<svg></svg>
 			</content> 
 		</section> 
 	</div> 
