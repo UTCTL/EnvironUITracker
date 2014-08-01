@@ -7,7 +7,9 @@ function hide_sections() {
 
 // display gather data for a particular session 
 function display_data() {
-	clear_grid_blocks(); 
+	clear_grid_blocks();
+	
+	$('.regionbuttons .button#'+selected_region).click(); 
 
 	// SESSION id
 	$('#sessionid').html(session["meta"]["session"]); 
