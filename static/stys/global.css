@@ -2,7 +2,8 @@
  * HTML defaults
  */ 
 
-* { margin:0px; padding:10px; }
+* { margin:0px; padding:10px; 
+	z-index:1; }
 
 html { padding:0px; }
 body { font-family:Helvetica; 
@@ -44,9 +45,12 @@ nav { display:block;
 	position:fixed; 
 	top:0px; left:0px; 
 	width:100%;  
-	background-color:#ddd; 
-	color:#444; 
+	background-color:#232323; 
+	color:#ddd; 
 	z-index:999; }
+
+	nav a:hover { background-color:#54c3c1; 
+		color:#fff; } 
 
 section { display:block; }
 	section:first-child { padding-top:100px; }

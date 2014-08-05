@@ -10,6 +10,9 @@ function HTMLhead($page) {
  <script src="static/scrs/jquery.min.js"></script>
  <script src="static/scrs/jquery.mixitup.min.js"></script>
  <script src="static/scrs/main.js"></script>
+ <? if($page=="home") { ?>
+ <link rel="stylesheet" type="text/css" href="static/stys/home.css">
+ <script src="static/scrs/home.js"></script> <? } ?>
 </head><body>
 	<?
 }
