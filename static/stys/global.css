@@ -1,0 +1,134 @@
+/*
+ * HTML defaults
+ */ 
+
+* { margin:0px; padding:10px; }
+
+html { padding:0px; }
+body { font-family:Helvetica; 
+	font-size:10pt; 
+	padding:0px; 
+	padding-top:40px; } 
+
+a { color:#777; 
+	text-decoration:none; }
+a:hover { color:#000; 
+	background-color:rgba(0,0,0,.1); }
+
+input, textarea, select { border:1px solid #ddd; 
+	outline:none; 
+	resize:none; 
+	margin:5px; } 
+	input:focus, textarea:focus { box-shadow:0px 0px 5px rgba(0,144,255,0.5); 
+		border:1px solid rgba(0,144,255,0.6); }
+
+img { max-width:400px; 
+	max-height:300px; 
+	margin:10px; }
+
+#Grid .mix { opacity:0; display:none; }
+li.filter { list-style-type:none; 
+	display:inline-block; 
+	padding:10px; 
+	margin:1px; 
+	border:1px solid #bbb;
+	background-color:#fff;  
+	cursor:pointer; }
+	li.filter:hover { background-color:#eee; } 
+
+/*
+ * HTML secions and modules
+ */
+
+nav { display:block;
+	position:fixed; 
+	top:0px; left:0px; 
+	width:100%;  
+	background-color:#ddd; 
+	color:#444; 
+	z-index:999; }
+
+section { display:block; }
+	section:first-child { padding-top:100px; }
+	section:nth-child(2n+1) { background-color:#ecf7ff; }
+
+.cover { display:inline-block; 
+	width:300px; height:150px; 
+	background-size:cover; 
+	background-position:center center; }
+	
+/*
+ * Admin stuff
+ */
+#logout { position:fixed;
+	top:0px;  
+	right:0px; }
+
+form#uploadform { position:absolute;
+	top:-500px; } 
+
+ul#menu { display:inline; 
+	width:200px; 
+	float:left; }
+
+	ul#menu li { color:#777; 
+		cursor:pointer; }
+	ul#menu li:hover { color:#000; }
+
+.gallery { display:inline-block; 
+	float:left; }
+
+.curtain { display:none; 
+	position:fixed; 
+	top:0px; left:0px;  
+	width:100%; 
+	height:100%; 
+	background-color:rgba(0,0,0,.2); 
+	z-index:1001; }
+	.curtain .box { display:block; 
+		position:fixed; 
+		top:50%; left:50%; 
+		width:400px; 
+		height:150px; 
+		margin-left:-200px; 
+		margin-top:-75px; 
+		background-color:#fff; }
+
+.submit { cursor:pointer; }
+
+progress { display:none; }
+
+.status { display:block;
+		position:relative; 
+		top:4px;  
+		width:120px; 
+		float:left; 
+		padding-left:10px; 
+		z-index:1; }
+		
+		.status .button#slide {
+			display:inline-block; 
+			width:40px; 
+			height:10px; 
+			border-radius:20px; 
+			border:1px solid #ccc; 
+			background-color:#f3f3f3; }
+		.status .submit#knob {
+			display:inline-block; 
+			position:relative; 
+			top:-11px; 
+			left:-11px; 
+			width:10px; 
+			height:10px; 
+			border-radius:20px; 
+			border:1px solid #ccc; 
+			background-color:#fff; 
+			cursor:pointer; }
+		.status .label { 
+			display:inline-block; ; 
+			font-size:9pt; 
+			font-style:italic; 
+			color:#aaa; 
+			line-height:27px; 
+			vertical-align:top; 
+			padding-left:5px; }
