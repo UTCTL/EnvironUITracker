@@ -60,3 +60,17 @@ section.footer { display:block;
 	position:absolute; 
 	bottom:0px; 
 	width:100%; }
+
+@media screen and (min-width:799px) {
+	section.footer {
+		bottom:-200px; 
+	}
+
+	body { 
+		overflow-y:scroll; 
+	}
+
+	.home_description {
+		margin-top:-250px;
+	}
+}
