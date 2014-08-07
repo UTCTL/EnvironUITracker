@@ -71,7 +71,6 @@ function HTMLnav($page) {
  <a href="<? echo $des; ?>">Home</a>
  <a href="<? echo $des; ?>about">About</a>
  <a href="<? echo $des; ?>login">Log in</a>
- <a href="<? echo $des; ?>signup">Sign up</a>
 		<?
 	}
 

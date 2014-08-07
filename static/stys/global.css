@@ -101,6 +101,11 @@ li.filter { list-style-type:none;
 	padding:0px; 
 	/*background-color:#0ff;*/ }
 
+.threefourths { display:inline-block; 
+	width:74%; 
+	vertical-align:top; 
+	padding:0px; }
+
 
 /*
  * HTML secions and modules
