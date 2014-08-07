@@ -24,8 +24,9 @@ facilisis ante. Pellentesque habitant morbi tristique senectus et netus et males
 Praesent vitae tortor interdum risus egestas viverra. Class aptent taciti sociosqu ad litora torquent 
 per conubia nostra, per inceptos himenaeos. Donec vehicula felis ut diam 
 semper volutpat. Donec quis est semper, viverra orci sit amet, sollicitudin metus.</p> 
-		<br><br>
+		<br>
 		<a href="<? echo $_SESSION['DESpath']; ?>about" class="button">Learn More</a>
+		<a href="<? echo $_SESSION['DESpath']; ?>login" class="button">Play</a>
 	</div> 
 </div> 
 <? } else { ?>

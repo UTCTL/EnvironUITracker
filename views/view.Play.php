@@ -80,6 +80,4 @@ HTMLnav($page);
   <div class="endscreen"></div>
 </section> 
 
-<?
-HTMLfoot($page); 
-?>
+</body><html>

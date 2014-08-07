@@ -14,6 +14,15 @@ function HTMLhead($page) {
  <link rel="stylesheet" type="text/css" href="static/stys/home.css">
  <script src="static/scrs/home.js"></script> 
  <? } ?>
+ <? if($page=="login") { ?>
+ <link rel="stylesheet" type="text/css" href="static/stys/login.css">
+ <? } ?>
+ <? if($page=="signup") { ?>
+ <link rel="stylesheet" type="text/css" href="static/stys/signup.css">
+ <? } ?>
+ <? if($page=="play") { ?>
+ <link rel="stylesheet" type="text/css" href="static/stys/play.css">
+ <? } ?>
 </head><body>
 	<?
 }
@@ -89,8 +98,11 @@ function HTMLfoot($page) {
 	 		<li><a href="http://www.utexas.edu/cio/policies/web-accessibility">UT Web Accessibility</a></li> 
 	 	</ul>
 	 </div> 
-	 <div class="half">
-	 	
+	 <div class="fourth">
+ 		<a class="logo" id="ctl" href="http://ctl.utexas.edu" target="_blank"></a>
+	 </div> 
+	 <div class="fourth">
+ 		<a class="logo" id="ut2" href="http://www.utexas.edu" target="_blank"></a> 
 	 </div> 
  </content> 
 </section> 

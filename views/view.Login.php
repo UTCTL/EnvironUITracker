@@ -7,12 +7,14 @@ HTMLhead($page);
 HTMLnav($page); 
 ?>
 
-<section>
- <form method="post">
-  <input type="text" name="uname" id="uname">
-  <input type="password" name="pword" id="pword">
-  <input type="submit" class="submit" id="login" value="Log in">
- </form>
+<section class="login">
+ <div class="loginbox">
+	 <form method="post">
+	  <input type="text" name="uname" id="uname" placeholder="Username"><br>
+	  <input type="password" name="pword" id="pword" placeholder="Password"><br>
+	  <input type="submit" class="submit" id="login" value="Log in">
+	 </form>
+ </div> 
 </section>
 
 <?
