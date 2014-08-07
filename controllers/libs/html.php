@@ -20,6 +20,9 @@ function HTMLhead($page) {
  <? if($page=="signup") { ?>
  <link rel="stylesheet" type="text/css" href="static/stys/signup.css">
  <? } ?>
+ <? if($page=="about") { ?>
+ <link rel="stylesheet" type="text/css" href="static/stys/about.css">
+ <? } ?>
  <? if($page=="play") { ?>
  <link rel="stylesheet" type="text/css" href="static/stys/play.css">
  <? } ?>
