@@ -95,9 +95,9 @@ function HTMLfoot($page) {
 	 </div> 
  	<div class="fourth">
 	 	<ul> 
-	 		<li><a href="http://dmi.utexas.org">Digital Media Institute</a></li> 
-	 		<li><a href="http://www.utexas.edu/cio/policies/web-privacy">UT Web Privacy</a></li> 
-	 		<li><a href="http://www.utexas.edu/cio/policies/web-accessibility">UT Web Accessibility</a></li> 
+	 		<li><a href="http://dmi.utexas.org" target="_blank">Digital Media Institute</a></li> 
+	 		<li><a href="http://www.utexas.edu/cio/policies/web-privacy" target="_blank">UT Web Privacy</a></li> 
+	 		<li><a href="http://www.utexas.edu/cio/policies/web-accessibility" target="_blank">UT Web Accessibility</a></li> 
 	 	</ul>
 	 </div> 
 	 <div class="fourth">
