@@ -6,7 +6,7 @@ $(function() {
 
 $(document).ready(function() {
 	ajaxLoadedSubmit = false; 
-	
+
 	// Log in and out
 	$('input#login').on('click',function(e) {
 		e.preventDefault(); 
@@ -23,7 +23,7 @@ $(document).ready(function() {
 			success: function(data) {
 				location.reload(); 
 			}
-		})
+		}); 
 	}); 
 	
 	$('#logout').on('click',function(e) {
@@ -37,7 +37,7 @@ $(document).ready(function() {
 			success: function(data) {
 				location.reload(); 
 			}
-		})
+		}); 
 	}); 
 	
 	// Admin project menu

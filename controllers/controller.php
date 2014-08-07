@@ -14,6 +14,9 @@
 $view = (isset($_GET['view'])) ? cleanView($_GET['view']) : 'home'; 
 switch($view) {
 	// unlogged users 
+	case 'about':
+		require_once('views/view.About.php'); 
+		break; 
 	case 'login':
 		require_once('views/view.Login.php'); 
 		break; 
