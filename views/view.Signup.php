@@ -11,7 +11,7 @@ HTMLnav($page);
  <div class="signupbox">
   <form method="post">
   <input type="text" name="uname" id="uname" placeholder="Username"><br>
-  <input type="text" name="email" id="email" placeholder="School/University e-mail"><br>
+    <input type="text" name="nemail" id="nemail" placeholder="School E-mail"><br>
   <input type="password" name="pword" id="pword" placeholder="Password"><br>
   <input type="password" name="cword" id="cword" placeholder="Confirm Password"><br>
   <input type="text" name="uname" id="uname" placeholder="Class Code"><br><br>

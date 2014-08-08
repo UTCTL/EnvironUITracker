@@ -48,6 +48,7 @@ video {
 	color:#ddd; 
 	font-size:12pt; }
 
+	.home_description p { width:600px; margin:auto; margin-bottom:10px; }
 	.home_description .button { width:150px; margin:0px 10px; }
 
 .logo { display:block; 

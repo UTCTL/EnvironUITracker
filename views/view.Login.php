@@ -19,7 +19,7 @@ HTMLnav($page);
   <div class="half">
 	 <form method="post">
 	  <input type="text" name="nuname" id="nuname" placeholder="Username"><br>
-	  <input type="text" name="nemail" id="nemail" placeholder="School/University e-mail"><br>
+	  <input type="text" name="nemail" id="nemail" placeholder="School E-mail"><br>
 	  <input type="password" name="npword" id="npword" placeholder="Password"><br>
 	  <input type="password" name="ncword" id="ncword" placeholder="Confirm Password"><br>
 	  <input type="text" name="nccode" id="nccode" placeholder="Class Code"><br><br>

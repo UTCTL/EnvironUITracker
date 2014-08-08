@@ -1,4 +1,10 @@
 <?
+
+if(isset($_SESSION['DESlogged'])) {
+	if($_SESSION['DESutype']==2) header('Location: '.$_SESSION["DESpath"].'report'); 
+	elseif($_SESSION['DESutype']>=3) header('Location: '.$_SESSION["DESpath"].'play'); 
+}
+
 $page = 'home';  
 HTMLhead($page); 
 HTMLnav($page); 
@@ -17,13 +23,7 @@ HTMLnav($page);
 <div class="lightbox">
 	<div class="home_description"> 
 		<div class="logo"></div> 
-		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam blandit tempus auctor. 
-Sed tempor in arcu congue vehicula. Vestibulum scelerisque, mauris in volutpat vulputate, 
-erat dolor feugiat nisi, sed scelerisque nisl arcu ut nibh. Duis in arcu facilisis, tempus arcu aliquam, 
-facilisis ante. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. 
-Praesent vitae tortor interdum risus egestas viverra. Class aptent taciti sociosqu ad litora torquent 
-per conubia nostra, per inceptos himenaeos. Donec vehicula felis ut diam 
-semper volutpat. Donec quis est semper, viverra orci sit amet, sollicitudin metus.</p> 
+		<p>Environ is an educational game that puts students in the role of a decision maker. The game is set in near-future Earth, and the player must take a series of actions to help improve the Earths environment without destroying economic output. Resources are limited, so the player must deeply analyze different courses of actions to make difficult and complex decisions.</p> 
 		<br>
 		<a href="<? echo $_SESSION['DESpath']; ?>about" class="button">Learn More</a>
 		<a href="<? echo $_SESSION['DESpath']; ?>login" class="button">Play</a>

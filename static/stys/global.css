@@ -4,6 +4,12 @@
 @font-face { font-family:ptsans; src:url('fonts/PTC55F.ttf'); } 
 @font-face { font-family:ptsans_bold; src:url('fonts/PTC75F.ttf'); }
 
+* { -webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none; }
 /*
  * HTML defaults
  */ 

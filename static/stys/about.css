@@ -1,4 +1,4 @@
-section { padding:60px; 
+section:not(.footer) { padding:60px; 
 	background-size:cover; 
 	background-repeat:no-repeat; 
 	background-position:center; 
