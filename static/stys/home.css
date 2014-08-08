@@ -12,7 +12,7 @@ body {
 	overflow-y:hidden; }
 
 video { 
-	position: fixed; 
+	position: absolute; 
 	-webkit-backface-visibility: hidden;
 	-webkit-transform: translateZ(0);
 	left: 0px; top: 0px; 
@@ -61,7 +61,8 @@ section.footer { display:block;
 	bottom:0px; 
 	width:100%; }
 
-@media screen and (min-width:799px) {
+/*@media screen and (min-width:799px) {*/
+@media screen and (max-width:2000px) {
 	section.footer {
 		bottom:-200px; 
 	}
