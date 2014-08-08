@@ -26,6 +26,14 @@ function HTMLhead($page) {
  <? if($page=="play") { ?>
  <link rel="stylesheet" type="text/css" href="static/stys/play.css">
  <? } ?>
+ <? if($page=="tracker") { ?>
+ <link rel="stylesheet" type="text/css" href="static/stys/visualization/visualization.css">
+ <script src="static/scrs/d3.v3.min.js"></script> 
+ <script src="static/scrs/visualization/classes.js"></script> 
+ <script src="static/scrs/visualization/constants.js"></script> 
+ <script src="static/scrs/visualization/display_data.js"></script> 
+ <script src="static/scrs/visualization/driver.js"></script> 
+ <? } ?>
 </head><body>
 	<?
 }
