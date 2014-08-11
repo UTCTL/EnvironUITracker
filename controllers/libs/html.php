@@ -53,22 +53,18 @@ function HTMLnav($page) {
 		if($type == 1) {
 			// admin
 			?>
- <a href="<? echo $des; ?>">Home</a>
- <a href="<? echo $des; ?>contentmaker">Content Maker</a>
+ <a href="<? echo $des; ?>">Admin</a>
  <a href="<? echo $des; ?>tracker">Tracker</a>
- <a href="<? echo $des; ?>admin">Admin</a> 
 			<?
 		} elseif($type == 2) {
 			// educator 
 			?>
- <a href="<? echo $des; ?>">Home</a>
- <a href="<? echo $des; ?>contentmaker">Content Maker</a>
+ <a href="<? echo $des; ?>">Educator</a>
  <a href="<? echo $des; ?>report">Report</a>
 			<?
 		} else {
 			// student 
 			?>
- <a href="<? echo $des; ?>">Home</a>
  <a href="<? echo $des; ?>play">Play</a>
 			<?
 		}
@@ -78,7 +74,8 @@ function HTMLnav($page) {
 		?>
  <a href="<? echo $des; ?>">Home</a>
  <a href="<? echo $des; ?>about">About</a>
- <a href="<? echo $des; ?>login">Log in</a>
+ <a href="<? echo $des; ?>play">Play</a>
+ <a href="<? echo $des; ?>login" id="navlogin">Log in</a>
 		<?
 	}
 

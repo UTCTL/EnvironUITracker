@@ -175,7 +175,7 @@ section.footer {
 /*
  * Admin stuff
  */
-#logout { float:right; /*position:fixed;
+#navlogin, #logout { float:right; /*position:fixed;
 	top:0px;  
 	right:0px; */}
 

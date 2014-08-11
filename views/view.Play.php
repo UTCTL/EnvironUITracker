@@ -1,6 +1,6 @@
 <?
-if(!isset($_SESSION['DESlogged']) || $_SESSION['DESlogged']!=1) 
-  header("Location: login"); 
+// if(!isset($_SESSION['DESlogged']) || $_SESSION['DESlogged']!=1) 
+//   header("Location: login"); 
 
 
 $page = 'play'; 
