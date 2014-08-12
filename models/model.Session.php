@@ -195,3 +195,56 @@ class Session {
 		return false; 
 	}
 } 
+
+
+
+class Classcode {
+
+	private $dblink; 
+	private $id; 
+	private $classcode; 
+	private $user; 
+	private $cname; 
+
+	public function __construct($dblink) {
+		$this->dblink = $dblink; 
+	} 
+
+	public function instantiate($id) {
+		$this->id = clean($id); 
+	} 
+
+	public function instantiateByCode($code) {
+		$this->classcode = $code; 
+	}
+
+	public function getId() { return $this->id; } 
+	public function getClassCode() { return $this->classcode; } 
+	public function getUser() { return $this->user; }
+	public function getName() { return $this->cname; } 
+
+	public function setClassCode($code) { $this->classcode = $code; } 
+	public function setName($name) { $this->cname = $name; } 
+	public function setUser($uid) { 
+		$this->user = new User($this->dblink); 
+		$this->user->instantiateById($uid); 
+	}
+
+	public function getSessions() {
+		$id = $this->id; 
+		$list = array(); 
+		$result = mysqli_query($this->dblink,"SELECT id FROM sessions WHERE classcodes_id='$id'"); 
+		while($row = mysqli_fetch_array($result)) {
+			$s = new Session($this->dblink); 
+			$s->instantiateById($row['id']); 
+			array_push($list,$s); 
+		}
+
+		return $list; 
+	} 
+
+	public function save() {
+		return false; 
+	}
+} 
+
