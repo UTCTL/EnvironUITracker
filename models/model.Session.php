@@ -160,8 +160,13 @@ class Session {
 	}
 
 	private function load($b) {
-		if($b=='ses') $result = mysqli_query($this->dblink,"SELECT * FROM session WHERE session_id='$b'"); 
-		else $result = mysqli_query($this->dblink,"SELECT * FROM session WHERE id='$b'"); 
+		if($b=='ses') {
+			$s = $this->session_id; 
+			$result = mysqli_query($this->dblink,"SELECT * FROM session WHERE session_id='$session_id'"); 
+		} else {
+			$id = $this->id; 
+			$result = mysqli_query($this->dblink,"SELECT * FROM session WHERE id='$id'"); 
+		}
 
 		while($row = mysqli_fetch_array($result)) {
 			$this->id 			= $row['id']; 

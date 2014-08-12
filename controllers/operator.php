@@ -10,14 +10,14 @@ if(isset($_POST) || isset($_REQUEST)) {
 			require_once('../models/model.User.php'); 
 			$uname = clean($_POST['uname']); 
 			$pword = clean($_POST['pword']); 
-			$admin = new Admin($dblink); 
+			$admin = new User($dblink); 
 			$admin->instantiate($uname,$pword); 
 			if($admin->login()) echo 'success'; 
 			else echo 'failure';  
 			break; 
 		case 'logout':
 			require_once('../models/model.User.php'); 
-			$admin = new Admin($dblink); 
+			$admin = new User($dblink); 
 			$admin->instantiateById($_SESSION['DESuid']); 
 			$admin->logout(); 
 			break; 

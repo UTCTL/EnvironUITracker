@@ -33,19 +33,36 @@ HTMLnav($page);
 
 <section> 
 <? /* admin */ ?>
-<? if($_SESSION['DESutype']==1) { ?>
+<? 
 
-Admin home (CP) 
+require_once('models/model.User.php'); 
+$u = new User($dblink); 
+$u->instantiateById($_SESSION['DESuid']); 
+
+if($u->getTypeByType()==1) { ?>
+
+<section>
+ <content>
+	<? echo $u->getName(); ?> home (CP) 
+	<? echo $u->getType(); ?> (<? echo $u->getTypeByType(); ?>)
+
+
+ </content> 
+</section>
 
 <? /* educator */ ?>
 <? } elseif($_SESSION['DESutype']==2) { ?>
 
-Educator home (CP) 
+<section>
+ <content>
+	educator home (CP) 
+ </content> 
+</section>
 
 <? /* student */ ?>
 <? } else { ?>
 
-Student Home (Play?) 
+404 ???
 
 <? } ?>
 <? } ?>

@@ -30,15 +30,18 @@ class User {
 	public function instantiate($uname,$pword) {
 		$this->setUname($uname); 
 		$this->setPassword($pword);  
+		$this->load('unp'); 
 	}
 	
 	public function instantiateById($id) {
 		$this->setId($id); 
+		$this->load('id'); 
 	}
 	
 	public function getId() { return $this->id; } 
-	public function getUname() { return $this->uname; } 
-	public function getType() { return $this->type; } 
+	public function getName() { return $this->uname; } 
+	public function getType() { return $this->type->getName(); } 
+	public function getTypeByType() { return $this->type->getId(); } 
 	protected function getLink() { return $this->dblink; }
 	
 	private function setId($int) { $this->id = clean($int); }
@@ -46,6 +49,27 @@ class User {
 	public function setPassword($str) { $this->pword = encode(clean($str)); }  
 	public function setType($int) { $this->type = new UserType($this->dblink, $int); }  
 	
+	public function load($b) {
+		if(array_key_exists('DESlogged', $_SESSION)) {
+			if(isset($_SESSION['DESlogged']) || $_SESSION['DESlogged']==1) {
+				if($b=='unp') {
+					$u = $this->uname; 
+					$p = $this->pword; 
+					$result = mysqli_query($this->dblink,"SELECT * FROM users WHERE uname='$u' AND pword='$p'"); 
+				} elseif($b=='id') {
+					$id = $this->id; 
+					$result = mysqli_query($this->dblink,"SELECT * FROM users WHERE id='$id'"); 
+				} else return false; 
+
+				while($row = mysqli_fetch_array($result)) {
+					$this->setId($row['id']); 
+					$this->setUname($row['uname']); 
+					$this->setType($row['types_id']); 
+				}
+			}
+		}
+	}
+
 	public function save() {
 		$id = $this->id; 
 		$uname = $this->uname; 
@@ -120,33 +144,6 @@ class User {
 
 
 
- 
-class Admin extends User {
-	
-	private $dblink; 
-	
-	public function __construct($dblink) {
-		parent::__construct($dblink);  
-		$this->dblink = parent::getLink(); 
-	}
-	
-	public function getMenu() {
-		return "";  
-	}
-}
-
-
-
- 
-class Educator extends User {
-	
-	private $dblink; 
-	
-	public function __construct($dblink) {
-		parent::__construct($dblink);  
-		$this->dblink = parent::getLink(); 
-	}
-}
 
 
 
