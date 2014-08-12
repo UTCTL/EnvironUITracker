@@ -4,10 +4,21 @@ This is an MVC web app to play, promote, and manage Environ. Admins and educator
 
 This web app applies a modification of the [Descartes Framework](https://github.com/samueleishion/Descartes "Descartes PHP Framework") at least for now. 
 
-# Directory Tree 
+## Directory Tree 
+
++ __controllers__
+	+ __libs__
+        +  *functions.php*: has global functions: clean, encode, now, encodequotes, etc. 
+        +  *html.php*: has html wrappers like header, footer, navigation bar, etc. 
+    + controller.php: handles url patterns given by .htaccess on root. 
+    + operator.php: handles data transfer/connection requests. works as a private api. 
+    + settings.php: handles database connection, path information and session initiation. 
++ __models__: holds the models for the application. 
++ __static__: holds static files. scripts, styles, images, etc. 
++ __views__: holds views for the application. 
 
 
-# Database Structure 
+## Database Structure 
 
 ### Logical Model
 There are a total of 4 models so far. The interaction is as follows: 
