@@ -11,6 +11,7 @@
  * 
  */
 
+// @TODO : change for production 
 $sitename = 'EnvironCPI'; 	// The name of your company/brand/website
 $siteurl = 'http://localhost:8888/'; 	// The domain of your website
 $dbhost = 'localhost'; 	// The hosting server of your database
@@ -21,14 +22,6 @@ $dbname = 'EnvironCPI_development'; 	// The database name
 
 // *********************************
 // No need to edit beyond this point. 
-
-// $prefix = projectPrefix($sitename); 
-// $DESpath;
-// $DESlogged; 
-// $DESuid; 
-// $DESpath 	= $prefix.'path';  
-// $DESlogged	= $prefix.'logged'; 
-// $DESuid 	= $prefix.'uid'; 
 
 // Connect to database
 header("Access-Control-Allow-Origin: ".$siteurl); 

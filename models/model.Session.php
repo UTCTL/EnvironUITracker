@@ -155,6 +155,10 @@ class Session {
 	public function getId() { return $this->id; } 
 	private function setId($int) { $this->id = clean($int); }
 
+	public function toJson() {
+		return '{"error":506,"message":"Data not found."}'; 
+	}
+
 	private function load($b) {
 		if($b=='ses') $result = mysqli_query($this->dblink,"SELECT * FROM session WHERE session_id='$b'"); 
 		else $result = mysqli_query($this->dblink,"SELECT * FROM session WHERE id='$b'"); 
