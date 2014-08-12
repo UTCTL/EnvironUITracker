@@ -24,6 +24,7 @@ class User {
 	public function __construct($dblink) {
 		$this->dblink = $dblink; 
 		$this->clear(); 
+
 	} 
 	
 	public function instantiate($uname,$pword) {
@@ -38,17 +39,18 @@ class User {
 	public function getId() { return $this->id; } 
 	public function getUname() { return $this->uname; } 
 	public function getType() { return $this->type; } 
+	protected function getLink() { return $this->dblink; }
 	
 	private function setId($int) { $this->id = clean($int); }
 	public function setUname($str) { $this->uname = clean($str); } 
 	public function setPassword($str) { $this->pword = encode(clean($str)); }  
-	public function setType($str) { $this->type = clean($str); }  
+	public function setType($int) { $this->type = new UserType($this->dblink, $int); }  
 	
 	public function save() {
 		$id = $this->id; 
 		$uname = $this->uname; 
 		$pword = $this->pword; 
-		$type = $this->type; 
+		$type = $this->type->getId(); 
 		
 		if($id==0) {
 			try {
@@ -86,11 +88,11 @@ class User {
 				while($row = mysqli_fetch_array($result)) {
 					$this->setId($row['id']); 
 					$this->setUname($row['uname']); 
-					$this->setType($row['type']);  
+					$this->setType($row['types_id']);  
 				} 
 				$_SESSION['DESlogged'] = true; 
 				$_SESSION['DESuid'] = $this->id; 
-				$_SESSION['DESutype'] = $this->type; 
+				$_SESSION['DESutype'] = $this->type->getId(); 
 				$this->logged = true; 
 				return true;
 			} else return false; 
@@ -111,13 +113,65 @@ class User {
 		$this->logged = (isset($_SESSION['DESlogged'])) ? $_SESSION['DESlogged'] : false; 
 	}
 	
-	protected function getLink() {
-		return $this->dblink; 
-	}
-	
 	public function __toString() {
 		return $this->getId().':'.$this->getUname().', '.$this->getType().', '.$this->logged; 
 	}
+}
+
+
+
+ 
+class Admin extends User {
+	
+	private $dblink; 
+	
+	public function __construct($dblink) {
+		parent::__construct($dblink);  
+		$this->dblink = parent::getLink(); 
+	}
+	
+	public function getMenu() {
+		return "";  
+	}
+}
+
+
+
+ 
+class Educator extends User {
+	
+	private $dblink; 
+	
+	public function __construct($dblink) {
+		parent::__construct($dblink);  
+		$this->dblink = parent::getLink(); 
+	}
+}
+
+
+
+class UserType { 
+
+	private $dblink; 
+	private $id; 
+	private $text; 
+
+	public function __construct($dblink, $int) {
+		$this->dblink = $dblink; 
+		$this->id = $int; 
+
+		$total_types = mysqli_query($this->dblink,"SELECT count(*) FROM types"); 
+		$total_types = mysqli_fetch_array($total_types)[0]; 
+		if($this->id > 0 && $this->id <= $total_types) {
+			$result = mysqli_query($this->dblink,"SELECT * FROM types WHERE id='$int'"); 
+			while($row = mysqli_fetch_array($result)) {
+				$this->text = $row['tname']; 
+			}
+		}
+	}
+
+	public function getId() { return $this->id; } 
+	public function getName() { return $this->text; } 
 }
 
 ?>
