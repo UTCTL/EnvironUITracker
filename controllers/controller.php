@@ -20,9 +20,9 @@ switch($view) {
 	case 'login':
 		require_once('views/view.Login.php'); 
 		break; 
-	case 'signup':
-		require_once('views/view.Signup.php'); 
-		break; 
+	// case 'signup':
+	// 	require_once('views/view.Signup.php'); 
+	// 	break; 
 
 	// student users 
 	case 'play': 

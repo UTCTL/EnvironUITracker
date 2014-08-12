@@ -23,10 +23,10 @@ HTMLnav($page);
 <div class="lightbox">
 	<div class="home_description"> 
 		<div class="logo"></div> 
-		<p>Environ is an educational game that puts students in the role of a decision maker. The game is set in near-future Earth, and the player must take a series of actions to help improve the Earths environment without destroying economic output. Resources are limited, so the player must deeply analyze different courses of actions to make difficult and complex decisions.</p> 
+		<p>Environ is an game that puts you in the role of a decision maker. The game is set in near-future Earth, and you must take a series of actions to help improve the Earth's environment without destroying the economy. Resources are limited, so you must consider different courses of actions to make the best out of your decisions.</p> 
 		<br>
 		<a href="<? echo $_SESSION['DESpath']; ?>about" class="button">Learn More</a>
-		<a href="<? echo $_SESSION['DESpath']; ?>login" class="button">Play</a>
+		<a href="<? echo $_SESSION['DESpath']; ?>play" class="button">Play</a>
 	</div> 
 </div> 
 <? } else { ?>
