@@ -10,9 +10,9 @@ This web app applies a modification of the [Descartes Framework](https://github.
 	+ __libs__
         +  *functions.php*: has global functions: clean, encode, now, encodequotes, etc. 
         +  *html.php*: has html wrappers like header, footer, navigation bar, etc. 
-    + controller.php: handles url patterns given by .htaccess on root. 
-    + operator.php: handles data transfer/connection requests. works as a private api. 
-    + settings.php: handles database connection, path information and session initiation. 
+    + *controller.php*: handles url patterns given by .htaccess on root. 
+    + *operator.php*: handles data transfer/connection requests. works as a private api. 
+    + *settings.php*: handles database connection, path information and session initiation. 
 + __models__: holds the models for the application. 
 + __static__: holds static files. scripts, styles, images, etc. 
 + __views__: holds views for the application. 
