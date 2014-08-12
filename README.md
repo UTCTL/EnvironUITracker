@@ -35,58 +35,58 @@ The following model shows more concrete relationships with foreign keys:
 CREATE
   TABLE classcodes
   (
-    id INTEGER NOT NULL ,
-    classcode CLOB ,
-    users_id INTEGER ,
-    cname CLOB
-  ) ;
-ALTER TABLE classcodes ADD CONSTRAINT classcodes_PK PRIMARY KEY ( id ) ;
+    id int NOT NULL,
+    classcode text NOT NULL,
+    users_id int NOT NULL,
+    cname text NOT NULL, 
+    PRIMARY KEY (`id`) 
+  ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;
 
 CREATE
   TABLE sessions
   (
-    id INTEGER NOT NULL ,
-    sessionid CLOB ,
-    accessdatetime DATE ,
-    name CLOB ,
-    spent_funds FLOAT ,
-    spent_polcap FLOAT ,
-    "level" INTEGER ,
-    playtime FLOAT ,
-    status    INTEGER ,
-    completed INTEGER ,
-    clicks CLOB ,
-    drag    INTEGER ,
-    arrows  INTEGER ,
-    keys    INTEGER ,
-    minimap INTEGER ,
-    keys_1  INTEGER ,
-    panel_time_open FLOAT ,
-    panel_time_close FLOAT ,
-    panel_clicks_open  INTEGER ,
-    panel_clicks_close INTEGER ,
-    region_data CLOB ,
-    classcodes_id INTEGER NOT NULL
-  ) ;
-ALTER TABLE sessions ADD CONSTRAINT sessions_PK PRIMARY KEY ( id ) ;
+    id int NOT NULL,
+    sessionid text NOT NULL,
+    accessdatetime datetime NOT NULL,
+    name text NOT NULL,
+    spent_funds float NOT NULL,
+    spent_polcap float NOT NULL,
+    last_level int NOT NULL,
+    playtime float NOT NULL,
+    status    int NOT NULL,
+    completed int NOT NULL,
+    clicks text NOT NULL,
+    drag    int NOT NULL,
+    arrows  int NOT NULL,
+    wasdkeys    int NOT NULL,
+    minimap int NOT NULL,
+    numkeys  int NOT NULL,
+    panel_time_open float NOT NULL,
+    panel_time_close float NOT NULL,
+    panel_clicks_open  int NOT NULL,
+    panel_clicks_close int NOT NULL,
+    region_data text NOT NULL,
+    classcodes_id int NOT NULL, 
+    PRIMARY KEY (`id`) 
+  ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;
 
 CREATE
   TABLE types
   (
-    id INTEGER NOT NULL ,
-    tname CLOB
-  ) ;
-ALTER TABLE types ADD CONSTRAINT types_PK PRIMARY KEY ( id ) ;
+    id int NOT NULL,
+    tname text, 
+    PRIMARY KEY (`id`) 
+  ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;
 
 CREATE
   TABLE users
   (
-    id INTEGER NOT NULL ,
-    uname CLOB ,
-    pword CLOB ,
-    types_id INTEGER
-  ) ;
-ALTER TABLE users ADD CONSTRAINT users_PK PRIMARY KEY ( id ) ;
+    id int NOT NULL,
+    uname text NOT NULL,
+    pword text NOT NULL,
+    types_id int, 
+    PRIMARY KEY (`id`) 
+  ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;
 
 ALTER TABLE classcodes ADD CONSTRAINT classcodes_users_FK FOREIGN KEY (
 users_id ) REFERENCES users ( id ) ;
