@@ -59,8 +59,7 @@ function HTMLnav($page) {
 		} elseif($type == 2) {
 			// educator 
 			?>
- <a href="<? echo $des; ?>">Educator</a>
- <a href="<? echo $des; ?>report">Report</a>
+ <a href="<? echo $des; ?>">Class Report</a>
 			<?
 		} else {
 			// student 

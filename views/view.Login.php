@@ -1,6 +1,7 @@
 <?
-if(isset($_SESSION['DESlogged']) || $_SESSION['DESlogged']==1) 
-  header("Location: home"); 
+if(array_key_exists('DESlogged', $_SESSION))
+	if(isset($_SESSION['DESlogged']) || $_SESSION['DESlogged']==1) 
+  		header("Location: home"); 
 
 $page = 'login'; 
 HTMLhead($page); 

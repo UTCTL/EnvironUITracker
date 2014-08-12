@@ -20,9 +20,6 @@ switch($view) {
 	case 'login':
 		require_once('views/view.Login.php'); 
 		break; 
-	// case 'signup':
-	// 	require_once('views/view.Signup.php'); 
-	// 	break; 
 
 	// student users 
 	case 'play': 
@@ -30,17 +27,9 @@ switch($view) {
 		break; 
 
 	// educator users 
-	case 'contentmaker':
-		require_once('views/view.ContentMaker.php'); 
-		break; 
 	case 'report': 
 	case 'tracker':
 		require_once('views/view.Tracker.php'); 
-		break; 
-
-	// admin users 
-	case 'admin':
-		require_once('views/view.Admin.php'); 
 		break; 
 
 	// home 
@@ -48,6 +37,6 @@ switch($view) {
 	default:
 		require_once('views/view.Home.php');  
 		break; 
-}
+} 
 
-?>
+?> 
