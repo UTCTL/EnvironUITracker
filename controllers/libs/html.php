@@ -13,19 +13,29 @@ function HTMLhead($page) {
  <? if($page=="home" && !isset($_SESSION['DESlogged'])) { ?>
  <link rel="stylesheet" type="text/css" href="static/stys/home.css">
  <script src="static/scrs/home.js"></script> 
- <? } ?>
+ <? 
+} ?>
+ <? if($page=="home" && isset($_SESSION['DESlogged'])) { ?>
+ <link rel="stylesheet" type="text/css" href="static/stys/admin.css">
+ <script src="static/scrs/admin.js"></script> 
+ <? 
+} ?>
  <? if($page=="login") { ?>
  <link rel="stylesheet" type="text/css" href="static/stys/login.css">
- <? } ?>
+ <? 
+} ?>
  <? if($page=="signup") { ?>
  <link rel="stylesheet" type="text/css" href="static/stys/signup.css">
- <? } ?>
+ <? 
+} ?>
  <? if($page=="about") { ?>
  <link rel="stylesheet" type="text/css" href="static/stys/about.css">
- <? } ?>
+ <? 
+} ?>
  <? if($page=="play") { ?>
  <link rel="stylesheet" type="text/css" href="static/stys/play.css">
- <? } ?>
+ <? 
+} ?>
  <? if($page=="tracker") { ?>
  <link rel="stylesheet" type="text/css" href="static/stys/visualization/visualization.css">
  <script src="static/scrs/d3.v3.min.js"></script> 
@@ -33,7 +43,8 @@ function HTMLhead($page) {
  <script src="static/scrs/visualization/constants.js"></script> 
  <script src="static/scrs/visualization/display_data.js"></script> 
  <script src="static/scrs/visualization/driver.js"></script> 
- <? } ?>
+ <? 
+} ?>
 </head><body>
 	<?
 }

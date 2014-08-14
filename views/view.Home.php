@@ -31,7 +31,7 @@ HTMLnav($page);
 </div> 
 <? } else { ?>
 
-<section> 
+<!-- <section>  -->
 <? /* admin */ ?>
 <? 
 
@@ -41,15 +41,37 @@ $u->instantiateById($_SESSION['DESuid']);
 
 if($u->getTypeByType()==1) { ?>
 
-<section>
+<section class="admin">
  <content>
-	<? echo $u->getName(); ?> home (CP) 
-	<? echo $u->getType(); ?> (<? echo $u->getTypeByType(); ?>)
 
+	<div class="box" id="users">
+		<h2>Manage Users</h2>
+
+		<table width="100%" cellpadding="0" cellspacing="0" border="0">
+			<tr>
+				<th width="20%">Username</th>
+				<th width="25%">E-mail</th>
+				<th width="25%">School</th>
+				<th width="80px">User Type</th>
+				<th width="30px"></th>
+				<th width="30px"></th>
+			</tr>
+			<? echo $u->getAllUsersToEdit(); ?>
+			<tr id="create"> 
+				<th colspan="6"><a href="#" class="button curtainOpen" id="create">Create User</a></th> 
+			</tr>
+		</table> 
+	</div> 
 
  </content> 
 </section>
 
+<div class="curtain">
+	<a href="#" class="curtainClose"></a> 
+	<div class="box"> 
+		modify user content
+	</div> 
+</div> 
 <? /* educator */ ?>
 <? } elseif($_SESSION['DESutype']==2) { ?>
 
@@ -66,7 +88,7 @@ if($u->getTypeByType()==1) { ?>
 
 <? } ?>
 <? } ?>
-</section> 
+<!-- </section>  -->
 
 
 

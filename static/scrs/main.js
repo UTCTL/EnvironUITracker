@@ -118,12 +118,14 @@ $(document).ready(function() {
 function showCurtains() {
 	$('.curtainOpen').on('click',function() {
 		var id = $(this).attr('id'); 
-		$('.curtain#'+id).fadeIn(); 
+		console.log('opening from '+id); 
+		$('.curtain').fadeIn(); 
 	}); 
 	$('.curtainClose').on('click',function() {
 		var id = $(this).attr('id'); 
-		$('.curtain#'+id).fadeOut(); 
-	})
+		console.log('closing'); 
+		$('.curtain').fadeOut(); 
+	}); 
 }
 
 // Function to activate form submissions
