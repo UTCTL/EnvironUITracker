@@ -27,6 +27,10 @@ if(isset($_POST) || isset($_REQUEST)) {
 			echo $u->getUserToEdit(); 
 			break; 
 		case 'delete':
+			$id = clean($_POST['userid']); 
+			$u = new User($dblink); 
+			$u->instantiateById($id); 
+			echo $u->getUserToDelete(); 
 			break; 
 		case 'create':
 			$u = new User($dblink); 
@@ -68,6 +72,11 @@ if(isset($_POST) || isset($_REQUEST)) {
 				$u->setType($_POST['type']); 
 				$u->save(); 
 			} else echo 'error'; 
+			break; 
+		case 'createdelete':
+			$u = new User($dblink); 
+			$u->instantiateById($_POST['id']); 
+			$u->delete();  
 			break; 
 
 		default:

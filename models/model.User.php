@@ -61,10 +61,10 @@ class User {
 				if($b=='unp') {
 					$u = $this->uname; 
 					$p = $this->pword; 
-					$result = mysqli_query($this->dblink,"SELECT * FROM users WHERE uname='$u' AND pword='$p'"); 
+					$result = mysqli_query($this->dblink,"SELECT * FROM users WHERE uname='$u' AND pword='$p' AND active_state=true"); 
 				} elseif($b=='id') { 
 					$id = $this->id; 
-					$result = mysqli_query($this->dblink,"SELECT * FROM users WHERE id='$id'"); 
+					$result = mysqli_query($this->dblink,"SELECT * FROM users WHERE id='$id' AND active_state=true"); 
 				} else return false; 
 
 				while($row = mysqli_fetch_array($result)) { 
@@ -74,9 +74,12 @@ class User {
 					$this->setType($row['types_id']); 
 					$this->setEmail($row['email']); 
 					$this->setSchool($row['school']); 
+					return true; 
 				}
 			}
 		}
+
+		return false; 
 	}
 
 	public function save() {
@@ -86,12 +89,14 @@ class User {
 		$email = $this->email; 
 		$school = $this->school; 
 		$type = $this->type->getId(); 
+		$date = implode('-',explode('/',now())); 
 		
 		if($id==0) {
 			try {
-				error_log("saving ".$id.' u:'.$uname.' p:'.$pword.' t:'.$this->type->getName()); 
-				mysqli_query($this->dblink,"INSERT INTO users (uname,pword,email,school,types_id) VALUES ('$uname','$pword','$email','$school','$type')"); 
+				error_log("saving ".$id.' u:'.$uname.' p:'.$pword.' t:'.$this->type->getName().' now:'.$date); 
+				mysqli_query($this->dblink,"INSERT INTO users (uname,pword,email,school,types_id,active_state,u_created) VALUES ('$uname','$pword','$email','$school','$type',true,'$date')"); 
 			} catch(mysqli_sql_exception $e) {
+				error_log("error while saving new users"); 
 				return false; 
 			}
 			$result = mysqli_query($this->dblink,"SELECT * FROM users WHERE uname='$uname' AND pword='$pword' AND types_id='$type'");
@@ -108,16 +113,21 @@ class User {
 		
 		return true; 
 	} 
+
+	public function delete() { 
+		$id = $this->id; 
+		mysqli_query($this->dblink,"UPDATE users SET active_state=false WHERE id='$id'"); 
+	} 
 	
 	public function login() {
 		if(!isset($this->logged) || !$this->logged) {
 			if(isset($this->id) && $this->id!=0) {
 				$id = $this->id; 
-				$result = mysqli_query($this->dblink, "SELECT * FROM users WHERE id='$id'");
+				$result = mysqli_query($this->dblink, "SELECT * FROM users WHERE id='$id' AND active_state=true");
 			} elseif(isset($this->uname) && isset($this->pword)) {
 				$uname = $this->uname; 
 				$pword = $this->pword; 
-				$result = mysqli_query($this->dblink, "SELECT * FROM users WHERE uname='$uname' AND pword='$pword'");
+				$result = mysqli_query($this->dblink, "SELECT * FROM users WHERE uname='$uname' AND pword='$pword' AND active_state=true");
 			} else return false; 
 			 
 			if(mysqli_num_rows($result) == 1) {
@@ -141,7 +151,7 @@ class User {
 		$str = ''; 
 		if($this->type->getId()==1) { 
 			//error_log('this user can get all users'); 
-			$result = mysqli_query($this->dblink, "SELECT * FROM users"); 
+			$result = mysqli_query($this->dblink, "SELECT * FROM users WHERE active_state=true"); 
 			while($row = mysqli_fetch_array($result)) { 
 				$t = new UserType($this->dblink, $row['types_id']); 
 				$str .= '<tr><td>'.$row['uname'].'</td><td><a href="mailto:'.$row['email'].'">'.$row['email'].'</a></td><td>'.$row['school'].'</td><td>'.$t->getName().'</td><td align="right"><div class="button curtainOpen" id="edit" data="u'.$row['id'].'"></div></td><td align="right"><div class="button curtainOpen" id="delete" data="u'.$row['id'].'"></div></td></tr>'; 
@@ -159,8 +169,8 @@ class User {
 
 
 		try {
-			if($this->id==0) $result = mysqli_query($this->dblink, "SELECT count(*) FROM users WHERE $field='$value'"); 
-			else $result = mysqli_query($this->dblink, "SELECT count(*) FROM users WHERE id!=$id AND $field='$value'"); 
+			if($this->id==0) $result = mysqli_query($this->dblink, "SELECT count(*) FROM users WHERE $field='$value' AND active_state=true"); 
+			else $result = mysqli_query($this->dblink, "SELECT count(*) FROM users WHERE id!=$id AND $field='$value' AND active_state=true"); 
 
 			while($row = mysqli_fetch_array($result)) { 
 				if($row[0]>0) return true; 
@@ -194,6 +204,16 @@ class User {
 		if($this->id==0) $str .= '<input type="button" class="button" id="createsubmit" value="Create">'; 
 		else $str .= '<input type="button" class="button" id="createedit" value="Edit">'; 
 		
+
+		return $str; 
+	}
+
+	public function getUserToDelete() {
+		$str = '<h2>Delete user</h2>'; 
+		$str .= '<p>Are you sure you want to delete this user?</p>'; 
+		$str .= '<input type="hidden" class="value" id="id" value="'.$this->id.'">'; 
+
+		$str .= '<input type="button" class="button" id="createdelete" value="Delete">'; 		
 
 		return $str; 
 	}

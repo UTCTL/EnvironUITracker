@@ -54,7 +54,21 @@ $(document).ready(function() {
 					window.location.reload(); 
 				}
 			}); 
-		}  
+		} else if(type=='createdelete') { 
+			var id = $('.curtain .value#id').val(); 
+
+			$.ajax({ 
+				type:'POST', 
+				url:'controllers/operator.php', 
+				data: { 
+					action:type, 
+					id:id 
+				}, 
+				success: function (data) { 
+					window.location.reload(); 
+				} 
+			}); 
+		} 
 	}); 
 
 	$('body').on('keyup','.curtain input.value',function() {

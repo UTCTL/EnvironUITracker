@@ -5,7 +5,8 @@
 	.box#users tr:nth-child(1),
 	.box#users tr:nth-child(1):hover { background-color:#eee; } 
 	/*.box#users tr:nth-child(1):hover { color:#000; }*/
-	.box#users tr:nth-child(2n) { background-color:#fff; } 
+	.box#users tr:nth-child(2n), 
+	.box#users tr:last-child { background-color:#fff; }
 	.box#users tr:hover { background-color:#daf9fa; } /*color:#26c7ca; } */ 
 
 	/*.box#users tr#create { cursor:pointer; }
