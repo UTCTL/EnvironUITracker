@@ -39,15 +39,17 @@
 
 	.curtain .curtainClose { margin-top:-180px; }
 
-	.curtain input { margin:10px auto; }
+	.curtain input { margin:10px 100px; }
 	.curtain input:not(.button, .ibutton) { display:block; 
 		width:360px; } 
 	.curtain input.button, 
 	.curtain input.ibutton { border:0px; 
 		float:right; 
+		margin-left:0px; 
 		margin-right:10px; }
 
 	.curtain input[type="radio"] { display:inline-block; 
 		width:30px; 
-		margin-left:40px; 
+		margin-left:20px; 
+		margin-right:0px; 
 		padding:10px; }
