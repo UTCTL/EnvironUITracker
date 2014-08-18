@@ -72,12 +72,20 @@ HTMLnav($page);
             break;
           }
         });
-        u.initPlugin(jQuery("#unityPlayer")[0], "static/game/test_streamed.unity3d");
+        u.initPlugin(jQuery("#unityPlayer")[0], "static/game/Environ_test.unity3d");
       });
     -->
     </script>
   </div> 
   <div class="endscreen"></div>
 </section> 
+
+
+<div class="curtain">
+  <a href="#" class="curtainClose"></a> 
+  <div class="box"> 
+    modify user content
+  </div> 
+</div> 
 
 </body><html>
