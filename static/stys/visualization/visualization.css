@@ -151,7 +151,7 @@ svg { z-index:20; }
 
 /* main menu */ 
 .mainnav { padding:0px; }
-.menuoptions { display:block; 
+.menuoptions, .codes { display:block; 
 	padding:0px; } 
 
 	.menuoptions ul { padding:0px; }
@@ -167,17 +167,19 @@ svg { z-index:20; }
 	.menuoptions li#logout:hover { background-color:#dc5151; 
 		color:#fff; } 
 
-	.menuoptions select { width:100%; } 
-	.menuoptions .button { 
+.codes { margin-bottom:30px; } 
+
+	.codes select { width:100%; } 
+	.codes .button { 
 		width:60px; height:20px; 
 		padding:10px; 
 		text-align:center; } 
-	.menuoptions .button#delcode { background-color:#ce272d; }
-	.menuoptions .button#delcode:hover { background-color:#df5151; 
+	.codes .button#delcode { background-color:#ce272d; }
+	.codes .button#delcode:hover { background-color:#df5151; 
 		text-shadow:0px 0px 5px #ac050b; } 
-	.menuoptions .button#sharecode { 
+	.codes .button#sharecode { 
 		background-color:#f3c320;  } 
-	.menuoptions .button#sharecode:hover { background-color:#ffde16; 
+	.codes .button#sharecode:hover { background-color:#ffde16; 
 		text-shadow:0px 0px 10px #a60; }
 
 /* sub navigation */ 
@@ -606,10 +608,7 @@ svg { z-index:20; }
 			font-size:11px; 
 			z-index:201; }
 
-		.piechart svg text { text-transform:capitalize; }
-		.piechart svg path:hover { fill:a1ebeb; } 
-		.piechart svg path:hover .pie_text { fill:ffffff; }
-
+		.piechart svg .slice:hover path { fill:#a1ebeb; } 
 
 
 

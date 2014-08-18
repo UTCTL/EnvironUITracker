@@ -1,6 +1,6 @@
 function hide_sections() {
 	$('.activity section').hide(); 
-	$('.visnav li').on('click',function() {
+	$('body').on('click','.visnav li',function() {
 		$('.activity section').fadeIn(1000); 
 	}); 
 }
@@ -9,7 +9,7 @@ function hide_sections() {
 function display_data() {
 	clear_grid_blocks();
 	console.log("displaying data"); 
-	
+
 	$('.regionbuttons .button#'+selected_region).click(); 
 
 	// SESSION id
@@ -273,7 +273,8 @@ function bake_pie(data) {
 
     arcs.append("svg:path")
         .attr("fill", function(d, i) { return get_color_in_between(i/data.length,'#e0e0e0','#fafafa'); /*return color[i];*/ } ) //set the color for each slice to be chosen from the color function defined above 
-        .attr("d", arc);                                    //this creates the actual SVG path using the associated data (pie) with the arc drawing function
+        .attr("d", arc)
+        .attr("class","pie_slice");                                    //this creates the actual SVG path using the associated data (pie) with the arc drawing function
 
     arcs.append("svg:text")                                     //add a label to each slice
         .attr("transform", function(d) {                    //set the label's origin to the center of the arc

@@ -13,6 +13,7 @@ HTMLnav($page);
 		<div class="hidemenuoption">&raquo;</div> 
 		<div class="subnav">
 			<h1>Session Tracker</h1> 
+			<div class="codes"></div> 
 			<ul class="menuoptions"> </ul> 
 		</div>
 	</div> 
@@ -24,26 +25,22 @@ HTMLnav($page);
 
 
 
-			<content class="meta clear fourth" ctype="meta"> 
-				<div id="age"><b>19</b> years old</div>
-				<div id="gender"><b>female</b></div>
-				<div id="ethnic"><b>white</b></div> 
-			</content> 
-			<content class="meta clear fourth" ctype="meta"> 
-				<div id="gamer_no"><b>non-gamer</b></div> 
-				<div id="ipaddr"><b>195.12.13.221</b></div>
-				<div id="iploc"><b>City, CTR</b></div>
-			</content> 
 			<content class="meta clear fourth" ctype="details"> 
 				<div id="funds"><b>$12345</b> spent</div>
 				<div id="pc"><b>54321pc</b> spent</div>
-				<div id="level">level <b>12</b></div> 
 			</content> 
 			<content class="meta clear fourth" ctype="details"> 
+				<div id="level">level <b>12</b></div> 
 				<div id="time"><b>00:20:34</b> played</div> 
+			</content> 
+			<content class="meta clear fourth" ctype="details"> 
 				<div id="status"><b><span class="chosen">won</span> | lost | quit </b></div> 
 				<div id="completed"><b>83%</b> completed</div> 
 			</content> 
+			<? if($_SESSION['DESutype']==1) { ?><content class="meta clear fourth" ctype="meta"> 
+				<div id="ipaddr"><b>195.12.13.221</b></div>
+				<div id="iploc"><b>City, CTR</b></div>
+			</content> <? } ?> 
 
 
 

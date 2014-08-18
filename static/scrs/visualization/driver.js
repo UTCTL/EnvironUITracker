@@ -17,7 +17,7 @@ $(document).ready(function() {
 	hide_sections(); 
 
 	// choose item from menu 
-	$('.subnav .menuoptions li').on('click',function() { 
+	$('body').on('click','.subnav .menuoptions li',function() { 
 		// $('.subnav .me li#'+SELECTED).removeClass('selected'); 
 
 		var id = $(this).attr('id'); 
@@ -37,6 +37,7 @@ $(document).ready(function() {
 			async: false, 
 			success: function(data) {
 				var j = $.parseJSON(data);  
+				console.log(j); 
 				if(j.hasOwnProperty("success")) {
 					session = j["data"][id]; 
 					display_data(); 
@@ -109,7 +110,7 @@ function load_menu() {
 			var sel = '<div class="coursecodes">'; 
 			sel += '<select name="classcodeselect" class="input" id="classcodeselect">'; 
 			sel += '<option selected="selected" disabled="disabled">Choose Class Code</option>'; 
-			$('.subnav .menuoptions').append(''); 
+			$('.subnav .codes').append(''); 
 			for(var k in j["data"]) {
 				var entry = j["data"][k]; 
 				// console.log(entry["name"]); 
@@ -119,9 +120,8 @@ function load_menu() {
 			sel += '<a href="#" class="button curtainOpen" id="sharecode" data=""> Share </a> '; 
 			sel += '<a href="#" class="button curtainOpen" id="delcode" data=""> Delete </a> '; 
 			sel += '<a href="#" class="button curtainOpen" id="addcode"> Add </a> '; 
-			sel += '</div> '
-			sel += '<li>test</li>'; 
-			$('.subnav .menuoptions').append(sel); 
+			sel += '</div> '; 
+			$('.subnav .codes').append(sel); 
 		}
 	}); 
 
@@ -130,31 +130,31 @@ function load_menu() {
 		$('.button#delcode').attr('data','c'+v); 
 		load_menu_options(v); 
 	}); 
-	// $.ajax({
-	// 	type: 'GET', 
-	// 	url: 'http://environtracker.benova.net/_api/requests.php', 
-	// 	data: {
-	// 		action:'options'
-	// 	}, 
-	// 	async:false, 
-	// 	success: function(data) {
-	// 		console.log(data); 
-	// 		var j = $.parseJSON(data); 
-	// 		if(j.hasOwnProperty("success")) {
-	// 			for(var i=0; i<j["data"].length; i++) {
-	// 				var val = j["data"][i]; 
-	// 				$('.subnav .menuoptions').append('<li id="u'+val+'">'+val+'</li>'); 
-	// 			}
-	// 		}
-	// 	}, 
-	// 	error: function(data) {
-	// 		console.log('something went wrong, check back later.'); 
-	// 	}
-	// })
 }
 
 function load_menu_options(ccid) {
-
+	$.ajax({
+		type: 'GET', 
+		url: 'http://environtracker.benova.net/_api/requests.php', 
+		data: {
+			action:'options'
+		}, 
+		async:false, 
+		success: function(data) {
+			console.log(data); 
+			var j = $.parseJSON(data); 
+			$('.subnav .menuoptions').html('');
+			if(j.hasOwnProperty("success")) {
+				for(var i=0; i<j["data"].length; i++) {
+					var val = j["data"][i]; 
+					$('.subnav .menuoptions').append('<li id="u'+val+'">'+val+'</li>'); 
+				}
+			}
+		}, 
+		error: function(data) {
+			console.log('something went wrong, check back later.'); 
+		}
+	})
 }
 
 // hide/show menu depending on screen size 
