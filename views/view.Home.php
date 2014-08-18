@@ -41,8 +41,8 @@ $u->instantiateById($_SESSION['DESuid']);
 
 if($u->getTypeByType()==1) { ?>
 
-<section class="admin">
- <content>
+<section class="admin"> 
+ <content> 
 
 	<div class="box" id="users">
 		<h2>Manage Users</h2>
@@ -64,7 +64,7 @@ if($u->getTypeByType()==1) { ?>
 	</div> 
 
  </content> 
-</section>
+</section> 
 
 <div class="curtain">
 	<a href="#" class="curtainClose"></a> 

@@ -104,23 +104,29 @@ function load_menu() {
 		}, 
 		async: false, 
 		success: function(data) {
-			console.log(data); 
+			// console.log(data); 
 			var j = $.parseJSON(data); 
-			var sel = '<select name="classcodeselect" class="input" id="classcodeselect">'; 
+			var sel = '<div class="coursecodes">'; 
+			sel += '<select name="classcodeselect" class="input" id="classcodeselect">'; 
 			sel += '<option selected="selected" disabled="disabled">Choose Class Code</option>'; 
 			$('.subnav .menuoptions').append(''); 
 			for(var k in j["data"]) {
 				var entry = j["data"][k]; 
-				console.log(entry["name"]); 
+				// console.log(entry["name"]); 
 				sel += '<option value="'+entry["ccid"]+'">'+entry["name"]+'</option>'; 
 			}
-			sel += '</select><div class="button curtainOpen" id="addcode"> add </div> '; 
+			sel += '</select><br><br>'; 
+			sel += '<a href="#" class="button curtainOpen" id="delcode" data=""> Delete </a> '; 
+			sel += '<a href="#" class="button curtainOpen" id="addcode"> Add </a> '; 
+			sel += '</div> '
+			sel += '<li>test</li>'; 
 			$('.subnav .menuoptions').append(sel); 
 		}
 	}); 
 
 	$('body').on('change','.input#classcodeselect',function() {
 		var v = $(this).val(); 
+		$('.button#delcode').attr('data','c'+v); 
 		load_menu_options(v); 
 	}); 
 	// $.ajax({
@@ -146,7 +152,7 @@ function load_menu() {
 	// })
 }
 
-function load_menu_options($ccid) {
+function load_menu_options(ccid) {
 
 }
 

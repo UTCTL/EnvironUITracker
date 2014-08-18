@@ -15,8 +15,12 @@ $(document).ready(function() {
 		if(	type=='edit'||
 			type=='delete'||
 			type=='create'||
-			type=='addcode') {
-			if(type=='edit'||type=='delete') { 
+			type=='addcode'||
+			type=='delcode') {
+
+			console.log(type); 
+
+			if(type=='edit'||type=='delete'||type=='delcode') { 
 				var id = $(this).attr('data').substring(1); 
 				msg += ' '+id; 
 			} 
@@ -103,7 +107,21 @@ $(document).ready(function() {
 					} 
 				} 
 			}); 
-		} 
+		} else if(type=='createdeletecourse') {
+			var id = $('.curtain .value#id').val(); 
+
+			$.ajax({ 
+				type:'POST', 
+				url:'controllers/operator.php', 
+				data: { 
+					action:type, 
+					id:id 
+				}, 
+				success: function (data) { 
+					window.location.reload(); 
+				} 
+			}); 
+		}
 	}); 
 
 	$('body').on('keyup','.curtain#ccreate input.value',function() {

@@ -41,6 +41,12 @@ if(isset($_POST) || isset($_REQUEST)) {
 			$c = new ClassCode($dblink); 
 			echo $c->getCodeToEdit($_SESSION['DESuid']); 
 			break; 
+		case 'delcode':
+			$id = clean($_POST['userid']); 
+			$c = new ClassCode($dblink); 
+			$c->instantiate($id); 
+			echo $c->getCodeToDelete(); 
+			break; 
 
 
 		case 'confirm_user':
@@ -95,10 +101,15 @@ if(isset($_POST) || isset($_REQUEST)) {
 			if(isset($_POST['uid']) && isset($_POST['cname'])) {
 				$c->setName($cname); 
 				$c->setUser($uid); 
-				$c->setClassCode($cname.now()); 
+				$c->setClassCode($uid.$cname.now()); 
 				if($c->save()) echo '{"status":"success", "message": "Entry saved successfully"}'; 
 				else echo '{"status":"error", "message": "Entry was not saved successfully"}'; 
 			}
+			break; 
+		case 'createdeletecourse':
+			$c = new ClassCode($dblink); 
+			$c->instantiate($_POST['id']); 
+			$c->delete(); 
 			break; 
 
 		default:

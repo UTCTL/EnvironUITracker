@@ -167,6 +167,10 @@ svg { z-index:20; }
 	.menuoptions li#logout:hover { background-color:#dc5151; 
 		color:#fff; } 
 
+	.menuoptions select { width:100%; } 
+	.menuoptions .button { width:32%; 
+		text-align:center; }
+
 /* sub navigation */ 
 .subnav { padding:0px; 
 	margin-top:20px; 
@@ -462,26 +466,26 @@ svg { z-index:20; }
 	border-radius:8px; 
 	z-index:250; }
 
-	.button { display:inline-block; 
+	.regionbuttons .button { display:inline-block; 
 		width:40px; height:40px; 
 		background-color:#333; 
 		padding:0px; margin-right:5px; 
 		cursor:pointer; 
 		background-position:0px 0px; 
 		background-repeat:no-repeat; }
-		.button:nth-child(7n) { margin-right:0px; }
+		.regionbuttons .button:nth-child(7n) { margin-right:0px; }
 
-		.button:hover { background-position:0px -40px; }
-		.button.selected { background-position:0px -80px; }
-		.button.selected:hover { cursor:default; }
+		.regionbuttons .button:hover { background-position:0px -40px; }
+		.regionbuttons .button.selected { background-position:0px -80px; }
+		.regionbuttons .button.selected:hover { cursor:default; }
 
-		.button#w { background-image:url('../../imgs/regionbuttons/w.png'); }
-		.button#na { background-image:url('../../imgs/regionbuttons/na.png'); }
-		.button#sa { background-image:url('../../imgs/regionbuttons/sa.png'); }
-		.button#eu { background-image:url('../../imgs/regionbuttons/eu.png'); }
-		.button#af { background-image:url('../../imgs/regionbuttons/af.png'); }
-		.button#ca { background-image:url('../../imgs/regionbuttons/ca.png'); }
-		.button#ea { background-image:url('../../imgs/regionbuttons/ea.png'); }
+		.regionbuttons .button#w { background-image:url('../../imgs/regionbuttons/w.png'); }
+		.regionbuttons .button#na { background-image:url('../../imgs/regionbuttons/na.png'); }
+		.regionbuttons .button#sa { background-image:url('../../imgs/regionbuttons/sa.png'); }
+		.regionbuttons .button#eu { background-image:url('../../imgs/regionbuttons/eu.png'); }
+		.regionbuttons .button#af { background-image:url('../../imgs/regionbuttons/af.png'); }
+		.regionbuttons .button#ca { background-image:url('../../imgs/regionbuttons/ca.png'); }
+		.regionbuttons .button#ea { background-image:url('../../imgs/regionbuttons/ea.png'); }
 
 
 

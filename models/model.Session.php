@@ -286,13 +286,23 @@ class Classcode {
 		return $str; 
 	}
 
+	public function getCodeToDelete() {
+		$str = '<h2>Delete course</h2>'; 
+		$str .= '<p>Are you sure you want to delete this course?</p>'; 
+		$str .= '<input type="hidden" class="value" id="id" value="'.$this->id.'">'; 
+
+		$str .= '<input type="button" class="button" id="createdeletecourse" value="Delete">'; 
+
+		return $str; 
+	}
+
 	public function save() {
 		$id = $this->id; 
 		$cc = $this->classcode; 
 		$user = $this->user->getId(); 
 		$name = $this->cname; 
 
-		error_log($id.' '.$cc.' '.$user.' '.$name); 
+		// error_log($id.' '.$cc.' '.$user.' '.$name); 
 
 		if($id==0) {
 			try { 
@@ -306,5 +316,10 @@ class Classcode {
 
 		return false; 
 	}
+
+	public function delete() { 
+		$id = $this->id; 
+		mysqli_query($this->dblink,"UPDATE classcodes SET active_state=false WHERE id='$id'"); 
+	} 
 } 
 
