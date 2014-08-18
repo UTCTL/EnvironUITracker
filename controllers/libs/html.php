@@ -2,10 +2,17 @@
 
 function HTMLhead($page) {
 	if($page=='admin') $_SESSION['DESlastadmin'] = ''; 
+
+	$title = 'Environ'; 
+	if(isset($_SESSION['DESlogged'])) {
+		$title .= ' Control Panel Interface'; }
+	if($page!='home')
+		$title .= ' : '.ucfirst($page); 
+
 	?>
 <!DOCTYPE html>
 <html><head>
- <title></title>
+ <title><? echo $title; ?></title>
  <link rel="stylesheet" type="text/css" href="static/stys/global.css">
  <script src="static/scrs/jquery.min.js"></script>
  <script src="static/scrs/jquery.mixitup.min.js"></script>
