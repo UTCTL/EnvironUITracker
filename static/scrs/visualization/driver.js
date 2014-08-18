@@ -116,6 +116,7 @@ function load_menu() {
 				sel += '<option value="'+entry["ccid"]+'">'+entry["name"]+'</option>'; 
 			}
 			sel += '</select><br><br>'; 
+			sel += '<a href="#" class="button curtainOpen" id="sharecode" data=""> Share </a> '; 
 			sel += '<a href="#" class="button curtainOpen" id="delcode" data=""> Delete </a> '; 
 			sel += '<a href="#" class="button curtainOpen" id="addcode"> Add </a> '; 
 			sel += '</div> '
