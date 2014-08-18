@@ -116,12 +116,12 @@ $(document).ready(function() {
 
 // Show curtains
 function showCurtains() {
-	$('.curtainOpen').on('click',function() {
+	$('body').on('click','.curtainOpen',function() {
 		var id = $(this).attr('id'); 
 		console.log('opening from '+id); 
-		$('.curtain').fadeIn(); 
+		$('.curtain').attr('id','c'+id).fadeIn(); 
 	}); 
-	$('.curtainClose').on('click',function() {
+	$('body').on('click','.curtainClose',function() {
 		var id = $(this).attr('id'); 
 		console.log('closing'); 
 		$('.curtain').fadeOut(); 

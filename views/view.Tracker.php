@@ -205,5 +205,12 @@ HTMLnav($page);
 </section>
 
 
+<div class="curtain">
+	<a href="#" class="curtainClose"></a> 
+	<div class="box"> 
+		modify user content
+	</div> 
+</div> 
+
 
 </body></html> 

@@ -11,6 +11,7 @@
  * information of gameplay sessions. 
  * 
  */
+require_once('model.User.php'); 
 
 class Session { 
 	
@@ -57,7 +58,7 @@ class Session {
 	public function instantiateByString($str) {
 		$j = json_decode($str,true); 
 		$id = ''; 
-		for($j as $a => $b) { $id = $a; }
+		foreach($j as $a => $b) { $id = $a; }
 
 		$this->id 			= $row['id']; 
 		$this->session_id 	= $id; 
@@ -216,11 +217,26 @@ class Classcode {
 	} 
 
 	public function instantiate($id) {
-		$this->id = clean($id); 
+		$id = clean($id); 
+		$result = mysqli_query($this->dblink,"SELECT * FROM classcodes WHERE id='$id' LIMIT 1"); 
+		while($row = mysqli_fetch_array($result)) {
+			$this->id = $row['id']; 
+			$this->setClassCode($row['classcode']); 
+			$u = new User($this->dblink); 
+			$u->instantiateById($row['users_id']); 
+			$this->setUser($u); 
+			$this->setName($row['cname']); 
+			return true; 
+		}
+
+		return false; 
 	} 
 
 	public function instantiateByCode($code) {
-		$this->classcode = $code; 
+		$c = clean($code); 
+		$result = mysqli_query($this->dblink,"SELECT id FROM classcodes WHERE classcode='$c'"); 
+		while($row = mysqli_fetch_array($result)) 
+			return instantiate($row['id']); 
 	}
 
 	public function getId() { return $this->id; } 
@@ -228,17 +244,17 @@ class Classcode {
 	public function getUser() { return $this->user; }
 	public function getName() { return $this->cname; } 
 
-	public function setClassCode($code) { $this->classcode = $code; } 
-	public function setName($name) { $this->cname = $name; } 
+	public function setClassCode($code) { $this->classcode = encode_crc($code); } 
+	public function setName($name) { $this->cname = clean($name); } 
 	public function setUser($uid) { 
 		$this->user = new User($this->dblink); 
-		$this->user->instantiateById($uid); 
+		$this->user->instantiateById(clean($uid)); 
 	}
 
-	public function getSessions() {
+	public function getSessions() { 
 		$id = $this->id; 
 		$list = array(); 
-		$result = mysqli_query($this->dblink,"SELECT id FROM sessions WHERE classcodes_id='$id'"); 
+		$result = mysqli_query($this->dblink,"SELECT id FROM sessions WHERE classcodes_id='$id' AND active_state=true"); 
 		while($row = mysqli_fetch_array($result)) {
 			$s = new Session($this->dblink); 
 			$s->instantiateById($row['id']); 
@@ -248,7 +264,46 @@ class Classcode {
 		return $list; 
 	} 
 
+	public function getCodesForUser($uid) {
+		$uid = clean($uid); 
+		$list = array(); 
+		$result = mysqli_query($this->dblink,"SELECT * FROM classcodes WHERE users_id='$uid' AND active_state=true"); 
+		while($row = mysqli_fetch_array($result)) {
+			$c = new Classcode($this->dblink); 
+			$c->instantiate($row['id']); 
+			array_push($list, $c); 
+		}
+
+		return $list; 
+	}
+
+	public function getCodeToEdit($uid) {
+		$str = '<h2>Add Course Code</h2>'; 
+		$str .= '<input type="text" class="value" id="cname" placeholder="Class Name"><br>'; 
+		$str .= '<input type="hidden" class="value" id="uid" value="'.clean($uid).'">'; 
+		$str .= '<input type="button" class="button" id="createclasscode" value="Add">'; 
+		$str .= '<input type="button" class="ibutton" id="createclasscode" value="Add">'; 
+		return $str; 
+	}
+
 	public function save() {
+		$id = $this->id; 
+		$cc = $this->classcode; 
+		$user = $this->user->getId(); 
+		$name = $this->cname; 
+
+		error_log($id.' '.$cc.' '.$user.' '.$name); 
+
+		if($id==0) {
+			try { 
+				mysqli_query($this->dblink,"INSERT INTO classcodes (classcode,users_id,cname,active_state) VALUES ('$cc','$user','$name',true)"); 
+			} catch(mysqli_sql_exception $e) {
+				return false; 
+			}
+
+			return true; 
+		}
+
 		return false; 
 	}
 } 

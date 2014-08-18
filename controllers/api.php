@@ -12,7 +12,7 @@ if(isset($_GET) || isset($_REQUEST)) {
 		case 'session': 
 			session_start(); 
 			session_regenerate_id(); 
-			echo '{"success":"success","message":"","data":{"session":"'.session_id().'"}}'; 
+			echo '{"status":"success","message":"","data":{"session":"'.session_id().'"}}'; 
 			//session_destroy(); 
 			break;
 		case 'push': 
@@ -27,7 +27,7 @@ if(isset($_GET) || isset($_REQUEST)) {
 			$s = new Session($dblink); 
 			$s->instantiateByString($jsondata); 
 
-			if($s->save()) echo '{"success":"success","message":"Entry added"}'; 
+			if($s->save()) echo '{"status":"success","message":"Entry added"}'; 
 			else echo '{"error":506,"message":"Data not found."}'; 
 			break; 
 		case 'pull': 
@@ -43,6 +43,17 @@ if(isset($_GET) || isset($_REQUEST)) {
 			$s->instantiate($jsondata); 
 
 			echo $s->toJson();  
+			break; 
+		case 'options': 
+			require_once('../models/model.Session.php'); 
+			$s = new Classcode($dblink); 
+			$list = $s->getCodesForUser($_SESSION['DESuid']); 
+			$result = '{"status":"success","message":"Entry found","data":{'; 
+			foreach($list as $item) {
+				$result .= '"'.$item->getClassCode().'":{"ccid":'.$item->getId().', "classcode":"'.$item->getClassCode().'", "user":'.$item->getUser()->getId().', "name":"'.$item->getName().'"},'; 
+			} 
+			$result = rtrim($result,',').'}}'; 
+			echo $result; 
 			break; 
 		default:
 			break; 

@@ -40,9 +40,10 @@
 	.curtain .curtainClose { margin-top:-180px; }
 
 	.curtain input { margin:10px auto; }
-	.curtain input:not(.button) { display:block; 
+	.curtain input:not(.button, .ibutton) { display:block; 
 		width:360px; } 
-	.curtain input.button { border:0px; 
+	.curtain input.button, 
+	.curtain input.ibutton { border:0px; 
 		float:right; 
 		margin-right:10px; }
 

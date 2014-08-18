@@ -93,10 +93,10 @@ class User {
 		
 		if($id==0) {
 			try {
-				error_log("saving ".$id.' u:'.$uname.' p:'.$pword.' t:'.$this->type->getName().' now:'.$date); 
+				// error_log("saving ".$id.' u:'.$uname.' p:'.$pword.' t:'.$this->type->getName().' now:'.$date); 
 				mysqli_query($this->dblink,"INSERT INTO users (uname,pword,email,school,types_id,active_state,u_created) VALUES ('$uname','$pword','$email','$school','$type',true,'$date')"); 
 			} catch(mysqli_sql_exception $e) {
-				error_log("error while saving new users"); 
+				// error_log("error while saving new users"); 
 				return false; 
 			}
 			$result = mysqli_query($this->dblink,"SELECT * FROM users WHERE uname='$uname' AND pword='$pword' AND types_id='$type'");
@@ -166,19 +166,33 @@ class User {
 		$value = clean($value); 
 		$id = $this->id; 
 
+		if($field=='cname') {
+			try {
+				// error_log("here: ".$field."=".$value." W id=".$id); 
+				$result = mysqli_query($this->dblink, "SELECT count(*) FROM classcodes WHERE $field='$value' AND users_id='$id' AND active_state=true"); 
 
-
-		try {
-			if($this->id==0) $result = mysqli_query($this->dblink, "SELECT count(*) FROM users WHERE $field='$value' AND active_state=true"); 
-			else $result = mysqli_query($this->dblink, "SELECT count(*) FROM users WHERE id!=$id AND $field='$value' AND active_state=true"); 
-
-			while($row = mysqli_fetch_array($result)) { 
-				if($row[0]>0) return true; 
-				else return false; 
+				while($row = mysqli_fetch_array($result)) { 
+					// error_log("classcode count ".$row[0]); 
+					if($row[0]>0) return true; 
+					else return false; 
+				} 
+			} catch (Exception $e) { 
+				return false; 
 			} 
-		} catch (Exception $e) { 
-			return false; 
-		} 
+		} else {
+				// error_log("there: ".$value); 
+			try {
+				if($this->id==0) $result = mysqli_query($this->dblink, "SELECT count(*) FROM users WHERE $field='$value' AND active_state=true"); 
+				else $result = mysqli_query($this->dblink, "SELECT count(*) FROM users WHERE id!=$id AND $field='$value' AND active_state=true"); 
+
+				while($row = mysqli_fetch_array($result)) { 
+					if($row[0]>0) return true; 
+					else return false; 
+				} 
+			} catch (Exception $e) { 
+				return false; 
+			} 
+		}
 
 		return false; 
 	} 
@@ -201,8 +215,13 @@ class User {
 		else $str .= '<input type="radio" name="usertype" class="value" id="typeadm" value="1" checked="checked">Administrator <input type="radio" name="usertype" class="value" id="typeedu" value="2">Educator'; 
 		
 
-		if($this->id==0) $str .= '<input type="button" class="button" id="createsubmit" value="Create">'; 
-		else $str .= '<input type="button" class="button" id="createedit" value="Edit">'; 
+		if($this->id==0) {
+			$str .= '<input type="button" class="button" id="createsubmit" value="Create">'; 
+			$str .= '<input type="button" class="ibutton" id="createsubmit" value="Create">'; 
+		} else {
+			$str .= '<input type="button" class="button" id="createedit" value="Edit">'; 
+			$str .= '<input type="button" class="ibutton" id="createedit" value="Edit"> '; 
+		}
 		
 
 		return $str; 
@@ -233,7 +252,7 @@ class User {
 	}
 	
 	public function __toString() {
-		return $this->getId().':'.$this->getUname().', '.$this->getType().', '.$this->logged; 
+		return $this->getId().':'.$this->getName().', '.$this->getType().', '.$this->logged; 
 	}
 }
 

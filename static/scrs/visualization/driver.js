@@ -2,6 +2,9 @@
 // 	Main Driver 
 // =======================
 
+// @TODO : change for production 
+var APPURL = 'http://localhost:8888/EnvironCPI/controllers/api.php'; 
+
 $(document).ready(function() {
 	resize_user_activity_section(); 
 	load_menu(); 
@@ -93,26 +96,58 @@ function resize_user_activity_section() {
 } 
 
 function load_menu() {
-	$.ajax({
+	$.ajax({ 
 		type: 'GET', 
-		url: 'http://environtracker.benova.net/_api/requests.php', 
-		data: {
-			action:'options'
+		url: APPURL, 
+		data: { 
+			action: 'options' 
 		}, 
-		async:false, 
+		async: false, 
 		success: function(data) {
+			console.log(data); 
 			var j = $.parseJSON(data); 
-			if(j.hasOwnProperty("success")) {
-				for(var i=0; i<j["data"].length; i++) {
-					var val = j["data"][i]; 
-					$('.subnav .menuoptions').append('<li id="u'+val+'">'+val+'</li>'); 
-				}
+			var sel = '<select name="classcodeselect" class="input" id="classcodeselect">'; 
+			sel += '<option selected="selected" disabled="disabled">Choose Class Code</option>'; 
+			$('.subnav .menuoptions').append(''); 
+			for(var k in j["data"]) {
+				var entry = j["data"][k]; 
+				console.log(entry["name"]); 
+				sel += '<option value="'+entry["ccid"]+'">'+entry["name"]+'</option>'; 
 			}
-		}, 
-		error: function(data) {
-			console.log('something went wrong, check back later.'); 
+			sel += '</select><div class="button curtainOpen" id="addcode"> add </div> '; 
+			$('.subnav .menuoptions').append(sel); 
 		}
-	})
+	}); 
+
+	$('body').on('change','.input#classcodeselect',function() {
+		var v = $(this).val(); 
+		load_menu_options(v); 
+	}); 
+	// $.ajax({
+	// 	type: 'GET', 
+	// 	url: 'http://environtracker.benova.net/_api/requests.php', 
+	// 	data: {
+	// 		action:'options'
+	// 	}, 
+	// 	async:false, 
+	// 	success: function(data) {
+	// 		console.log(data); 
+	// 		var j = $.parseJSON(data); 
+	// 		if(j.hasOwnProperty("success")) {
+	// 			for(var i=0; i<j["data"].length; i++) {
+	// 				var val = j["data"][i]; 
+	// 				$('.subnav .menuoptions').append('<li id="u'+val+'">'+val+'</li>'); 
+	// 			}
+	// 		}
+	// 	}, 
+	// 	error: function(data) {
+	// 		console.log('something went wrong, check back later.'); 
+	// 	}
+	// })
+}
+
+function load_menu_options($ccid) {
+
 }
 
 // hide/show menu depending on screen size 

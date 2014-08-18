@@ -3,6 +3,7 @@
 require_once('libs/functions.php'); 
 require_once('settings.php'); 
 require_once('../models/model.User.php'); 
+require_once('../models/model.Session.php'); 
 
 if(isset($_POST) || isset($_REQUEST)) {
 	$action = (isset($_REQUEST)) ? clean($_REQUEST['action']) : clean($_POST['action']);
@@ -36,6 +37,10 @@ if(isset($_POST) || isset($_REQUEST)) {
 			$u = new User($dblink); 
 			echo $u->getUserToEdit(); 
 			break; 
+		case 'addcode':
+			$c = new ClassCode($dblink); 
+			echo $c->getCodeToEdit($_SESSION['DESuid']); 
+			break; 
 
 
 		case 'confirm_user':
@@ -47,6 +52,11 @@ if(isset($_POST) || isset($_REQUEST)) {
 			$u = new User($dblink); 
 			$u->instantiateById(clean($_POST['id'])); 
 			echo $u->find('email',clean($_POST['email'])); 
+			break; 
+		case 'confirm_coursecode':
+			$u = new User($dblink); 
+			$u->instantiateById(clean($_POST['uid'])); 
+			echo $u->find('cname',clean($_POST['cname'])); 
 			break; 
 
 		case 'createsubmit':
@@ -77,6 +87,18 @@ if(isset($_POST) || isset($_REQUEST)) {
 			$u = new User($dblink); 
 			$u->instantiateById($_POST['id']); 
 			$u->delete();  
+			break; 
+		case 'createclasscode':
+			$c = new ClassCode($dblink); 
+			$cname = clean($_POST['cname']); 
+			$uid = clean($_POST['uid']); 
+			if(isset($_POST['uid']) && isset($_POST['cname'])) {
+				$c->setName($cname); 
+				$c->setUser($uid); 
+				$c->setClassCode($cname.now()); 
+				if($c->save()) echo '{"status":"success", "message": "Entry saved successfully"}'; 
+				else echo '{"status":"error", "message": "Entry was not saved successfully"}'; 
+			}
 			break; 
 
 		default:

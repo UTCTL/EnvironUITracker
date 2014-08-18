@@ -43,6 +43,8 @@ function HTMLhead($page) {
  <script src="static/scrs/visualization/constants.js"></script> 
  <script src="static/scrs/visualization/display_data.js"></script> 
  <script src="static/scrs/visualization/driver.js"></script> 
+ <link rel="stylesheet" type="text/css" href="static/stys/admin.css">
+ <script src="static/scrs/admin.js"></script> 
  <? 
 } ?>
 </head><body>

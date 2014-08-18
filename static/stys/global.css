@@ -68,6 +68,25 @@ a.button {
 	input[type="reset"]:focus, 
 	a.button:focus { border:1px solid #ddd; }
 
+input[type="button"].ibutton, 
+input[type="submit"].ibutton, 
+input[type="reset"].ibutton, 
+a.ibutton { 
+	display:inline-block; 
+	background-color:#ccc; 
+	color:#999; 
+	cursor:default; 
+	text-decoration:none; 
+	padding:10px 20px; 
+	visibility:hidden; }
+
+	input[type="button"].ibutton:hover, 
+	input[type="submit"].ibutton:hover, 
+	input[type="reset"].ibutton:hover, 
+	a.ibutton:hover { color:#999; 
+		text-decoration:none; 
+		text-shadow:0px 0px 0px #ccc; }
+
 img { max-width:400px; 
 	max-height:300px; 
 	margin:10px; }
