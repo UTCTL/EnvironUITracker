@@ -64,6 +64,10 @@ if(isset($_POST) || isset($_REQUEST)) {
 			$u->instantiateById(clean($_POST['uid'])); 
 			echo $u->find('cname',clean($_POST['cname'])); 
 			break; 
+		case 'confirm_coursecodecode': 
+			$u = new User($dblink); 
+			echo $u->find('classcode',clean($_POST['ccode'])); 
+			break; 
 
 		case 'createsubmit':
 			$u = new User($dblink); 

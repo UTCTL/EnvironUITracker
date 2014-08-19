@@ -1,6 +1,10 @@
-body { background-color:#000; }
+body { background-color:#000; } 
 
 #unityPlayer { position:fixed; 
 	top:50%; left:50%; 
 	margin-top:-350px; 
-	margin-left:-600px; }
+	margin-left:-620px; } 
+
+.curtain .box { height:280px; } 
+.curtain .box .button, 
+.curtain .box .ibutton { float:right; } 

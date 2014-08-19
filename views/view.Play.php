@@ -36,7 +36,7 @@ HTMLnav($page);
         params: { enableDebugging:"0" }
         
       };
-      var u = new UnityObject2(config);
+      u = new UnityObject2(config);
       
       jQuery(function() {
 
@@ -72,6 +72,7 @@ HTMLnav($page);
             break;
           }
         });
+        // u.initPlugin(jQuery("#unityPlayer")[0], "static/game/Environ_test.unity3d");
         u.initPlugin(jQuery("#unityPlayer")[0], "static/game/Environ_test.unity3d");
       });
     -->
@@ -87,5 +88,7 @@ HTMLnav($page);
     modify user content
   </div> 
 </div> 
-
+ 
+ <script src="static/scrs/play.js"></script> 
+ 
 </body><html>

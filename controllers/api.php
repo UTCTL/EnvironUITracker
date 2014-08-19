@@ -22,13 +22,15 @@ if(isset($_GET) || isset($_REQUEST)) {
 			}
 
 			$jsondata = clean($_GET['data']); 
+			error_log(clean($_GET['type']).' => '.html_entity_decode($jsondata)); 
 
-			require_once('../models/model.Session.php'); 
-			$s = new Session($dblink); 
-			$s->instantiateByString($jsondata); 
+			// require_once('../models/model.Session.php'); 
+			// $s = new Session($dblink); 
+			// $s->instantiateByString($jsondata); 
 
-			if($s->save()) echo '{"status":"success","message":"Entry added"}'; 
-			else echo '{"error":506,"message":"Data not found."}'; 
+			// if($s->save()) echo '{"status":"success","message":"Entry added"}'; 
+			// else echo '{"error":506,"message":"Data not found."}'; 
+
 			break; 
 		case 'pull': 
 			if(!$_GET['id']) {

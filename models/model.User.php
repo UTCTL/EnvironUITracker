@@ -168,11 +168,9 @@ class User {
 
 		if($field=='cname') {
 			try {
-				// error_log("here: ".$field."=".$value." W id=".$id); 
 				$result = mysqli_query($this->dblink, "SELECT count(*) FROM classcodes WHERE $field='$value' AND users_id='$id' AND active_state=true"); 
 
 				while($row = mysqli_fetch_array($result)) { 
-					// error_log("classcode count ".$row[0]); 
 					if($row[0]>0) return true; 
 					else return false; 
 				} 
@@ -180,15 +178,13 @@ class User {
 				return false; 
 			} 
 		} else {
-				// error_log("there: ".$value); 
 			try {
-				if($this->id==0) $result = mysqli_query($this->dblink, "SELECT count(*) FROM users WHERE $field='$value' AND active_state=true"); 
+				if($this->id==0) $result = mysqli_query($this->dblink, "SELECT count(*) FROM classcodes WHERE $field='$value' AND active_state=true"); 
 				else $result = mysqli_query($this->dblink, "SELECT count(*) FROM users WHERE id!=$id AND $field='$value' AND active_state=true"); 
-
-				while($row = mysqli_fetch_array($result)) { 
-					if($row[0]>0) return true; 
-					else return false; 
-				} 
+				
+				while($row = mysqli_fetch_array($result)) 
+					return ($row[0]>0); 
+				
 			} catch (Exception $e) { 
 				return false; 
 			} 
