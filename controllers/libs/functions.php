@@ -20,6 +20,18 @@ function encode_crc($str) { return hash('crc32',$str); }
 function now() { return date('Y\/m\/d H\:i\:s'); }
 function projectPrefix($str) { return substr(strtoupper($str),0,3); }
 
+function getamps($str) {
+	$result = ""; 
+	for($i = 0; $i < strlen($str); $i++) {
+		if($str[$i]==chr(38))
+			$result .= '&amp;'; 
+		else 
+			$result .= $str[$i]; 
+	}
+
+	return $result; 
+}
+
 function encodequotes($str) {
 	$str = stripslashes($str); 
 	$result = ""; 

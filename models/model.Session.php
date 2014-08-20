@@ -197,6 +197,32 @@ class Session {
 		}
 	} 
 
+	public function store_temp_data($sid, $type, $data) {
+		try {
+			mysqli_query($this->dblink,"INSERT INTO sessions_temp (session_id,data_type,data_data) VALUES ('$sid','$type','$data')"); 
+		} catch (mysqli_sql_exception $e) {
+			return false; 
+		}
+	}
+
+	public function save_temp_data($sid) {
+		// $all = array(); 
+		// $data = array(); 
+
+		// try {
+		// 	$result = mysqli_query($this->dblink,"SELECT * FROM sessions_temp WHERE session_id='$sid'"); 
+		// 	while($row = mysqli_fetch_array($result)) {
+		// 		array_push($all,$row); 
+		// 	}
+		// } catch (mysqli_sql_exception $e) {
+		// 	return false; 
+		// }
+
+		// $all = 
+		return false; 
+
+	}
+
 	public function save() {
 		return false; 
 	}

@@ -16,20 +16,22 @@ if(isset($_GET) || isset($_REQUEST)) {
 			//session_destroy(); 
 			break;
 		case 'push': 
-			if(!$_GET['data']) {
+			if(!$_GET['session'] || !$_GET['type'] || !$_GET['data']) {
 				echo '{"error":504,"message":"Information missing"}'; 
 				break; 
 			}
 
+			$session_id = clean($_GET['session']); 
+			$datatype = clean($_GET['type']); 
 			$jsondata = clean($_GET['data']); 
-			error_log(clean($_GET['type']).' => '.html_entity_decode($jsondata)); 
 
-			// require_once('../models/model.Session.php'); 
-			// $s = new Session($dblink); 
-			// $s->instantiateByString($jsondata); 
+			require_once('../models/model.Session.php'); 
+			$s = new Session($dblink); 
 
-			// if($s->save()) echo '{"status":"success","message":"Entry added"}'; 
-			// else echo '{"error":506,"message":"Data not found."}'; 
+			if($datatype=="input") error_log(html_entity_decode($jsondata)); 
+
+			if(clean($_GET['type'])=="end") $s->save_temp_data($session_id); 
+			else $s->store_temp_data($session_id, $datatype, $jsondata); 
 
 			break; 
 		case 'pull': 
