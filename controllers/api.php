@@ -57,6 +57,13 @@ if(isset($_GET) || isset($_REQUEST)) {
 			$result = rtrim($result,',').'}}'; 
 			echo $result; 
 			break; 
+		case 'test':
+			require_once('../models/model.Session.php'); 
+			$sid = '051fbcaa532bebaa623cf7e0208f517e'; 
+			$s = new Session($dblink); 
+			$s->save_temp_data($sid); 
+			break; 
+
 		default:
 			break; 
 	} 
