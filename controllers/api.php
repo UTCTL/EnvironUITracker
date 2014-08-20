@@ -28,8 +28,6 @@ if(isset($_GET) || isset($_REQUEST)) {
 			require_once('../models/model.Session.php'); 
 			$s = new Session($dblink); 
 
-			if($datatype=="input") error_log(html_entity_decode($jsondata)); 
-
 			if(clean($_GET['type'])=="end") $s->save_temp_data($session_id); 
 			else $s->store_temp_data($session_id, $datatype, $jsondata); 
 
