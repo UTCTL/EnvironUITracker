@@ -158,6 +158,9 @@ class Session {
 	} 
 
 	public function getId() { return $this->id; } 
+	public function getStudent() { return $this->name; } 
+	public function getSessionId() { return $this->session_id; } 
+
 	private function setId($int) { $this->id = clean($int); }
 
 	public function toJson() {
@@ -297,11 +300,24 @@ class Session {
 
 
 				$str .= '}'; // session_id
-				
+
 			$str .= '}'; // data 
 		$str .= '}'; // json 
 
 		return $str; 
+	}
+
+	public function find($uid,$cc) { 
+		$out = array(); 
+
+		$result = mysqli_query($this->dblink,"SELECT id FROM sessions WHERE coursecodes_id='$cc'"); 
+		while($row = mysqli_fetch_array($result)) {
+			$s = new Session($this->dblink); 
+			$s->instantiateById($row["id"]); 
+			array_push($out,$s); 
+		}
+
+		return $out; 
 	}
 
 	private function load($b) {

@@ -133,11 +133,14 @@ function load_menu() {
 }
 
 function load_menu_options(ccid) {
+	console.log("getting "+ccid); 
 	$.ajax({
 		type: 'GET', 
-		url: 'http://environtracker.benova.net/_api/requests.php', 
+		// url: 'http://environtracker.benova.net/_api/requests.php', 
+		url: APPURL, 
 		data: {
-			action:'options'
+			action:'sessions', 
+			ccid:ccid 
 		}, 
 		async:false, 
 		success: function(data) {
@@ -145,10 +148,12 @@ function load_menu_options(ccid) {
 			var j = $.parseJSON(data); 
 			$('.subnav .menuoptions').html('');
 			if(j.hasOwnProperty("success")) {
-				for(var i=0; i<j["data"].length; i++) {
-					var val = j["data"][i]; 
-					$('.subnav .menuoptions').append('<li id="u'+val+'">'+val+'</li>'); 
-				}
+				console.log(j["data"]); 
+				// for(var i=0; i<j["data"].length; i++) {
+				// 	var val = j["data"][i]; 
+				// 	// $('.subnav .menuoptions').append('<li id="u'+val+'">'+val+'</li>'); 
+				// 	console.log(j["data"][i]); 
+				// }
 			}
 		}, 
 		error: function(data) {

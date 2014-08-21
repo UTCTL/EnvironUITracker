@@ -52,14 +52,41 @@ if(isset($_GET) || isset($_REQUEST)) {
 			require_once('../models/model.Session.php'); 
 			$s = new Classcode($dblink); 
 			$list = $s->getCodesForUser($_SESSION['DESuid']); 
-			$result = '{"status":"success","message":"Entry found","data":{'; 
+			$result = '{"success":"success","message":"Entry found","data":{'; 
 			foreach($list as $item) {
 				$result .= '"'.$item->getClassCode().'":{"ccid":'.$item->getId().', "classcode":"'.$item->getClassCode().'", "user":'.$item->getUser()->getId().', "name":"'.$item->getName().'"},'; 
 			} 
 			$result = rtrim($result,',').'}}'; 
 			echo $result; 
 			break; 
+		case 'sessions':
+			require_once('../models/model.Session.php'); 
+			$c = clean($_GET['ccid']); 
+			$s = new Session($dblink); 
+			$results = $s->find($_SESSION['DESuid'],$c); 
 
+			if(count($results)==0) echo '{"error":"error","message":"No entries were found"}'; 
+			else {
+				$str = '{"success":"success","messages":"Entries found","data":['; 
+
+				$i = 0; 
+				foreach($results as $x) {
+					$i++; 
+
+					$str .= '{"id":'.$x->getId().','; 
+					$str .= '"user":'; 
+					if($x->getStudent() != '') $str .= '"'.$x->getStudent().'"'; 
+					else $str .= '"'.$x->getSessionId().'"'; 
+					$str .= '}'; 
+
+					if($i<count($results)) $str .= ','; 
+				}
+
+				$str .= ']}'; 
+				echo $str; 
+			}
+
+			break; 
 		default:
 			break; 
 	} 
