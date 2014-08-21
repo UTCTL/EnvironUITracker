@@ -241,10 +241,6 @@ class Session {
 						$this->name = $data["studentid"]; 
 						$this->ipaddress = $data["ipaddr"]; 
 						$this->accessdatetime = now(); 
-						// echo '<span id="spacing">----</span>session: <span id="value">'.$data["session"].'</span><br>';
-						// echo '<span id="spacing">----</span>coursecode: <span id="value">'.$data["coursecode"].'</span><br>'; 
-						// echo '<span id="spacing">----</span>studentid: <span id="value">'.$data["studentid"].'</span><br>'; 
-						// echo '<span id="spacing">----</span>ipaddr: <span id="value">'.$data["ipaddr"].'</span><br>';  
 						break; 
 					case 'details':
 						$this->spent_funds = $data["spent_funds"]; 
@@ -253,12 +249,6 @@ class Session {
 						$this->playtime = $data["playtime"]; 
 						$this->status = $data["status"]; 
 						$this->completed = $data["completed"]; 
-						// echo '<span id="spacing">----</span>spent_funds: <span id="value">'.$data["spent_funds"].'</span><br>'; 
-						// echo '<span id="spacing">----</span>spent_polcap: <span id="value">'.$data["spent_polcap"].'</span><br>'; 
-						// echo '<span id="spacing">----</span>level: <span id="value">'.$data["level"].'</span><br>'; 
-						// echo '<span id="spacing">----</span>playtime: <span id="value">'.$data["playtime"].'</span><br>'; 
-						// echo '<span id="spacing">----</span>status: <span id="value">'.$data["status"].'</span><br>'; 
-						// echo '<span id="spacing">----</span>completed: <span id="value">'.$data["completed"].'</span><br>'; 
 						break;
 					case 'input':
 						$this->drag = $data["camera_movement"]["drag"]; 
@@ -272,24 +262,6 @@ class Session {
 						$this->panel_clicks_close = $data["panel_time"]["click_closed"]; 
 						$this->help_time_open = $data["help_time"]["open"]; 
 						$this->help_time_close = $data["help_time"]["closed"]; 
-						// echo '<span id="spacing">----</span>camera movement<br>'; 
-						// echo '<span id="spacing">--------</span>drag: <span id="value">'.$data["camera_movement"]["drag"].'</span><br>'; 
-						// echo '<span id="spacing">--------</span>arrows: <span id="value">'.$data["camera_movement"]["arrows"].'</span><br>'; 
-						// echo '<span id="spacing">--------</span>wasd: <span id="value">'.$data["camera_movement"]["keys"].'</span><br>'; 
-
-						// echo '<span id="spacing">----</span>navigation<br>'; 
-						// echo '<span id="spacing">--------</span>minimap: <span id="value">'.$data["navigation"]["minimap"].'</span><br>'; 
-						// echo '<span id="spacing">--------</span>1-6keys: <span id="value">'.$data["navigation"]["keys"].'</span><br>'; 
-
-						// echo '<span id="spacing">----</span>panel time<br>'; 
-						// echo '<span id="spacing">--------</span>panel time open: <span id="value">'.$data["panel_time"]["open"].'</span><br>'; 
-						// echo '<span id="spacing">--------</span>panel time closed: <span id="value">'.$data["panel_time"]["closed"].'</span><br>'; 
-						// echo '<span id="spacing">--------</span>panel click open: <span id="value">'.$data["panel_time"]["click_open"].'</span><br>'; 
-						// echo '<span id="spacing">--------</span>panel click closed: <span id="value">'.$data["panel_time"]["click_closed"].'</span><br>'; 
-
-						// echo '<span id="spacing">----</span>help time<br>'; 
-						// echo '<span id="spacing">--------</span>help time open: <span id="value">'.$data["help_time"]["open"].'</span><br>'; 
-						// echo '<span id="spacing">--------</span>help time closed: <span id="value">'.$data["help_time"]["closed"].'</span><br>'; 
 						break; 
 					case 'clicks':
 						
@@ -300,12 +272,6 @@ class Session {
 							array_push($temp,$click); 
 
 						$this->clicks = json_encode($temp); 
-						
-						// echo '<span id="spacing">----</span>index: <span id="value">'.$data["index"].'</span><br>';  
-						// echo '<span id="spacing">----</span>clicks: <span id="value">'.count($data["clicks"]).' (count)</span><br>';  
-
-						// foreach($temp as $click)
-						// 	echo '<span id="spacing">--------</span><span id="value">'.$click[0].','.$click[1].' </span><br>';  
 
 						break; 
 					case 'region':
@@ -316,13 +282,6 @@ class Session {
 						$temp[$r] = $data; 
 
 						$this->region_data = json_encode($temp); 
-
-						echo '<span id="spacing">----</span>new entry: <span id="value">'.$this->region_data.'</span><br>';  
-						// echo '<span id="spacing">----</span>initials: <span id="value">'.$data["initials"].'</span><br>';  
-						// echo '<span id="spacing">----</span>name: <span id="value">'.$data["name"].'</span><br>';  
-						// echo '<span id="spacing">----</span>order: <span id="value">'.$data["order"].'</span><br>';  
-						// echo '<span id="spacing">----</span>spent_funds: <span id="value">'.$data["spent_funds"].'</span><br>';  
-						// echo '<span id="spacing">----</span>spent_polcap: <span id="value">'.$data["spent_polcap"].'</span><br>';  
 						break; 
 					case 'environ_scores':
 						// assumes previous transactions were successful and 
@@ -333,11 +292,6 @@ class Session {
 						$temp[$r]["environ_scores"][$data["index"]] = $data["environ_scores"]; 
 
 						$this->region_data = json_encode($temp); 
-
-						echo '<span id="spacing">----</span>new entry: <span id="value">'.$this->region_data.'</span><br>';  
-						// echo '<span id="spacing">----</span>region: <span id="value">'.$data["region"].'</span><br>';  
-						// echo '<span id="spacing">----</span>index: <span id="value">'.$data["index"].'</span><br>';  
-						// echo '<span id="spacing">----</span>environ_scores: <span id="value">'.count($data["environ_scores"]).' (count)</span><br>';  
 						break; 
 					case 'economy_scores':
 						// assumes previous transactions were successful and 
@@ -348,11 +302,6 @@ class Session {
 						$temp[$r]["economy_scores"][$data["index"]] = $data["economy_scores"]; 
 
 						$this->region_data = json_encode($temp); 
-
-						echo '<span id="spacing">----</span>new entry: <span id="value">'.$this->region_data.'</span><br>';  
-						// echo '<span id="spacing">----</span>region: <span id="value">'.$data["region"].'</span><br>';  
-						// echo '<span id="spacing">----</span>index: <span id="value">'.$data["index"].'</span><br>';  
-						// echo '<span id="spacing">----</span>economy_scores: <span id="value">'.count($data["economy_scores"]).' (count)</span><br>';  
 						break; 
 					case 'bases':
 						// assumes previous transactions were successful and 
@@ -392,35 +341,23 @@ class Session {
 						}
 
 						$this->upgrades_data = json_encode($u);  
-						
-						echo '<span id="spacing">----</span>new entry: <span id="value">'.$this->bases_data.'</span><br>';  
-						echo '<span id="spacing">----</span>its upgrades: <span id="value">'.$this->upgrades_data.'</span><br>'; 
-						// echo '<span id="spacing">----</span>region: <span id="value">'.$data["region"].'</span><br>';  
-						// echo '<span id="spacing">----</span>name: <span id="value">'.$data["name"].'</span><br>';  
-						// echo '<span id="spacing">----</span>active: <span id="value">'.(($data["active"]) ? 'true' : 'false').'</span><br>';  
-						// echo '<span id="spacing">----</span>upgrades: <span id="value">'.count($data["upgrades"]).' (count)</span><br>';  
-						
-						// foreach($data["upgrades"] as $u) {
-						// 	echo '<span id="spacing">--------</span>name: <span id="value">'.$u["name"].'</span><br>'; 
-						// 	echo '<span id="spacing">--------</span>active: <span id="value">'.(($u["active"]) ? 'true' : 'false').'</span><br>'; 
-						// }
 
 						break; 
 					case 'blank':
 					default: 
-						// echo $row['data_data'].'<br>'; 
 						break; 
 				} 
 
-				if($this->save()) {
-					echo '<span id="saving">====&nbsp;&nbsp;saving</span>'; 
-					echo '<br>'; 
-					echo '<br>'; 
-				} else {
-					echo '<span id="error">====&nbsp;&nbsp;failed saving</span>'; 
-					echo '<br>'; 
-					echo '<br>'; 
-				}
+				$this->save(); 
+				// if($this->save()) {
+				// 	echo '<span id="saving">====&nbsp;&nbsp;saving</span>'; 
+				// 	echo '<br>'; 
+				// 	echo '<br>'; 
+				// } else {
+				// 	echo '<span id="error">====&nbsp;&nbsp;failed saving</span>'; 
+				// 	echo '<br>'; 
+				// 	echo '<br>'; 
+				// }
 
 			}
 		} catch (mysqli_sql_exception $e) {

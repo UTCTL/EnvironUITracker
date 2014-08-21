@@ -23,6 +23,8 @@ $dbname = 'EnvironCPI_development'; 	// The database name
 // *********************************
 // No need to edit beyond this point. 
 
+date_default_timezone_set('US/Central');
+
 // Connect to database
 header("Access-Control-Allow-Origin: ".$siteurl); 
 try {
