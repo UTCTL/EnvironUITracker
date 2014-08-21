@@ -44,7 +44,7 @@ if(isset($_GET) || isset($_REQUEST)) {
 
 			require_once('../models/model.Session.php'); 
 			$s = new Session($dblink); 
-			$s->instantiate($sessionid); 
+			$s->instantiateById($sessionid); 
 
 			echo $s->toJson();  
 			break; 

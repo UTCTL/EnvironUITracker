@@ -21,15 +21,18 @@ $(document).ready(function() {
 		// $('.subnav .me li#'+SELECTED).removeClass('selected'); 
 
 		var id = $(this).attr('id'); 
+		var sid = $(this).html(); 
 		// SELECTED = id; 
 		// $('.usermenu li#'+SELECTED).addClass('selected'); 
+		console.log("clicked on "+sid); 
 
 		id = id.substring(1,id.length); 
 		// console.log(id); 
 		$.ajax({
 			type: 'GET', 
 			// url: 'testloader.php', 
-			url: 'http://environtracker.benova.net/_api/requests.php', 
+			// url: 'http://environtracker.benova.net/_api/requests.php', 
+			url: APPURL, 
 			data: {
 				action:'pull', 
 				id:id 
@@ -39,7 +42,7 @@ $(document).ready(function() {
 				var j = $.parseJSON(data);  
 				console.log(j); 
 				if(j.hasOwnProperty("success")) {
-					session = j["data"][id]; 
+					session = j["data"][sid]; 
 					display_data(); 
 					if(selected_visualization==1) draw_heatmap(); 
 					else draw_points(); 
@@ -148,7 +151,11 @@ function load_menu_options(ccid) {
 			var j = $.parseJSON(data); 
 			$('.subnav .menuoptions').html('');
 			if(j.hasOwnProperty("success")) {
-				console.log(j["data"]); 
+				for(var i in j["data"]) {
+					console.log(x); 
+					var x = j["data"][i]; 
+					$('.subnav .menuoptions').append('<li id="u'+x["id"]+'">'+x["user"]+'</li>');
+				}
 				// for(var i=0; i<j["data"].length; i++) {
 				// 	var val = j["data"][i]; 
 				// 	// $('.subnav .menuoptions').append('<li id="u'+val+'">'+val+'</li>'); 

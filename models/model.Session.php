@@ -180,11 +180,11 @@ class Session {
 					$str .= '},'; // details 
 
 				$str .= '"meta":{'; 
-					$str .= '"session_id":"'.$this->session_id.'",'; 
+					$str .= '"session":"'.(($this->name!='') ? $this->name : $this->session_id).'",'; 
 					$str .= '"datetime":"'.$this->accessdatetime.'",'; 
 					$str .= '"student_id":"'.$this->name.'",'; 
 					$str .= '"classcode":"'.$this->classcode->getClassCode().'",'; 
-					$str .= '"ipaddress":"'.$this->ipaddress.'"'; 
+					$str .= '"ipaddr":"'.$this->ipaddress.'"'; 
 					$str .= '},'; // meta 
 
 				$str .= '"input":{'; 
@@ -238,7 +238,7 @@ class Session {
 								foreach($scores as $x) {
 									$j++; 
 
-									$str .= '"'.$x.'_score":['; 
+									$str .= '"'.$x.'":['; 
 
 									$temp = array(); 
 									ksort($r[$x."_scores"]); 
