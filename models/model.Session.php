@@ -50,7 +50,6 @@ class Session {
 	} 
 
 	public function instantiate($sessionid) {
-		
 		$this->session_id = clean($sessionid); 
 		$this->load('ses'); 
 	} 
@@ -162,7 +161,147 @@ class Session {
 	private function setId($int) { $this->id = clean($int); }
 
 	public function toJson() {
-		return '{"error":506,"message":"Data not found."}'; 
+
+		if($this->id==0 || !isset($this->session_id))
+			return '{"error":506,"message":"Data not found."}'; 
+
+		$str = '{"success":"success","message":"Entry found","data":{'; 
+			$str .= '"'.$this->session_id.'":{';
+				$str .= '"details":{'; 
+					$str .= '"completed":'.$this->completed.','; 
+					$str .= '"level":'.$this->last_level.','; 
+					$str .= '"playtime":"'.$this->playtime.'",'; 
+					$str .= '"spent_funds":'.$this->spent_funds.','; 
+					$str .= '"spent_polcap":'.$this->spent_polcap.','; 
+					$str .= '"status":"'.$this->status.'"'; 
+					$str .= '},'; // details 
+
+				$str .= '"meta":{'; 
+					$str .= '"session_id":"'.$this->session_id.'",'; 
+					$str .= '"datetime":"'.$this->accessdatetime.'",'; 
+					$str .= '"student_id":"'.$this->name.'",'; 
+					$str .= '"classcode":"'.$this->classcode->getClassCode().'",'; 
+					$str .= '"ipaddress":"'.$this->ipaddress.'"'; 
+					$str .= '},'; // meta 
+
+				$str .= '"input":{'; 
+					$str .= '"camera_movement":{'; 
+						$str .= '"arrows":'.$this->arrows.','; 
+						$str .= '"drag":'.$this->drag.','; 
+						$str .= '"keys":'.$this->wasdkeys; 
+						$str .= '},'; // camera_movement 
+					$str .= '"navigation":{'; 
+						$str .= '"keys":'.$this->numkeys.','; 
+						$str .= '"minimap":'.$this->minimap; 
+						$str .= '},'; // navigation 
+					$str .= '"panel_time":{'; 
+						$str .= '"closed":'.$this->panel_time_close.','; 
+						$str .= '"open":'.$this->panel_time_open.','; 
+						$str .= '"click_close":'.$this->panel_clicks_close.','; 
+						$str .= '"click_open":'.$this->panel_clicks_open; 
+						$str .= '},'; // panel_time
+					$str .= '"help_time":{'; 
+						$str .= '"closed":'.$this->help_time_close.','; 
+						$str .= '"open":'.$this->help_time_open; 
+						$str .= '},'; // help_time
+					$str .= '"screen_usage":{'; 
+						$str .= '"clicks":'; 
+							$str .= $this->clicks; // clicks
+						$str .= '}'; // screen_usage 
+					$str .= '},'; // input
+
+
+				$str .= '"regions":{'; 
+					
+					$regions = json_decode($this->region_data,true); 
+					$bases = json_decode($this->bases_data,true); 
+					$upgrades = json_decode($this->upgrades_data,true); 
+					$i = 0; 
+
+					foreach($regions as $r) {
+						$j = 0; 
+						$i++; 
+
+						$str .= '"'.$r["initials"].'":{';
+							$str .= '"initials":"'.$r["initials"].'",'; 
+							$str .= '"name":"'.$r["name"].'",'; 
+							$str .= '"order":'.$r["order"].','; 
+							$str .= '"spent_funds":'.$r["spent_funds"].','; 
+							$str .= '"spent_polcap":'.$r["spent_polcap"].','; 
+
+							$str .= '"scores": {';
+
+								$scores = ["environ","economy"]; 
+								foreach($scores as $x) {
+									$j++; 
+
+									$str .= '"'.$x.'_score":['; 
+
+									$temp = array(); 
+									ksort($r[$x."_scores"]); 
+									foreach($r[$x."_scores"] as $score) {
+										foreach ($score as $e) 
+											array_push($temp, $e); 
+									}
+
+									$str .= implode(',',$temp); 
+									$str .= ']'; 
+
+									if($j<count($scores)) $str .= ','; 
+
+								}
+
+								$str .= '},'; // scores
+
+							$str .= '"bases": [';
+
+								$temp = array(); 
+								$inits = $r["initials"]; 
+								foreach($bases[$inits] as $b) {
+									$k = 0; 
+									$name = $b["name"]; 
+
+									$block = '{'; 
+									$block .= '"active":'.(($b["active"]) ? 'true' : 'false').','; 
+									$block .= '"name":"'.$name.'",'; 
+									$block .= '"upgrades":['; 
+
+									// $nodes = array(); 
+									foreach($upgrades[$inits][$name] as $u) {
+										$k++; 
+
+										$block .= '{'; 
+										$block .= '"name":"'.$u["name"].'",'; 
+										$block .= '"active":'.(($u["active"]) ? 'true' : 'false'); 
+										$block .= '}'; 
+
+										if($k<count($upgrades[$inits][$name])) $block .= ','; 
+									}
+
+									// $block .= implode(',',$nodes); 
+									$block .= ']'; 
+									$block .= '}'; 
+									array_push($temp, $block); 
+								}
+
+								$str .= implode(',',$temp); 
+								$str .= ']'; // bases
+
+							$str .= '}'; // particular region
+
+						if($i<count($regions)) $str .= ','; 
+					}
+
+
+					$str .= '}'; // regions
+
+
+				$str .= '}'; // session_id
+				
+			$str .= '}'; // data 
+		$str .= '}'; // json 
+
+		return $str; 
 	}
 
 	private function load($b) {
@@ -199,6 +338,8 @@ class Session {
 				$this->panel_time_close = $row['panel_time_close']; 
 				$this->panel_clicks_open = $row['panel_clicks_open']; 
 				$this->panel_clicks_close = $row['panel_clicks_close']; 
+				$this->help_time_open = $row['help_time_open']; 
+				$this->help_time_close = $row['help_time_close']; 
 				$this->region_data 	= $row['region_data']; 
 				$this->bases_data  	= $row['bases_data']; 
 				$this->upgrades_data = $row['upgrades_data']; 
