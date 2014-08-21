@@ -41,6 +41,8 @@ class Session {
 	public $help_time_open; 
 	public $help_time_close; 
 	public $region_data; 
+	public $bases_data; 
+	public $upgrades_data; 
 	public $classcode; 
 
 	public function __construct($dblink) {
@@ -48,7 +50,7 @@ class Session {
 	} 
 
 	public function instantiate($sessionid) {
-		error_log("instantiating"); 
+		
 		$this->session_id = clean($sessionid); 
 		$this->load('ses'); 
 	} 
@@ -164,8 +166,7 @@ class Session {
 	}
 
 	private function load($b) {
-		error_log("loading"); 
-		$into = false; 
+		
 		try {
 			if($b=='ses') {
 				$s = $this->session_id; 
@@ -199,22 +200,17 @@ class Session {
 				$this->panel_clicks_open = $row['panel_clicks_open']; 
 				$this->panel_clicks_close = $row['panel_clicks_close']; 
 				$this->region_data 	= $row['region_data']; 
+				$this->bases_data  	= $row['bases_data']; 
+				$this->upgrades_data = $row['upgrades_data']; 
 				$this->classcode 	= new Classcode($this->dblink); 
 				$this->classcode->instantiateByCode($row['coursecodes_id']); 
-				$into = true; 
-			}
-
-			if($into) error_log("fetch at least an entry"); 
-			else {
-				error_log("fetched no entries"); 
-				return false; 
 			}
 		} catch (mysqli_sql_exception $e) {
-			error_log("error caught on loading"); 
+			
 			return false; 
 		}
 
-		error_log("loaded successfully"); 
+		
 		return true; 
 	} 
 
@@ -240,10 +236,6 @@ class Session {
 				echo '<b>'.$type.'</b><br>'; 
 				switch($type) {
 					case 'meta':
-						// error_log(html_entity_decode($row['data_data'])); 
-						// foreach($data as $d) {
-						// 	error_log($d); 
-						// }
 						$this->session_id = $data["session"]; 
 						$this->classcode = $data["coursecode"]; 
 						$this->name = $data["studentid"]; 
@@ -300,7 +292,7 @@ class Session {
 						// echo '<span id="spacing">--------</span>help time closed: <span id="value">'.$data["help_time"]["closed"].'</span><br>'; 
 						break; 
 					case 'clicks':
-						error_log("clicks: ".$this->clicks); 
+						
 						if(empty($this->clicks)) $temp = array(); 
 						else $temp = json_decode($this->clicks,true); 
 						
@@ -309,71 +301,112 @@ class Session {
 
 						$this->clicks = json_encode($temp); 
 						
-						echo '<span id="spacing">----</span>index: <span id="value">'.$data["index"].'</span><br>';  
-						echo '<span id="spacing">----</span>clicks: <span id="value">'.count($data["clicks"]).' (count)</span><br>';  
+						// echo '<span id="spacing">----</span>index: <span id="value">'.$data["index"].'</span><br>';  
+						// echo '<span id="spacing">----</span>clicks: <span id="value">'.count($data["clicks"]).' (count)</span><br>';  
 
-						foreach($temp as $click)
-							echo '<span id="spacing">--------</span><span id="value">'.$click[0].','.$click[1].' </span><br>';  
+						// foreach($temp as $click)
+						// 	echo '<span id="spacing">--------</span><span id="value">'.$click[0].','.$click[1].' </span><br>';  
 
 						break; 
 					case 'region':
-						// if(empty($this->region)) $this->region = array(); 
+						if(empty($this->region_data)) $temp = array(); 
+						else $temp = json_decode($this->region_data,true); 
 
-						// $this->region[$this->data["initials"]] = $data; 
+						$r = $data["initials"]; 
+						$temp[$r] = $data; 
 
-						echo '<span id="spacing">----</span>initials: <span id="value">'.$data["initials"].'</span><br>';  
-						echo '<span id="spacing">----</span>name: <span id="value">'.$data["name"].'</span><br>';  
-						echo '<span id="spacing">----</span>order: <span id="value">'.$data["order"].'</span><br>';  
-						echo '<span id="spacing">----</span>spent_funds: <span id="value">'.$data["spent_funds"].'</span><br>';  
-						echo '<span id="spacing">----</span>spent_polcap: <span id="value">'.$data["spent_polcap"].'</span><br>';  
+						$this->region_data = json_encode($temp); 
+
+						echo '<span id="spacing">----</span>new entry: <span id="value">'.$this->region_data.'</span><br>';  
+						// echo '<span id="spacing">----</span>initials: <span id="value">'.$data["initials"].'</span><br>';  
+						// echo '<span id="spacing">----</span>name: <span id="value">'.$data["name"].'</span><br>';  
+						// echo '<span id="spacing">----</span>order: <span id="value">'.$data["order"].'</span><br>';  
+						// echo '<span id="spacing">----</span>spent_funds: <span id="value">'.$data["spent_funds"].'</span><br>';  
+						// echo '<span id="spacing">----</span>spent_polcap: <span id="value">'.$data["spent_polcap"].'</span><br>';  
 						break; 
 					case 'environ_scores':
+						// assumes previous transactions were successful and 
+						// region entry already exists 
+						$r = $data["region"]; 
+						$temp = json_decode($this->region_data,true); 
+						$temp[$r]["environ_scores"] = array(); 
+						$temp[$r]["environ_scores"][$data["index"]] = $data["environ_scores"]; 
 
-						// if(!isset($this->region[$this->data["region"]]["environ_scores"])) 
-						// 	$this->region[$this->data["region"]]["environ_scores"] = array(); 
+						$this->region_data = json_encode($temp); 
 
-						// array_push($this->region[$this->data["region"]]["environ_scores"], $data["environ_scores"]); 
-
-						echo '<span id="spacing">----</span>region: <span id="value">'.$data["region"].'</span><br>';  
-						echo '<span id="spacing">----</span>index: <span id="value">'.$data["index"].'</span><br>';  
-						echo '<span id="spacing">----</span>environ_scores: <span id="value">'.count($data["environ_scores"]).' (count)</span><br>';  
+						echo '<span id="spacing">----</span>new entry: <span id="value">'.$this->region_data.'</span><br>';  
+						// echo '<span id="spacing">----</span>region: <span id="value">'.$data["region"].'</span><br>';  
+						// echo '<span id="spacing">----</span>index: <span id="value">'.$data["index"].'</span><br>';  
+						// echo '<span id="spacing">----</span>environ_scores: <span id="value">'.count($data["environ_scores"]).' (count)</span><br>';  
 						break; 
 					case 'economy_scores':
+						// assumes previous transactions were successful and 
+						// region entry already exists 
+						$r = $data["region"]; 
+						$temp = json_decode($this->region_data,true); 
+						$temp[$r]["economy_scores"] = array(); 
+						$temp[$r]["economy_scores"][$data["index"]] = $data["economy_scores"]; 
 
-						// if(!isset($this->region[$this->data["region"]]["economy_scores"])) 
-						// 	$this->region[$this->data["region"]]["economy_scores"] = array(); 
+						$this->region_data = json_encode($temp); 
 
-						// array_push($this->region[$this->data["region"]]["economy_scores"], $data["economy_scores"]); 
-
-						echo '<span id="spacing">----</span>region: <span id="value">'.$data["region"].'</span><br>';  
-						echo '<span id="spacing">----</span>index: <span id="value">'.$data["index"].'</span><br>';  
-						echo '<span id="spacing">----</span>economy_scores: <span id="value">'.count($data["economy_scores"]).' (count)</span><br>';  
+						echo '<span id="spacing">----</span>new entry: <span id="value">'.$this->region_data.'</span><br>';  
+						// echo '<span id="spacing">----</span>region: <span id="value">'.$data["region"].'</span><br>';  
+						// echo '<span id="spacing">----</span>index: <span id="value">'.$data["index"].'</span><br>';  
+						// echo '<span id="spacing">----</span>economy_scores: <span id="value">'.count($data["economy_scores"]).' (count)</span><br>';  
 						break; 
 					case 'bases':
+						// assumes previous transactions were successful and 
+						// region entry already exists 
+						$r = $data["region"]; 
 
-						// if(!isset($this->region[$this->data["region"]]["bases"])) 
-						// 	$this->region[$this->data["region"]]["bases"] = array(); 
+						// bases 
+						// -----
+						if(empty($this->bases_data)) $b = array(); 
+						else $b = json_decode($this->bases_data,true); 
 
-						// $temp = array(); 
-						// $temp["name"] = $data["name"]; 
-						// $temp["active"] = $data["active"]; 
-						// $temp["upgrades"] = $data["upgrades"]; 
-						// array_push($this->region[$this->data["region"]]["bases"], $temp); 
-
-						echo '<span id="spacing">----</span>region: <span id="value">'.$data["region"].'</span><br>';  
-						echo '<span id="spacing">----</span>name: <span id="value">'.$data["name"].'</span><br>';  
-						echo '<span id="spacing">----</span>active: <span id="value">'.(($data["active"]) ? 'true' : 'false').'</span><br>';  
-						echo '<span id="spacing">----</span>upgrades: <span id="value">'.count($data["upgrades"]).' (count)</span><br>';  
+						$temp = array(); 
+						foreach($data["upgrades"] as $x) 
+							array_push($temp,$x); 
 						
-						foreach($data["upgrades"] as $u) {
-							echo '<span id="spacing">--------</span>name: <span id="value">'.$u["name"].'</span><br>'; 
-							echo '<span id="spacing">--------</span>active: <span id="value">'.(($u["active"]) ? 'true' : 'false').'</span><br>'; 
+						unset($data["upgrades"]); 
+
+						if(!isset($b[$r])) $b[$r] = array(); 
+
+						unset($data["region"]); 
+						array_push($b[$r],$data); 
+
+						$this->bases_data = json_encode($b); 
+
+						// upgrades 
+						// --------
+						if(empty($this->upgrades_data)) $u = array(); 
+						else $u = json_decode($this->upgrades_data,true); 
+
+						if(!isset($u[$r])) $u[$r] = array(); 
+						if(!isset($u[$r][$data["name"]])) $u[$r][$data["name"]] = array(); 
+
+						foreach($temp as $x) {
+							
+							if(!in_array($x,$u[$r][$data["name"]]))
+								array_push($u[$r][$data["name"]],$x); 
 						}
+
+						$this->upgrades_data = json_encode($u);  
+						
+						echo '<span id="spacing">----</span>new entry: <span id="value">'.$this->bases_data.'</span><br>';  
+						echo '<span id="spacing">----</span>its upgrades: <span id="value">'.$this->upgrades_data.'</span><br>'; 
+						// echo '<span id="spacing">----</span>region: <span id="value">'.$data["region"].'</span><br>';  
+						// echo '<span id="spacing">----</span>name: <span id="value">'.$data["name"].'</span><br>';  
+						// echo '<span id="spacing">----</span>active: <span id="value">'.(($data["active"]) ? 'true' : 'false').'</span><br>';  
+						// echo '<span id="spacing">----</span>upgrades: <span id="value">'.count($data["upgrades"]).' (count)</span><br>';  
+						
+						// foreach($data["upgrades"] as $u) {
+						// 	echo '<span id="spacing">--------</span>name: <span id="value">'.$u["name"].'</span><br>'; 
+						// 	echo '<span id="spacing">--------</span>active: <span id="value">'.(($u["active"]) ? 'true' : 'false').'</span><br>'; 
+						// }
 
 						break; 
 					case 'blank':
-						// echo '<span id="spacing">----</span>: <span id="value">'.$data[""].'</span><br>';  
-						// break; 
 					default: 
 						// echo $row['data_data'].'<br>'; 
 						break; 
@@ -391,11 +424,11 @@ class Session {
 
 			}
 		} catch (mysqli_sql_exception $e) {
-			error_log("error saving temp data"); 
+			
 			return false; 
 		}
 
-		// $this->remove_temp_data(); 
+		$this->remove_temp_data(); 
 
 		return false; 
 	}
@@ -436,32 +469,33 @@ class Session {
 		$pcc = $this->panel_clicks_close; 
 		$hto = $this->help_time_open; 
 		$htc = $this->help_time_close; 
-		// $clicks = $this->clicks; 
+		$reg = $this->region_data; 
+		$bas = $this->bases_data; 
+		$ups = $this->upgrades_data; 
 
 		if($id==0) {
 			try {
-				error_log("inserting"); 
+				
 				$query = "INSERT INTO sessions 
-					(sessionid,accessdatetime,name,ipaddress,citystate,spent_funds,spent_polcap,last_level,playtime,status,completed,clicks,drag,arrows,wasdkeys,minimap,numkeys,panel_time_open,panel_time_close,panel_clicks_open,panel_clicks_close,help_time_open,help_time_close,region_data,coursecodes_id) VALUES 
-					('$sid',	'$dt',		'$name',	'$ip','',		'$funds',	'$polcap',	'$level',	'$play','$status','$comp','',	'$drag','$arrows','$wasd','$mini','$numk','$pto',	'$ptc',				'$pco',				'$pcc',			'$hto',			'$htc',			'',			'$cc')"; 
-				// error_log($query); 
+					(sessionid,accessdatetime,name,ipaddress,citystate,spent_funds,spent_polcap,last_level,playtime,status,completed,clicks,drag,arrows,wasdkeys,minimap,numkeys,panel_time_open,panel_time_close,panel_clicks_open,panel_clicks_close,help_time_open,help_time_close,region_data,bases_data,upgrades_data,coursecodes_id) VALUES 
+					('$sid',	'$dt',		'$name',	'$ip','',		'$funds',	'$polcap',	'$level',	'$play','$status','$comp','',	'$drag','$arrows','$wasd','$mini','$numk','$pto',	'$ptc',				'$pco',				'$pcc',			'$hto',			'$htc',			'$reg',		'$bas',		'$ups',		'$cc')"; 
 				mysqli_query($this->dblink,$query); 
 			} catch(mysqli_sql_exception $e) {
-				error_log("caught error on insert"); 
+				
 				return false; 
 			}
 
 			$count = 0; 
 			$result = mysqli_query($this->dblink,"SELECT * FROM sessions WHERE sessionid='$sid'"); 
 			while($row=mysqli_fetch_array($result)) {
-				error_log("loading after save"); 
+				
 				$this->load('ses'); 
 				$count++; 
 			}
-			error_log("count of loadable entries after save: ".$count); 
+			
 		} else {
 			try {
-				error_log("updating"); 
+				
 				$result = mysqli_query($this->dblink,"UPDATE sessions SET 
 					sessionid='$sid', 
 					name='$name', 
@@ -484,21 +518,23 @@ class Session {
 				 	panel_clicks_close='$pcc', 
 				 	help_time_open='$hto', 
 				 	help_time_close='$htc', 
-				 	region_data='', 
+				 	region_data='$reg', 
+				 	bases_data='$bas', 
+				 	upgrades_data='$ups', 
 				 	coursecodes_id='$cc'
 
 					WHERE id='$id'
 					"); 
 
-				error_log(($result) ? "true" : "false"); 
+				
 				return ($result) ? true : false; 
 			} catch(mysqli_sql_exception $e) {
-				error_log("caught error on update"); 
+				
 				return false; 
 			}
 		}
 
-		error_log("successful save ".$this->id); 
+		
 		return true; 
 	}
 } 
@@ -601,8 +637,6 @@ class Classcode {
 		$cc = $this->classcode; 
 		$user = $this->user->getId(); 
 		$name = $this->cname; 
-
-		// error_log($id.' '.$cc.' '.$user.' '.$name); 
 
 		if($id==0) {
 			try { 

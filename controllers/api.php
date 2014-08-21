@@ -61,7 +61,7 @@ if(isset($_GET) || isset($_REQUEST)) {
 			break; 
 		case 'test':
 			require_once('../models/model.Session.php'); 
-			$sid = 'b314cdfc1744f7c142a894a2695180d3'; 
+			$sid = '11ce22a40534c71d758eb4cdb87ca7ef'; 
 			$s = new Session($dblink); 
 			$s->save_temp_data($sid); 
 			break; 
