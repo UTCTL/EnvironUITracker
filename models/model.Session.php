@@ -200,7 +200,7 @@ class Session {
 				$this->panel_clicks_close = $row['panel_clicks_close']; 
 				$this->region_data 	= $row['region_data']; 
 				$this->classcode 	= new Classcode($this->dblink); 
-				$this->classcode->instantiateByCode($row['classcodes_id']); 
+				$this->classcode->instantiateByCode($row['coursecodes_id']); 
 				$into = true; 
 			}
 
@@ -227,23 +227,8 @@ class Session {
 	}
 
 	public function save_temp_data($sid) {
-		// $all = array(); 
-		// $data = array(); 
-
-		// try {
-		// 	$result = mysqli_query($this->dblink,"SELECT * FROM sessions_temp WHERE session_id='$sid'"); 
-		// 	while($row = mysqli_fetch_array($result)) {
-		// 		array_push($all,$row); 
-		// 	}
-		// } catch (mysqli_sql_exception $e) {
-		// 	return false; 
-		// }
-
-		// $all = 
-
-		$this->instantiate($sid); 
-
 		$all = array(); 
+		$this->instantiate($sid); 
 
 		try {
 			$result = mysqli_query($this->dblink, "SELECT * FROM sessions_temp WHERE session_id='$sid'"); 
@@ -373,13 +358,26 @@ class Session {
 			return false; 
 		}
 
+		$this->remove_temp_data(); 
+
 		return false; 
+	}
+
+	private function remove_temp_data() {
+		try {
+			$sid = $this->session_id; 
+			mysqli_query($this->dblink, "DELETE FROM sessions_temp WHERE session_id='$sid'"); 
+		} catch(mysqli_sql_exception $e) {
+			return false; 
+		}
+
+		return true; 
 	}
 
 	public function save() {
 		$id = $this->id; 
 		$sid = $this->session_id; 
-		$cc = (($this->classcode!='') ? $this->classcode->getClassCode() : 'NULL'); 
+		$cc = (($this->classcode!='') ? $this->classcode->getClassCode() : ''); 
 		$ip = $this->ipaddress; 
 		$name = $this->name; 
 		$dt = $this->accessdatetime; 
@@ -406,8 +404,8 @@ class Session {
 			try {
 				error_log("inserting"); 
 				$query = "INSERT INTO sessions 
-					(sessionid,accessdatetime,name,ipaddress,citystate,spent_funds,spent_polcap,last_level,playtime,status,completed,clicks,drag,arrows,wasdkeys,minimap,numkeys,panel_time_open,panel_time_close,panel_clicks_open,panel_clicks_close,help_time_open,help_time_close,region_data,classcodes_id) VALUES 
-					('$sid',	'$dt',		'$name',	'$ip','',		'$funds',	'$polcap',	'$level',	'$play','$status','$comp','',	'$drag','$arrows','$wasd','$mini','$numk','$pto',	'$ptc',				'$pco',				'$pcc',			'$hto',			'$htc',			'',			$cc)"; 
+					(sessionid,accessdatetime,name,ipaddress,citystate,spent_funds,spent_polcap,last_level,playtime,status,completed,clicks,drag,arrows,wasdkeys,minimap,numkeys,panel_time_open,panel_time_close,panel_clicks_open,panel_clicks_close,help_time_open,help_time_close,region_data,coursecodes_id) VALUES 
+					('$sid',	'$dt',		'$name',	'$ip','',		'$funds',	'$polcap',	'$level',	'$play','$status','$comp','',	'$drag','$arrows','$wasd','$mini','$numk','$pto',	'$ptc',				'$pco',				'$pcc',			'$hto',			'$htc',			'',			'$cc')"; 
 				// error_log($query); 
 				mysqli_query($this->dblink,$query); 
 			} catch(mysqli_sql_exception $e) {
@@ -428,34 +426,34 @@ class Session {
 				error_log("updating"); 
 				$result = mysqli_query($this->dblink,"UPDATE sessions SET 
 					sessionid='$sid', 
-					accessdatetime='$dt', 
 					name='$name', 
-					ipaddress='$ip', 
-					spent_funds='$funds', 
-					spent_polcap='$polcap', 
-					last_level='$level', 
-					playtime='$play', 
-					status='$status', 
-					completed='$completed', 
-					clicks='', 
-					drag='$drag', 
-					arrows='$arrows', 
-					wasdkeys='$wasd', 
-					minimap='$mini', 
-					numkeys='$numk', 
-					panel_time_open='$pto', 
-					panel_time_close='$ptc', 
-					panel_clicks_open='$pco', 
-					panel_clicks_close='$pcc', 
-					help_time_open='$hto', 
-					help_time_close='$htc', 
-					region_data='', 
-					classcodes_id='$cc'
+				 	ipaddress='$ip', 
+				 	spent_funds='$funds', 
+				 	spent_polcap='$polcap', 
+				 	last_level='$level', 
+				 	playtime='$play', 
+				 	status='$status', 
+				 	completed='$comp', 
+				 	clicks='', 
+				 	drag='$drag', 
+				 	arrows='$arrows', 
+				 	wasdkeys='$wasd', 
+				 	minimap='$mini', 
+				 	numkeys='$numk', 
+				 	panel_time_open='$pto', 
+				 	panel_time_close='$ptc', 
+				 	panel_clicks_open='$pco', 
+				 	panel_clicks_close='$pcc', 
+				 	help_time_open='$hto', 
+				 	help_time_close='$htc', 
+				 	region_data='', 
+				 	coursecodes_id='$cc'
 
 					WHERE id='$id'
 					"); 
 
-
+				error_log(($result) ? "true" : "false"); 
+				return ($result) ? true : false; 
 			} catch(mysqli_sql_exception $e) {
 				error_log("caught error on update"); 
 				return false; 

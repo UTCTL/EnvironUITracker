@@ -28,8 +28,10 @@ if(isset($_GET) || isset($_REQUEST)) {
 			require_once('../models/model.Session.php'); 
 			$s = new Session($dblink); 
 
-			if(clean($_GET['type'])=="end") $s->save_temp_data($session_id); 
-			else $s->store_temp_data($session_id, $datatype, $jsondata); 
+			if(clean($_GET['type'])=="end") {
+				error_log('ending transmission'); 
+				$s->save_temp_data($session_id); 
+			} else $s->store_temp_data($session_id, $datatype, $jsondata); 
 
 			break; 
 		case 'pull': 
@@ -59,7 +61,7 @@ if(isset($_GET) || isset($_REQUEST)) {
 			break; 
 		case 'test':
 			require_once('../models/model.Session.php'); 
-			$sid = '051fbcaa532bebaa623cf7e0208f517e'; 
+			$sid = 'bbf1d4dd1e8c3e7b1f83aa6ff15564e1'; 
 			$s = new Session($dblink); 
 			$s->save_temp_data($sid); 
 			break; 
