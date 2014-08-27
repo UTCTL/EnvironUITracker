@@ -260,34 +260,37 @@ class Session {
 
 								$temp = array(); 
 								$inits = $r["initials"]; 
-								foreach($bases[$inits] as $b) {
-									$k = 0; 
-									$name = $b["name"]; 
 
-									$block = '{'; 
-									$block .= '"active":'.(($b["active"]) ? 'true' : 'false').','; 
-									$block .= '"name":"'.$name.'",'; 
-									$block .= '"upgrades":['; 
+								if($inits!='W') {
+									foreach($bases[$inits] as $b) {
+										$k = 0; 
+										$name = $b["name"]; 
 
-									// $nodes = array(); 
-									foreach($upgrades[$inits][$name] as $u) {
-										$k++; 
+										$block = '{'; 
+										$block .= '"active":'.(($b["active"]) ? 'true' : 'false').','; 
+										$block .= '"name":"'.$name.'",'; 
+										$block .= '"upgrades":['; 
 
-										$block .= '{'; 
-										$block .= '"name":"'.$u["name"].'",'; 
-										$block .= '"active":'.(($u["active"]) ? 'true' : 'false'); 
+										// $nodes = array(); 
+										foreach($upgrades[$inits][$name] as $u) {
+											$k++; 
+
+											$block .= '{'; 
+											$block .= '"name":"'.$u["name"].'",'; 
+											$block .= '"active":'.(($u["active"]) ? 'true' : 'false'); 
+											$block .= '}'; 
+
+											if($k<count($upgrades[$inits][$name])) $block .= ','; 
+										}
+
+										// $block .= implode(',',$nodes); 
+										$block .= ']'; 
 										$block .= '}'; 
-
-										if($k<count($upgrades[$inits][$name])) $block .= ','; 
+										array_push($temp, $block); 
 									}
 
-									// $block .= implode(',',$nodes); 
-									$block .= ']'; 
-									$block .= '}'; 
-									array_push($temp, $block); 
-								}
-
-								$str .= implode(',',$temp); 
+									$str .= implode(',',$temp); 
+								}	
 								$str .= ']'; // bases
 
 							$str .= '}'; // particular region

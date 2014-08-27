@@ -8,7 +8,7 @@ function hide_sections() {
 // display gather data for a particular session 
 function display_data() {
 	clear_grid_blocks();
-	console.log("displaying data"); 
+	// console.log("displaying data"); 
 
 	$('.regionbuttons .button#'+selected_region).click(); 
 
@@ -29,7 +29,7 @@ function display_data() {
 			$('.meta #iploc b').html(iploc); 
 		}, 
 		error: function(data) {
-			console.log(data);
+			// console.log(data);
 		}
 	}); 
 
@@ -83,8 +83,21 @@ function display_data() {
 		$('.panel#off .label').removeClass("negative").addClass("positive"); 
 	} 
 
+	console.log("total for panel: "+total); 
+
 	$('.panel#on .label').html(total+"%"); 
 	$('.panel#off .label').html((100-total)+"%"); 
+	// $('.panel_clicks').html("Panel has been opened x times and closed y times."); 
+
+
+	var open = session["input"]["panel_time"]["click_open"]; 
+	var close = session["input"]["panel_time"]["click_close"]; 
+	total = open+close; 
+	panel_clicks_data("open",open,total); 
+	panel_clicks_data("close",close,total); 
+	$('.panel_clicks#open .label').html(open); 
+	$('.panel_clicks#close .label').html(close); 
+
 
 	// SESSION navigation 
 	// console.log(session); 
@@ -152,6 +165,33 @@ function move_camera_data(type,value,total) {
 		// console.log(type+" "+value+" "+get_color_in_between(p,COLORS_MAIN_LIGHT,COLORS_MAIN_DARK) );
 		$('.movement#'+type+' .bargraph').removeClass('zero'); 
 		$('.movement#'+type+' .bargraph .bar .model').animate({
+			'width':Math.round(35+(415*p))+'px' 
+		},700,function() {}).css({
+			'background-color':get_color_in_between(p,COLORS_MAIN_LIGHT,COLORS_MAIN_DARK) 
+		}); 
+	}
+}
+
+
+
+
+
+// show data panel open/close clicks
+function panel_clicks_data(type,value,total) { 
+	var p = value/total; 
+	var v = Math.round(p*100); 
+	$('.panel_clicks#'+type+' .label').html(v+"%"); 
+	if(v==0) {
+		$('.panel_clicks#'+type+' .bargraph').addClass('zero'); 
+		$('.panel_clicks#'+type+' .bargraph .bar .model').animate({
+			'width':'35px' 
+		},700,function() {}).css({
+			'background-color':'#bbb'
+		}); 
+	} else { 
+		// console.log(type+" "+value+" "+get_color_in_between(p,COLORS_MAIN_LIGHT,COLORS_MAIN_DARK) );
+		$('.panel_clicks#'+type+' .bargraph').removeClass('zero'); 
+		$('.panel_clicks#'+type+' .bargraph .bar .model').animate({
 			'width':Math.round(35+(415*p))+'px' 
 		},700,function() {}).css({
 			'background-color':get_color_in_between(p,COLORS_MAIN_LIGHT,COLORS_MAIN_DARK) 
@@ -310,11 +350,14 @@ function focus_regions(data) {
 	})
 
 	d3.range(data.length).map(function(i) {
+		// console.log(data[i]["value"]+'/'+total); 
 		var x = data[i]["coords"][0], 
 			y = data[i]["coords"][1], 
-			f = data[i]["value"]/total, 
+			f = (total==0) ? 0 : data[i]["value"]/total, 
 			m = f/(max["value"]/total), 
-			r = 11 + (f*70); 
+			r = (isNaN(f)) ? 11 : 11 + (f*70); 
+
+		// console.log('11 + ('+f+'*70) = '+r); 
 
 		vis.append('circle')
 		   .attr('cx',x) 
@@ -479,6 +522,7 @@ function show_region_data(id) {
 		var x = $('.distribution svg').width()/2 + dist*Math.cos(i*theta/180*Math.PI + Math.PI), 
 			y = $('.distribution svg').height()/2 + dist*Math.sin(i*theta/180*Math.PI + Math.PI); 
 
+		// console.log('('+x+','+y+')'); 
 
 		var upgrades = region["bases"][i]["upgrades"]; 
 		var uweight = 0; 
@@ -486,13 +530,13 @@ function show_region_data(id) {
 			uweight += (upgrades[j]["active"]) ? 1 : 0; 
 		}); 
 
-		var ratio = uweight / upgrades.length; 
+		var ratio = (upgrades.length==0) ? 0 : uweight / upgrades.length; 
 
 		svg.append('circle')
 		   .attr('cx',x) 
 		   .attr('cy',y) 
-		   .attr('r',40+(ratio*20))
-		   .attr('fill',get_color_in_between(ratio,COLORS_MAIN_DARK,COLORS_MAIN_LIGHT)) 
+		   .attr('r',30+(ratio*20))
+		   .attr('fill',get_color_in_between(ratio,'#006261','#79ebed')) 
 		   .attr('id','base'+i); 
 	}); 
 

@@ -86,11 +86,25 @@ HTMLnav($page);
 				<div class="panel" id="off">
 					<span class="label negative">0%</span> 
 				</div> 
+				<br><br>
+				<h2>Panel Clicks</h2>
+				<div class="panel_clicks" id="open">
+					<div class="icon"></div>
+					<div class="bargraph">
+						<div class="bar"><div class="model"></div><span class="label"></span></div>
+					</div>
+				</div>
+				<div class="panel_clicks" id="close">
+					<div class="icon"></div>
+					<div class="bargraph">
+						<div class="bar"><div class="model"></div><span class="label"></span></div>
+					</div>
+				</div>
 			</content>
 
 
 
-			<content class="half box" ctype="navigation">
+			<content class="half box" ctype="navigation" style="vertical-align:top; ">
 				<h2>Navigation</h2> 
 				<div class="navigation">
 					<div class="bargraph">
@@ -101,6 +115,20 @@ HTMLnav($page);
 					</div>
 				</div>
 			</content> 
+
+
+
+		<!-- 	<content class="half box" ctype="navigation">
+				<h2>Navigation</h2> 
+				<div class="navigation">
+					<div class="bargraph">
+						<div class="bar">
+							<div style="width:314px;" id="minimap"></div><span class="label" id="mini">Minimap 72%</span>
+							<div style="width:116px; left:334px;" id="regkeys"></div><span class="label" id="regk"style="left:345px">Keys 18%</span>
+						</div>
+					</div>
+				</div>
+			</content>  -->
 
 
 
