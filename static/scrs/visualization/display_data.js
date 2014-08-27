@@ -92,7 +92,7 @@ function display_data() {
 
 	var open = session["input"]["panel_time"]["click_open"]; 
 	var close = session["input"]["panel_time"]["click_close"]; 
-	total = open+close; 
+	total = Math.max(open,close); 
 	panel_clicks_data("open",open,total); 
 	panel_clicks_data("close",close,total); 
 	$('.panel_clicks#open .label').html(open); 
