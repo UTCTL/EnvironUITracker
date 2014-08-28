@@ -41,6 +41,9 @@ function HTMLhead($page) {
 } ?>
  <? if($page=="play") { ?>
  <link rel="stylesheet" type="text/css" href="static/stys/play.css">
+ <script type="text/javascript">
+ var u = null; 
+ </script> 
  <? 
 } ?>
  <? if($page=="tracker") { ?>

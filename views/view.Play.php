@@ -73,7 +73,7 @@ HTMLnav($page);
           }
         });
         // u.initPlugin(jQuery("#unityPlayer")[0], "static/game/Environ_test.unity3d");
-        u.initPlugin(jQuery("#unityPlayer")[0], "static/game/Environ_test.unity3d");
+        u.initPlugin(jQuery("#unityPlayer")[0], "static/game/test_streamed.unity3d");
       });
     -->
     </script>

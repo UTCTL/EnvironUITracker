@@ -4,6 +4,8 @@ var GRB = '#e2ffff';
 
 $(document).ready(function() {
 	// play_for_credit(); 
+	$('.curtain input.button').show(); 
+	$('.curtain input.ibutton').hide(); 
 }); 
 
 function end_screen(uname) {
@@ -29,7 +31,7 @@ function play_for_credit() {
 		var idnum = $('.value#idnum').val(); 
 		
 		if(validate_ccode(ccode,idnum)) { 
-			u.getUnity().SendMessage("globe","PlayForCredit",ccode,idnum); 
+			u.getUnity().SendMessage("globe","PlayForCredit",ccode+"|"+idnum); 
 		} 
 	});
 } 
@@ -69,6 +71,8 @@ function validate_ccode(ccode,idnum) {
 		$('.curtain input.value#idnum').css({ 'background-color':RED }); 
 		icheck = false; 
 	}
+
+	console.log("CCHECK is "+CCHECK+" and icheck is "+icheck); 
 
 	if(CCHECK && icheck) {
 		$('.curtain input.button').show(); 
