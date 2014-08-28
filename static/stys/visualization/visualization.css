@@ -363,7 +363,7 @@ svg { z-index:20; }
 			.movement .zero .model, 
 			.panel_clicks .zero .model { background-color:#bbb; }
 			.movement .zero .label, 
-			.panel_clicks .zero .model { text-shadow:0px 0px 5px rgba(0,0,0,0.4);  }
+			.panel_clicks .zero .label { text-shadow:0px 0px 5px rgba(0,0,0,0.4);  }
 
 
 
@@ -398,31 +398,36 @@ svg { z-index:20; }
 */ 
 
 /* -= Navigation =- */
-.navigation { display:block; 
+.navigation, 
+.help_time { display:block; 
 		padding:0px; 
 		padding-bottom:15px; } 
 
-		.navigation .bargraph { display:inline-block; 
+		.navigation .bargraph, 
+		.help_time .bargraph { display:inline-block; 
 			position:relative; 
 			top:0px; 
 			width:450px; height:40px; 
 			padding:40px; 
 			padding-top:20px; }
 
-		.navigation .bar { display:block; 
+		.navigation .bar, 
+		.help_time .bar { display:block; 
 			width:450px; height:40px; 
 			background-color:#dff3ff; /*#cff1ff; */
 			background-image:url('../../imgs/content.png');
 			position:absolute; 
 			border-radius:40px; }
 
-			.navigation .bar div { display:block; 
+			.navigation .bar div, 
+			.help_time .bar div { display:block; 
 				width:350px; 
 				height:40px; 
 				position:absolute; 
 				top:0px; left:0px; }
 
-			.navigation .bar .label { display:inline-block; 
+			.navigation .bar .label,
+			.help_time .bar .label { display:inline-block; 
 				color:#fff; 
 				text-shadow:0px 0px 5px rgba(40,138,177,0.9);  
 				font-size:12pt; 
@@ -430,15 +435,13 @@ svg { z-index:20; }
 				top:10px; left:6px; 
 				z-index:400; }
 
-				.movement .zero div, 
-				.panel_clicks .zero div { background-color:#bbb; }
-				.movement .zero .label, 
-				.panel_clicks .zero .label { text-shadow:0px 0px 5px rgba(0,0,0,0.4);  }
-
-				.navigation .bar div { z-index:200;  }
-				.navigation .bar #minimap { border-radius:40px 0px 0px 40px; 
+				.navigation .bar div, 
+				.help_time .bar div { z-index:200;  }
+				.navigation .bar #minimap, 
+				.help_time .bar #help_open { border-radius:40px 0px 0px 40px; 
 					background-color:#54c3c1; }
-				.navigation .bar #regkeys { border-radius:0px 40px 40px 0px; 
+				.navigation .bar #regkeys, 
+				.help_time .bar #help_closed { border-radius:0px 40px 40px 0px; 
 					background-color:#79dad8;}
 
 

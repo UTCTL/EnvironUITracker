@@ -43,7 +43,7 @@ function display_data() {
 	$('.meta #level b').html(session["details"]["level"]); 
 	$('.meta #time b').html(get_time(session["details"]["playtime"])); 
 	$('.meta #status b').html(win+" | "+los+" | "+qui); 
-	$('.meta #completed b').html(session["details"]["completed"]+"%"); 
+	$('.meta #completed b').html((Math.round(session["details"]["completed"]*1000)/10)+"%"); 
 	 
 
 	// SESSION screen usage 
@@ -72,7 +72,10 @@ function display_data() {
 	 	move_camera_data(tags[i],data[tags[i]],total); 
 
 	// SESSION panel time 
-	total = session["input"]["panel_time"]["open"]+session["input"]["panel_time"]["closed"]; 
+	var open = Math.abs(session["input"]["panel_time"]["open"]); 
+	var close = Math.abs(session["input"]["panel_time"]["closed"]); 
+	// total = session["input"]["panel_time"]["open"]+session["input"]["panel_time"]["closed"]; 
+	total = open+close; 
 	total = Math.round(session["input"]["panel_time"]["open"]*100/total); 
 
 	if(total>=50) {
@@ -90,13 +93,31 @@ function display_data() {
 	// $('.panel_clicks').html("Panel has been opened x times and closed y times."); 
 
 
-	var open = session["input"]["panel_time"]["click_open"]; 
-	var close = session["input"]["panel_time"]["click_close"]; 
+	open = session["input"]["panel_time"]["click_open"]; 
+	close = session["input"]["panel_time"]["click_close"]; 
 	total = Math.max(open,close); 
 	panel_clicks_data("open",open,total); 
 	panel_clicks_data("close",close,total); 
-	$('.panel_clicks#open .label').html(open); 
-	$('.panel_clicks#close .label').html(close); 
+	console.log("open: "+open+", close: "+close); 
+	// $('.panel_clicks#open .label').html(open); 
+	// $('.panel_clicks#close .label').html(close); 
+
+
+	// SESSION help time
+	var help_open = Math.abs(session["input"]["help_time"]["open"]), 
+		help_closed = Math.abs(session["input"]["help_time"]["closed"]); 
+	total = help_open+help_closed; 
+	ratio = help_open/total; 
+
+	$('.help_time #help_open').animate({ 'width':(430*ratio)+'px' }); 
+	$('.help_time .label#open').html('Open '+(Math.round(ratio*100))+'%'); 
+
+	$('.help_time #help_closed').animate({ 
+		'width':(430*(1-ratio))+'px', 
+		'left':((430*ratio)+20)+'px' 
+	}); 
+	$('.help_time .label#closed').html('Closed '+(Math.round((1-ratio)*100))+'%'); 
+
 
 
 	// SESSION navigation 
@@ -178,9 +199,9 @@ function move_camera_data(type,value,total) {
 
 // show data panel open/close clicks
 function panel_clicks_data(type,value,total) { 
-	var p = value/total; 
-	var v = Math.round(p*100); 
-	$('.panel_clicks#'+type+' .label').html(v+"%"); 
+	var p = ((total==0) ? 0 : value/total); 
+	var v = value; 
+	$('.panel_clicks#'+type+' .label').html(v); 
 	if(v==0) {
 		$('.panel_clicks#'+type+' .bargraph').addClass('zero'); 
 		$('.panel_clicks#'+type+' .bargraph .bar .model').animate({

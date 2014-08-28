@@ -54,6 +54,35 @@ HTMLnav($page);
 					</div>
 				</div> 
 			</content> 
+
+
+
+			<content class="half box" ctype="navigation" style="vertical-align:top; ">
+				<h2>Navigation</h2> 
+				<div class="navigation">
+					<div class="bargraph">
+						<div class="bar">
+							<div style="width:314px;" id="minimap"></div><span class="label" id="mini">Minimap 72%</span>
+							<div style="width:116px; left:334px;" id="regkeys"></div><span class="label" id="regk" style="left:345px">Keys 18%</span>
+						</div>
+					</div>
+				</div>
+			</content> 
+
+
+
+			<content class="half box" ctype="help_time">
+				<h2>Help Time</h2> 
+				<div class="help_time">
+					<div class="bargraph">
+						<div class="bar">
+							<div style="width:314px;" id="help_open"></div><span class="label" id="open">Open 72%</span>
+							<div style="width:116px; left:334px;" id="help_closed"></div><span class="label" id="closed" style="left:345px">Closed 18%</span>
+						</div>
+					</div>
+				</div>
+			</content> 
+
 			<content class="half box" ctype="cammov">
 				<h2>Camera Movement</h2>
 				<div class="movement" id="drag">
@@ -101,34 +130,6 @@ HTMLnav($page);
 					</div>
 				</div>
 			</content>
-
-
-
-			<content class="half box" ctype="navigation" style="vertical-align:top; ">
-				<h2>Navigation</h2> 
-				<div class="navigation">
-					<div class="bargraph">
-						<div class="bar">
-							<div style="width:314px;" id="minimap"></div><span class="label" id="mini">Minimap 72%</span>
-							<div style="width:116px; left:334px;" id="regkeys"></div><span class="label" id="regk"style="left:345px">Keys 18%</span>
-						</div>
-					</div>
-				</div>
-			</content> 
-
-
-
-		<!-- 	<content class="half box" ctype="navigation">
-				<h2>Navigation</h2> 
-				<div class="navigation">
-					<div class="bargraph">
-						<div class="bar">
-							<div style="width:314px;" id="minimap"></div><span class="label" id="mini">Minimap 72%</span>
-							<div style="width:116px; left:334px;" id="regkeys"></div><span class="label" id="regk"style="left:345px">Keys 18%</span>
-						</div>
-					</div>
-				</div>
-			</content>  -->
 
 
 
