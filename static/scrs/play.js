@@ -8,11 +8,22 @@ $(document).ready(function() {
 	$('.curtain input.ibutton').hide(); 
 }); 
 
-function end_screen(uname) {
-	console.log("ended game by "+uname); 
+function unitylog() {
+	// str = typeof str!=='undefined' ? str : 'void message'; 
+	console.log("=unitylog="); 
+	alert("=unitylog="); 
+
+}
+
+function end_screen() {
+	// uname = typeof uname!=='undefined' ? uname : 'anonymous'; 
+	console.log("ended game"); 
+	alert("ended game"); 
 }
 
 function play_for_credit() { 
+	// console.log("play for credit"); 
+	// alert("playing for credit"); 
 	$('.curtain').fadeIn(); 
 	var str = '<h2>Play for credit</h2>'; 
 	str += '<table cellpadding="0" cellspacing="0" width="100%">'; 
@@ -31,7 +42,10 @@ function play_for_credit() {
 		var idnum = $('.value#idnum').val(); 
 		
 		if(validate_ccode(ccode,idnum)) { 
-			u.getUnity().SendMessage("globe","PlayForCredit",ccode+"|"+idnum); 
+			var str = ccode+"|"+idnum; 
+			console.log(str); 
+			u.getUnity().SendMessage("globe","EnvironModules.Operator.PlayForCredit",str); 
+			$('.curtain').fadeOut(); 
 		} 
 	});
 } 

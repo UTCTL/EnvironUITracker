@@ -38,7 +38,7 @@ function display_data() {
 	var los = (session["details"]["status"]==1) ? '<span class="chosen">lost</span>' : 'lost'; ; 
 	var qui = (session["details"]["status"]==2) ? '<span class="chosen">quit</span>' : 'quit'; ; 
 
-	$('.meta #funds b').html(session["details"]["spent_funds"]); 
+	$('.meta #funds b').html('$'+session["details"]["spent_funds"]); 
 	$('.meta #pc b').html(session["details"]["spent_polcap"]); 
 	$('.meta #level b').html(session["details"]["level"]); 
 	$('.meta #time b').html(get_time(session["details"]["playtime"])); 
@@ -534,7 +534,7 @@ function show_region_data(id) {
 		dist = 250
 		svg = ""; 
 
-	$('#funds_small b').html(spent_funds); 
+	$('#funds_small b').html('$'+spent_funds); 
 	$('#pc_small b').html(spent_polcap); 
 
 	svg = d3.select('.distribution svg'); 

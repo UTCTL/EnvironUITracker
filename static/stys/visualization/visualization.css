@@ -23,7 +23,7 @@ h6 { font-size:14px;
 	color:#777;
 	font-family:webly; }
 
-b { padding:0px; }
+b, .vis b { padding:0px; }
 
 input { outline:none; 
 	border:1px solid #ddd;
