@@ -3,12 +3,12 @@
 **Purpose**: In its relation to Environ, its purpose is to visualize the collected data per gameplay session. In its general design, this is a multipurpose web-app. 
 
 * [Branches](#branches)
-* [Tracker](#tracker) 
 * [Flow](#flow) 
-* [Database Structure](#database-structure) 
-    * [Logical Model](#logical-model) 
-    * [Relational Model](#relational-model) 
-    * [DDL](#ddl)
+    * [Site l
+* [Front-end Structure](#front-end-structure) 
+    * [Static files](#static-files)
+    * [Game](#game) 
+    * [Visualization](#visualization) 
 * [Back-end Structure](#back-end-structure)
     * [Directory Tree](#directory-tree) 
     * [Settings](#settings) 
@@ -17,10 +17,10 @@
     * [Controllers](#controllers) 
         * [Main controller](#main-controller) 
         * [API controller](#api-controller) 
-* [Front-end Structure](#front-end-structure) 
-    * [Static files](#static-files)
-    * [Game](#game) 
-    * [Visualization](#visualization) 
+* [Database Structure](#database-structure) 
+    * [Logical Model](#logical-model) 
+    * [Relational Model](#relational-model) 
+    * [DDL](#ddl)
 
 
 This is an MVC web app to play, promote, and manage Environ. Admins and educators can log in to create class codes to have users play and track their activity for grading and gameplay/ui evaluation. 
@@ -30,7 +30,8 @@ This web app applies a modification of the [Descartes Framework](https://github.
 ## Branches
 
 ## Flow
-
+##### Site Flow 
+ ![Site flow image](_bkp/siteflow.png)
 
 ## Front End Structure 
 #### Static Files 
