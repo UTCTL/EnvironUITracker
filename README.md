@@ -1,13 +1,47 @@
-# Environ Control Panel Interface (CPI) 
+# Environ CPI (Control Panel Interface) 
+
+**Purpose**: In its relation to Environ, its purpose is to visualize the collected data per gameplay session. In its general design, this is a multipurpose web-app. 
+
+* [Branches](#branches)
+* [Tracker](#tracker) 
+* [Flow](#flow) 
+* [Database Structure](#database-structure) 
+    * [Logical Model](#logical-model) 
+    * [Relational Model](#relational-model) 
+    * [DDL](#ddl)
+* [Back-end Structure](#back-end-structure)
+    * [Directory Tree](#directory-tree) 
+    * [Settings](#settings) 
+    * [Models](#models) 
+    * [Views](#views) 
+    * [Controllers](#controllers) 
+        * [Main controller](#main-controller) 
+        * [API controller](#api-controller) 
+* [Front-end Structure](#front-end-structure) 
+    * [Static files](#static-files)
+    * [Game](#game) 
+    * [Visualization](#visualization) 
+
 
 This is an MVC web app to play, promote, and manage Environ. Admins and educators can log in to create class codes to have users play and track their activity for grading and gameplay/ui evaluation. 
 
 This web app applies a modification of the [Descartes Framework](https://github.com/samueleishion/Descartes "Descartes PHP Framework") at least for now. 
 
-## Directory Tree 
+## Branches
 
+## Flow
+
+
+## Front End Structure 
+#### Static Files 
+#### Game
+#### Visualization 
+
+## Back End Structure
+
+#### Directory Tree
 + __controllers__
-	+ __libs__
+  + __libs__
         +  *functions.php*: has global functions: clean, encode, now, encodequotes, etc. 
         +  *html.php*: has html wrappers like header, footer, navigation bar, etc. 
     + *controller.php*: handles url patterns given by .htaccess on root. 
@@ -17,20 +51,26 @@ This web app applies a modification of the [Descartes Framework](https://github.
 + __static__: holds static files. scripts, styles, images, etc. 
 + __views__: holds views for the application. 
 
+#### Settings
+#### Models
+#### Views
+#### Controllers 
+##### Main controller 
+##### API Controller 
 
-## Database Structure 
+## Database Structure
 
-### Logical Model
+#### Logical Model 
 There are a total of 4 models so far. The interaction is as follows: 
 
 ![Logical Model](_bkp/logical_model.png) 
 
-### Relational Model
+#### Relational Model 
 The following model shows more concrete relationships with foreign keys: 
 
 ![Relational Model](_bkp/relational_model.png) 
 
-### DDL
+#### DDL
 ```
 CREATE
   TABLE classcodes
