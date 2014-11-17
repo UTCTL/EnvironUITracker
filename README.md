@@ -71,11 +71,15 @@ $(document).ready(function() {
             type: 'GET', 
             url: APPURL, // APPURL is the api's url, defined on first lines of driver.js
             data: {
-                action: 'pull', // api action "pull" to pull data from database
+                // API action "pull" to pull data from database. 
+                // More about this request on steps F and G
+                action: 'pull', 
                 id:id
             }, 
             success: function(data) {
-                // display data returned from request 
+                // Display data returned from request 
+                // More about this on steps H and I
+                display_data(); 
             }
         }); 
     }); 
@@ -95,7 +99,48 @@ function load_menu_options(ccid) {
 ```
 
 ##### STEP F
+Like mentioned on **Step C** on the [Data Collection documentation](https://github.com/UTCTL/Environ/tree/master/Assets/Scripts/EnvironModules/Tracker#step-c), the API script works as a controller with a switch statement to process separate requests. In this case, we are sending a "`pull`" via ajax. All we do in `pull` is return a json representation of the sessions data. To do this we instantiate a new session with the given session id, and then we call its `toJson()` method. 
+```php
+$action = clean($_GET['action']); // getting the action from the request call 
+switch($action) {
+    case 'pull':
+        $s = new Session($dblink); // $dblink is the connection to the database 
+        $s->instantiateById($sessionid); 
+        echo $s->toJson(); 
+        break; 
+}
+```
+
 ##### STEP G
+Step G was actually already explained in Step F, so here we are just going to go over how `GET` requests work in this particular context. If you are pretty comfortable with `GET`/`POST` requests, you can skip this step. 
+
+To understand how the server-side script (`api.php`) receives the ajax request we will briefly voer the `$_GET`, `$_POST`, and `$_REQUEST` variables. As mentioned on the [Data Collection documentation](https://github.com/UTCTL/Environ/tree/master/Assets/Scripts/EnvironModules/Tracker#step-c), the way php deals with requests (at least for our purposes) can get either `GET` or `POST`. The main difference is that `GET` can be seen by anybody, while `POST` can't. For instance: A `GET` request can be easily built by attaching parameters to the script url. I.e./ `server/api.php?action=pull&sessionid=1`. For a `POST` request, you can send in the same parameters but the url will not change. I.e./ `server/api.php`. 
+
+In order to retrive the sent infromation in your script, you have to access the `$_GET` associative array if it was a `GET` request, and `$_POST` if it was a `POST` request. If you are unsure of what type of request was sent, you can still access the data through the `$_REQUEST` associative array. So for the above example, we can access the data like so:
+```php
+echo $_GET['action']; // "pull"
+echo $_GET['sessionid']; // 1
+echo $_REQUEST['action']; // "pull" 
+echo $_REQUEST['sessionid']; // 1
+```
+
+To return the data from the back-end (API) to the ajax call from the front-end in PHP all you have to do to send data back from an ajax request is print (`echo`) a string. In our case we are `echo`ing `$s->toJson();`. To catch it back on the ajax request, we call the success function: 
+```js
+$.ajax({
+    type:'GET',  
+    url:'server/api.php',
+    data: {
+        action:"pull", 
+        sessionid:1
+    }, // these parameters will compose the GET url: server/api?action=pull&sessionid=1
+    succes: function(data) {
+        // in this case, data contains
+        // "pull1pull1" since that's what being "echoed" by the previous script
+        console.log(data); 
+    }
+}); 
+```
+
 ##### STEP H
 ##### STEP I
 
