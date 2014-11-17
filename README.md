@@ -112,9 +112,9 @@ switch($action) {
 ```
 
 ##### STEP G
-Step G was actually already explained in Step F, so here we are just going to go over how `GET` requests work in this particular context. If you are pretty comfortable with `GET`/`POST` requests, you can skip this step. 
+**Step G** was actually already explained in **Step F**, so here we are just going to go over how `GET` requests work in this particular context. If you are pretty comfortable with `GET`/`POST` requests, you can skip this step. 
 
-To understand how the server-side script (`api.php`) receives the ajax request we will briefly voer the `$_GET`, `$_POST`, and `$_REQUEST` variables. As mentioned on the [Data Collection documentation](https://github.com/UTCTL/Environ/tree/master/Assets/Scripts/EnvironModules/Tracker#step-c), the way php deals with requests (at least for our purposes) can get either `GET` or `POST`. The main difference is that `GET` can be seen by anybody, while `POST` can't. For instance: A `GET` request can be easily built by attaching parameters to the script url. I.e./ `server/api.php?action=pull&sessionid=1`. For a `POST` request, you can send in the same parameters but the url will not change. I.e./ `server/api.php`. 
+To understand how the server-side script (`api.php`) receives the ajax request we will briefly go over the `$_GET`, `$_POST`, and `$_REQUEST` variables. As mentioned on the [Data Collection documentation](https://github.com/UTCTL/Environ/tree/master/Assets/Scripts/EnvironModules/Tracker#step-c), the way php deals with requests (at least for our purposes) can get either `GET` or `POST`. The main difference is that `GET` can be seen by anybody, while `POST` can't. For instance: A `GET` request can be easily built by attaching parameters to the script url. I.e./ `server/api.php?action=pull&sessionid=1`. For a `POST` request, you can send in the same parameters but the url will not change. I.e./ `server/api.php`. 
 
 In order to retrive the sent infromation in your script, you have to access the `$_GET` associative array if it was a `GET` request, and `$_POST` if it was a `POST` request. If you are unsure of what type of request was sent, you can still access the data through the `$_REQUEST` associative array. So for the above example, we can access the data like so:
 ```php
@@ -124,25 +124,59 @@ echo $_REQUEST['action']; // "pull"
 echo $_REQUEST['sessionid']; // 1
 ```
 
-To return the data from the back-end (API) to the ajax call from the front-end in PHP all you have to do to send data back from an ajax request is print (`echo`) a string. In our case we are `echo`ing `$s->toJson();`. To catch it back on the ajax request, we call the success function: 
+To return the data from the back-end (API) to the ajax call from the front-end in PHP all you have to do to send data back from an ajax request is print a string. In our case we are `echo`ing `$s->toJson();`. To catch it back on the ajax request, we call the success function: 
 ```js
 $.ajax({
     type:'GET',  
     url:'server/api.php',
     data: {
         action:"pull", 
-        sessionid:1
+        sessionid:2
     }, // these parameters will compose the GET url: server/api?action=pull&sessionid=1
-    succes: function(data) {
+    success: function(data) {
         // in this case, data contains
-        // "pull1pull1" since that's what being "echoed" by the previous script
+        // "pull12pull2" since that's what being "echoed" by the previous script
         console.log(data); 
     }
 }); 
 ```
 
 ##### STEP H
+Since **Step F/G** returns a json string, we first need to parse it to get a json dictionary. If this dictionary contains a _success_ message then we set the global variable `session` to the successful data. We then call the `display_data()` function to render the data on the browser. 
+```js
+// Same request indicated on Step E 
+$(document).ready(function() {
+    $('body').on('click','.subnav .menuoptions li', function() {
+        var id = $(this).attr('id'); // session id contained in clicked menu item 
+        $.ajax({
+            type: 'GET', 
+            url: APPURL, // APPURL is the api's url, defined on first lines of driver.js
+            data: {
+                action: 'pull', 
+                id:id
+            }, success: function(data) {
+                var j = $.parseJSON(data); 
+                if(j.hasOwnProperty("success")) {
+                    session = j["data"][id]; 
+                    // More on display_data() on Step I
+                    display_data(); 
+                }  
+            }
+        }); 
+    }); 
+}); 
+```
+
 ##### STEP I
+
+For this step we will focus on the `display_data.js` file. In it, we find `display_data()` which processes the session data to display it. Most of the things we access are pretty straight forward: 
+```js
+// displaying spent funds and political capital for selected session. 
+$('.meta #funds b').html(session["details"]["spent_funds"]); 
+$('.meta #pc b').html(session["details"]["spent_polcap"]); 
+```
+
+From here on, the visualization depends on accessing the data through the session global cariable. 
 
 #### Static Files 
 #### Game
