@@ -17,6 +17,7 @@
     * [Views](#views) 
     * [Controllers](#controllers) 
         * [Main controller](#main-controller) 
+        * [Opreator](#operator-controller) 
         * [API controller](#api-controller) 
 * [Database Structure](#database-structure) 
     * [Logical Model](#logical-model) 
@@ -227,8 +228,28 @@ The views are the html web pages that the user gets to see. Their main function 
 
 #### Controllers 
 ##### Main controller 
+This controller is in charge of routing the input from the urls into the proper view. Via the `.htaccess` file, the `GET` variable is defined at `view`: 
+```
+RewriteRule ^([a-zA-Z0-9\-]+)$ index.php?view=$1 
+```
+So on php, we filter that `view` to display a particular view like so: 
+```php
+$view = $_GET['view']; 
+switch($view) {
+    case 'about':
+        require_once('views/view.About.php'); 
+        break; 
+}
+```
 ##### Operator controller
+This controller is an internal controller: it is used to handle requests from within the sites like loading menu or internal data. For exampls it's used in `main.js` to log in and/or out. 
+
 ##### API Controller 
+This controller is an external controller: it is used to handle requests from third party developers. It is, nevertheless, highly suggested to restrict who accesses the `api.php` script by modifying the `Access Controll Allow Origin` header to only allow access to the same site's server tand the game-hosting server: 
+```php
+header('Access-Control-Allow-Origin: http://siteserver.com'); 
+header('Access-Control-Allow-Origin: http://gameserver.com'); 
+```
 
 For more information on how the back-end works, take a look at the [Descartes Framework documentation](https://github.com/samueleishion/Descartes "Descartes PHP Framework")
 
