@@ -8,9 +8,9 @@
     * [Site Flow](#site-flow) 
     * [Tracker Workflow](#tracker-workflow) 
 * [Front-end Structure](#front-end-structure) 
+    * [Visualization](#visualization) 
     * [Static files](#static-files)
     * [Game](#game) 
-    * [Visualization](#visualization) 
 * [Back-end Structure](#back-end-structure)
     * [Settings](#settings) 
     * [Models](#models) 
@@ -29,6 +29,11 @@ This is an MVC web app to play, promote, and manage Environ. Admins and educator
 This web app applies a modification of the [Descartes Framework](https://github.com/samueleishion/Descartes "Descartes PHP Framework") at least for now. 
 
 ## Branches
+- **development**: 
+    - Changes that happen on the development stage. 
+    - Assumes only one person working on development. 
+    - Merge with master when ready for production. 
+- **master**: Changes ready for production 
 
 ## Flow
 ##### Directory Tree
@@ -51,6 +56,49 @@ This web app applies a modification of the [Descartes Framework](https://github.
 
 ## Front End Structure 
 #### Visualization 
+##### STEP D
+When the `driver.js` file is loaded into the DOM, it loads the different courses a user can select from by calling `load_menu();`. Once a course has been selected, this function then calls `load_menu_options(ccid);` with that courses' id to load all session that pertain to it. These sessions are only the session ids that are displayed in the left menu. This step represent the user clicking a session number to load its data. 
+
+##### STEP E
+When one of these session ids is clicked, the browser performs and ajax request to load the session data. This is a brief code abstract to illustrate Steps D and E: 
+```js
+$(document).ready(function() {
+    load_menu(); 
+    
+    $('body').on('click','.subnav .menuoptions li', function() {
+        var id = $(this).attr('id'); // session id contained in clicked menu item 
+        $.ajax({
+            type: 'GET', 
+            url: APPURL, // APPURL is the api's url, defined on first lines of driver.js
+            data: {
+                action: 'pull', // api action "pull" to pull data from database
+                id:id
+            }, 
+            success: function(data) {
+                // display data returned from request 
+            }
+        }); 
+    }); 
+}); 
+
+function load_menu() {
+    ...
+    load_menu_options($(this).val()); 
+    ...
+}; 
+
+function load_menu_options(ccid) {
+    ...
+    $('.subnav .menuoptions').append('<li id="'+sessionid+'">'+sessionid+'</li>'); 
+    ...
+}; 
+```
+
+##### STEP F
+##### STEP G
+##### STEP H
+##### STEP I
+
 #### Static Files 
 #### Game
 
