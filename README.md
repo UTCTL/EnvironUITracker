@@ -4,13 +4,14 @@
 
 * [Branches](#branches)
 * [Flow](#flow) 
+    * [Directory Tree](#directory-tree) 
     * [Site Flow](#site-flow) 
+    * [Tracker Workflow](#tracker-workflow) 
 * [Front-end Structure](#front-end-structure) 
     * [Static files](#static-files)
     * [Game](#game) 
     * [Visualization](#visualization) 
 * [Back-end Structure](#back-end-structure)
-    * [Directory Tree](#directory-tree) 
     * [Settings](#settings) 
     * [Models](#models) 
     * [Views](#views) 
@@ -30,29 +31,32 @@ This web app applies a modification of the [Descartes Framework](https://github.
 ## Branches
 
 ## Flow
+##### Directory Tree
+- [__controllers__](#controllers)
+    - __libs__
+        -  *functions.php*: has global functions: clean, encode, now, encodequotes, etc. 
+        -  *html.php*: has html wrappers like header, footer, navigation bar, etc. 
+    - [*controller.php*](#main-controller): handles url patterns given by .htaccess on root. 
+    - [*operator.php*](#operator-controller): handles data transfer/connection requests. works as a private api. 
+    - [*settings.php*](#settings): handles database connection, path information and session initiation. 
+- [__models__](#models): holds the models for the application. 
+- [__static__](#static-files): holds static files: scripts, styles, images, etc. 
+- [__views__](#views): holds views for the application. 
+ 
 ##### Site Flow 
- ![Site flow image](siteflow.png)
+ ![Site flow image](_bkp/siteflow.png)
+
+##### Tracker Workflow
+![Tracker workflow image](_bkp/workflow.png) 
 
 ## Front End Structure 
+#### Visualization 
 #### Static Files 
 #### Game
-#### Visualization 
 
 ## Back End Structure
 
-#### Directory Tree
-+ __controllers__
-  + __libs__
-        +  *functions.php*: has global functions: clean, encode, now, encodequotes, etc. 
-        +  *html.php*: has html wrappers like header, footer, navigation bar, etc. 
-    + *controller.php*: handles url patterns given by .htaccess on root. 
-    + *operator.php*: handles data transfer/connection requests. works as a private api. 
-    + *settings.php*: handles database connection, path information and session initiation. 
-+ __models__: holds the models for the application. 
-+ __static__: holds static files. scripts, styles, images, etc. 
-+ __views__: holds views for the application. 
-
-#### Settings
+#### Settings 
 
 There are 7 variables that should be set to get the site running on any server. 
 * `$sitename`: The name of the site or brand. 
