@@ -1,21 +1,22 @@
-<?
-
-/*
- * Descartes PHP Framework
- * 
- * @author: Samuel Acuna
- * @date: 08/2013
- * 
- * The Descartes Framework focuses on distributing site flow in an MVC
- * type of architecture that is targetted for portfolio sites that
- * contain multiple images. This framwork can be adapted to other 
- * types of content such as articles, galleries, files, etc. 
- * 
- */
-
-include_once('controllers/libs/functions.php'); 
-include_once('controllers/libs/html.php'); 
-require_once('controllers/settings.php'); 
-require_once('controllers/controller.php'); 
-
+<?php
 ?>
+<!DOCTYPE html> 
+<html><head> 
+	<title>Environ Control Panel Interface</title> 
+
+	<!-- <link rel="stylesheet" type="text/css" href="client/app/stys/bootstrap.min.css">  -->
+	<link rel="stylesheet" type="text/css" href="client/app/stys/global.css">
+
+	<script type="text/javascript" src="client/app/scrs/webcomponents.min.js"></script> 
+	<script type="text/javascript" src="client/app/scrs/jquery.min.js"></script> 
+	<script type="text/javascript" src="client/app/scrs/inject.mod.js"></script> 
+	<script type="text/javascript" src="client/app/scrs/underscore.min.js"></script> 
+	<script type="text/javascript" src="client/app/scrs/backbone.min.js"></script> 
+	<!-- <script type="text/javascript" src="client/app/scrs/bootstrap.min.js"></script>  -->
+	<script type="text/javascript" src="client/app/scrs/main.js"></script> 
+</head><body> 
+
+<content>
+</content> 
+
+</body></html> 

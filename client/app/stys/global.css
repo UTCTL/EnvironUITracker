@@ -1,0 +1,76 @@
+/*@import url(http://fonts.googleapis.com/css?family=Open+Sans|Roboto);*/
+@font-face { font-family:ptsans; src:url('../fonts/PTC55F.ttf'); } 
+@font-face { font-family:ptsans_bold; src:url('../fonts/PTC75F.ttf'); }
+@font-face { font-family:webly; src:url('../fonts/weblysleekuil.ttf'); } 
+@font-face { font-family:webly_semi; src:url('../fonts/weblysleekuisl.ttf'); }
+@font-face { font-family:webly_bold; src:url('../fonts/weblysleekuisb.ttf'); }
+
+* { -webkit-touch-callout: none; 
+	-webkit-user-select: none; 
+	-khtml-user-select: none; 
+	-moz-user-select: none; 
+	-ms-user-select: none; 
+	user-select: none; 
+	cursor:default; 
+	margin:0px; padding:10px; } 
+
+body { font-family:ptsans, Open Sans, Helvetica, sans; 
+	font-size:14px; 
+	color:#777; 
+	letter-spacing:0px; 
+	background-color:#f5f5f5; 
+	padding:0px; }
+
+h1 { font-size:20px; 
+	font-family:webly; }
+h2 { font-size:24px; 
+	color:#000; }
+h3 { font-size:16pt; } 
+h4 { font-size:16pt; 
+	font-weight:normal; }
+h6 { font-size:14px; 
+	font-weight:normal; 
+	color:#777;
+	font-family:webly; } 
+
+a { cursor:pointer; 
+	padding:0px; } 
+
+b { padding:0px; }
+
+input { outline:none; 
+	border:1px solid #ddd;
+	font-family:webly;
+	letter-spacing: 1px; 
+	font-size:18px; 
+	margin:10px; }
+	input:focus { border:1px solid #46c2c2;
+		box-shadow:0px 0px 5px rgba(83,206,208,0.5); }
+
+	input[type="button"] { background-color:#54c3c1; 
+		border:0px solid #54c3c1; 
+		padding:10px 25px;
+		color:#fff; 
+		font-size:16px; 
+		cursor:pointer; }
+	input[type="button"]:hover { background-color:#5ececc; 
+		text-shadow:0px 0px 5px #128483; }
+	input[type="button"]:active { background-color:#46bcba; 
+		box-shadow:0px 0px 5px rgba(83,206,208,0.5); }
+	input[type="button"]:focus { border:0px solid #54c3c1; }
+
+	input[type="text"], 
+	input[type="password"] { cursor:text; } 
+
+content { display:block; 
+	padding:0px; } 
+
+.template { display:block; 
+	padding:0px; }
+
+section { display:block; } 
+
+.card { display:block; 
+	background-color:#fff; 
+	margin:20px;  
+	box-shadow:0px 0px 10px rgba(0,0,0,0.2); }

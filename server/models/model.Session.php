@@ -234,7 +234,7 @@ class Session {
 
 							$str .= '"scores": {';
 
-								$scores = ["environ","economy"]; 
+								$scores = array("environ","economy"); 
 								foreach($scores as $x) {
 									$j++; 
 

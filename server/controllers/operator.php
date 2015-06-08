@@ -21,6 +21,10 @@ if(isset($_POST) || isset($_REQUEST)) {
 			$admin->instantiateById($_SESSION['DESuid']); 
 			$admin->logout(); 
 			break; 
+		case 'isloggedin': 
+			if(isset($_SESSION['DESlogged']) && $_SESSION['DESlogged']) echo 'success'; 
+			else echo 'failure'; 
+			break; 
 		case 'edit':
 			$id = clean($_POST['userid']); 
 			$u = new User($dblink); 

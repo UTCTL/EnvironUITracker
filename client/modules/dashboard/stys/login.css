@@ -1,0 +1,16 @@
+
+.loginbox { display:block; 
+	position:absolute; 
+	top:50%; left:50%; 
+	margin-left:-205px; 
+	margin-top:-220px; 
+	width:400px; height:200px; 
+	text-align:center; 
+	padding:50px 10px; }
+
+.errormsg { display:block; 
+	background-color:rgba(158,11,15,0.15); 
+	color:rgb(158,11,15); 
+	text-align:center; } 
+
+input.error { border:1px solid #d00; } 

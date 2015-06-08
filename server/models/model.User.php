@@ -268,12 +268,15 @@ class UserType {
 		$this->id = $int; 
 
 		$total_types = mysqli_query($this->dblink,"SELECT count(*) FROM types"); 
-		$total_types = mysqli_fetch_array($total_types)[0]; 
-		if($this->id > 0 && $this->id <= $total_types) {
-			$result = mysqli_query($this->dblink,"SELECT * FROM types WHERE id='$int'"); 
-			while($row = mysqli_fetch_array($result)) {
-				$this->text = $row['tname']; 
+		// $total_types = mysqli_fetch_array($total_types)[0]; 
+		while($row = mysqli_fetch_array($total_types)) {
+			if($this->id > 0 && $this->id <= $total_types) {
+				$result = mysqli_query($this->dblink,"SELECT * FROM types WHERE id='$int'"); 
+				while($row = mysqli_fetch_array($result)) {
+					$this->text = $row['tname']; 
+				}
 			}
+			break; 
 		}
 	}
 
