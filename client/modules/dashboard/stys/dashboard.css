@@ -1,0 +1,46 @@
+
+nav { position:fixed; 
+	width:100%; height:40px; 
+	background-color:rgba(39,40,34,0.9); }
+
+	nav a { color:#fff; 
+		text-decoration:none; } 
+	nav a:hover { color:#54c3c1; } 
+
+	nav #logo { display:inline-block; 
+		width:250px; height:50px; 
+		position:relative; 
+		top:-15px; left:-15px; 
+		background-image:url('../../../app/imgs/logo.png'); 
+		background-position:center center; 
+		background-repeat:no-repeat; 
+		padding:0px; }
+
+	nav #logout { float:right; } 
+
+.main { position:absolute; 
+	top:60px; left:0px; }
+
+
+#sessionid { display:block; 
+	font-family:webly_bold; 
+	font-size:58px; 
+	line-height:50px; 
+	color:#000; 
+	padding-bottom:20px; }
+
+.meta { height:30px; 
+	line-height:30px; 
+	padding-left:60px; 
+	margin:5px 0px; 
+	background-repeat:no-repeat; 
+	background-position:left center; } 
+
+	.meta#ipaddr { background-image:url('../../../app/imgs/_webicons/ipaddr.png'); } 
+	.meta#iploc { background-image:url('../../../app/imgs/_webicons/iploc.png'); } 
+	.meta#funds { background-image:url('../../../app/imgs/_webicons/funds.png'); } 
+	.meta#pc { background-image:url('../../../app/imgs/_webicons/polcap.png'); } 
+	.meta#level { background-image:url('../../../app/imgs/_webicons/level.png'); } 
+	.meta#time { background-image:url('../../../app/imgs/_webicons/time.png'); } 
+	.meta#status { background-image:url('../../../app/imgs/_webicons/status.png'); } 
+	.meta#completed { background-image:url('../../../app/imgs/_webicons/completed.png'); }

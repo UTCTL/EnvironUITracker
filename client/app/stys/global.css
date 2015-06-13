@@ -14,12 +14,13 @@
 	cursor:default; 
 	margin:0px; padding:10px; } 
 
+html, body { padding:0px; }
+
 body { font-family:ptsans, Open Sans, Helvetica, sans; 
 	font-size:14px; 
 	color:#777; 
 	letter-spacing:0px; 
-	background-color:#f5f5f5; 
-	padding:0px; }
+	background-color:#f5f5f5; }
 
 h1 { font-size:20px; 
 	font-family:webly; }
@@ -65,12 +66,48 @@ input { outline:none;
 content { display:block; 
 	padding:0px; } 
 
+.row { display:flex; 
+	padding:0px; 
+	vertical-align:top; }
+
+.col-1,.col-2,.col-3,.col-4, 
+.col-5,.col-6,.col-7,.col-8, 
+.col-9,.col-10,.col-11,.col-12 { display:inline-block; 
+	margin:0px; } 
+
+.col-0 { width:0%; } /* used for customed width padding */
+.col-1 { width:6%; } 
+.col-2 { width:14%; } 
+.col-3 { width:23%; } 
+.col-4 { width:31%; } 
+.col-5 { width:40%; } 
+.col-6 { width:48%; } 
+.col-7 { width:56%; } 
+.col-8 { width:65%; } 
+.col-9 { width:73%; } 
+.col-10 { width:82%; } 
+.col-11 { width:90%; } 
+.col-12 { width:100%; } 
+
 .template { display:block; 
 	padding:0px; }
 
 section { display:block; } 
 
+
+.container { position:relative; 
+	left:50%; 
+	margin-left:-650px; 
+	width:1260px; }
+
+.container-fluid { display:block; 
+	width:100%; 
+	padding:0px; }
+
 .card { display:block; 
 	background-color:#fff; 
 	margin:20px;  
 	box-shadow:0px 0px 10px rgba(0,0,0,0.2); }
+
+	.card.transparent { background-color:rgba(255,255,255,0); 
+		box-shadow:0px 0px 0px rgba(0,0,0,0); } 
